@@ -145,7 +145,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const STORAGE_PREFIX = 'chef_benzaza_';
-const DATA_VERSION = 'v10_coiffure_femme_laleg_djamila_img';
+const DATA_VERSION = 'v11_coiffure_homme_adem_img';
 
 function getStored<T>(key: string, fallback: T): T {
   try {

@@ -71,10 +71,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
   };
 
   return (
-    <div className="space-y-24 pb-20">
+    <div className="space-y-14 sm:space-y-20 lg:space-y-24 pb-14 sm:pb-20">
       
       {/* 1. HERO SECTION — Luxury White & Gold Atmosphere */}
-      <section className="relative min-h-[580px] lg:min-h-[640px] flex items-center bg-gradient-to-br from-white via-[#FAF7F2] to-[#F5EEDB] text-[#2D241E] overflow-hidden border-b border-[#EADFC7]">
+      <section className="relative min-h-[440px] sm:min-h-[540px] lg:min-h-[640px] flex items-center bg-gradient-to-br from-white via-[#FAF7F2] to-[#F5EEDB] text-[#2D241E] overflow-hidden border-b border-[#EADFC7]">
         {/* Background photo with white & gold scrim for high contrast */}
         <div className="absolute inset-0">
           <img
@@ -87,31 +87,31 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-white/40" />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-8 py-20 lg:py-28 z-10 w-full">
-          <div className="max-w-2xl space-y-6">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-8 py-12 sm:py-20 lg:py-28 z-10 w-full">
+          <div className="max-w-2xl space-y-5 sm:space-y-6">
             
             {/* Quiet unboxed kicker */}
-            <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#8C6B28]">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] sm:text-xs font-bold tracking-widest uppercase text-[#8C6B28]">
               <span>{t('heroBadge')}</span>
               <span aria-hidden="true">·</span>
-              <span>Fondée par Chef Benzaza</span>
+              <span>{language === 'ar' ? 'معتمد من طرف الدولة' : "AGRÉÉ PAR L'ÉTAT"}</span>
             </div>
 
             {/* Headline with text-wrap: balance */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#2D241E] leading-[1.15] font-display text-balance">
+            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#2D241E] leading-[1.15] font-display text-balance">
               {t('heroTitle')}
             </h1>
 
             {/* Slogan & Subtitle */}
-            <p className="text-base sm:text-lg text-[#6B5E52] font-normal leading-relaxed">
+            <p className="text-sm sm:text-lg text-[#6B5E52] font-normal leading-relaxed">
               {t('heroSubtitle')}
             </p>
 
             {/* CTAs */}
-            <div className="pt-2 flex flex-wrap items-center gap-4">
+            <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center gap-3 sm:gap-4">
               <button
                 onClick={() => onOpenRegistration()}
-                className="px-6 py-3.5 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md shadow-[#C9A45C]/25 whitespace-nowrap"
+                className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md shadow-[#C9A45C]/25 whitespace-nowrap text-center"
               >
                 {t('registerNow')}
               </button>
@@ -125,7 +125,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     window.scrollTo({ top: y, behavior: 'smooth' });
                   }
                 }}
-                className="px-6 py-3.5 bg-white hover:bg-[#FAF7F2] text-[#8C6B28] border border-[#C9A45C] font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-xs whitespace-nowrap"
+                className="w-full sm:w-auto px-5 sm:px-6 py-3 sm:py-3.5 bg-white hover:bg-[#FAF7F2] text-[#8C6B28] border border-[#C9A45C] font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-xs whitespace-nowrap text-center"
               >
                 {t('discoverCourses')}
               </button>
@@ -150,13 +150,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-12 gap-2.5 sm:gap-6 lg:gap-8 items-start">
+        <div className="grid grid-cols-12 gap-2 sm:gap-6 lg:gap-8 items-start">
           
           {/* LEFT SIDEBAR: Simple Rectangular Formation List (Visible on ALL Screen Sizes) */}
           <div className="col-span-4 sm:col-span-4 lg:col-span-4 sticky top-16 sm:top-24 self-start">
             <div className="bg-white border border-[#E8DEC8] flex flex-col shadow-xs overflow-hidden">
-              <div className="p-2.5 sm:p-4 bg-[#FAF7F2] border-b border-[#E8DEC8]">
-                <h3 className="text-xs sm:text-sm font-bold text-[#2D241E] font-display uppercase tracking-wider">
+              <div className="p-2 sm:p-4 bg-[#FAF7F2] border-b border-[#E8DEC8]">
+                <h3 className="text-[11px] sm:text-sm font-bold text-[#2D241E] font-display uppercase tracking-wider">
                   Nos Formations
                 </h3>
               </div>
@@ -171,21 +171,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
                       key={`home-path-${course.id}`}
                       id={`home-path-${course.id}`}
                       onClick={() => handleSelectHomeCoursePath(course.id)}
-                      className={`w-full text-left p-2.5 sm:p-4 transition-colors flex flex-col ${
+                      className={`w-full text-left rtl:text-right p-2 sm:p-4 transition-colors flex flex-col ${
                         isActive
-                          ? 'bg-[#FAF4E6] border-l-2 sm:border-l-4 border-l-[#8C6B28] text-[#2D241E]'
+                          ? 'bg-[#FAF4E6] border-l-2 sm:border-l-4 rtl:border-l-0 rtl:border-r-2 sm:rtl:border-r-4 border-l-[#8C6B28] rtl:border-r-[#8C6B28] text-[#2D241E]'
                           : 'bg-white hover:bg-[#FAF7F2] text-[#2D241E]'
                       }`}
                     >
                       {/* BIG BOLD FORMATION TITLE */}
-                      <span className={`text-xs sm:text-base font-bold font-display leading-tight line-clamp-2 ${
+                      <span className={`text-[11px] sm:text-base font-bold font-display leading-tight line-clamp-2 break-words ${
                         isActive ? 'text-[#8C6B28]' : 'text-[#2D241E]'
                       }`}>
                         {course.title[language] || course.title.fr}
                       </span>
 
                       {/* FORMATEUR NAME DOWNSIDE THE FORMATION NAME */}
-                      <span className="text-[10px] sm:text-xs font-semibold text-[#8C6B28] mt-1 block">
+                      <span className="text-[10px] sm:text-xs font-semibold text-[#8C6B28] mt-1 block truncate w-full">
                         {course.instructor.name}
                       </span>
                     </button>
@@ -196,7 +196,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
 
           {/* RIGHT COLUMN: Detailed Cards (Visible on ALL Screen Sizes) */}
-          <div className="col-span-8 sm:col-span-8 lg:col-span-8 space-y-4 sm:space-y-8">
+          <div className="col-span-8 sm:col-span-8 lg:col-span-8 space-y-4 sm:space-y-8 min-w-0">
             {courses.map((course) => (
               <div
                 key={`home-card-${course.id}`}
@@ -213,39 +213,39 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     referrerPolicy="no-referrer"
                     className="w-full h-auto max-h-full object-contain object-center"
                   />
-                  <div className="absolute top-3 right-3 rtl:right-auto rtl:left-3 bg-white/95 text-[#8C6B28] text-xs font-mono font-bold px-3 py-1 border border-[#EADFC7] shadow-xs">
+                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 rtl:right-auto rtl:left-2 sm:rtl:left-3 bg-white/95 text-[#8C6B28] text-[10px] sm:text-xs font-mono font-bold px-2 sm:px-3 py-0.5 sm:py-1 border border-[#EADFC7] shadow-xs">
                     {course.priceDZD} {t('dzd')}
                   </div>
                 </div>
 
-                <div className="p-6 space-y-4">
+                <div className="p-3 sm:p-6 space-y-2.5 sm:space-y-4">
                   <div>
-                    <div className="flex items-center gap-2 text-xs text-[#7A6E63] mb-1">
-                      <Clock className="w-3.5 h-3.5 text-[#C9A45C]" />
-                      <span>{course.duration[language] || course.duration.fr}</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#7A6E63] mb-1">
+                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C9A45C] shrink-0" />
+                      <span className="truncate">{course.duration[language] || course.duration.fr}</span>
                     </div>
-                    <h3 className="text-xl font-bold text-[#2D241E] font-display">
+                    <h3 className="text-sm sm:text-xl font-bold text-[#2D241E] font-display leading-snug">
                       {course.title[language] || course.title.fr}
                     </h3>
-                    <div className="text-xs font-semibold text-[#8C6B28] mt-1">
+                    <div className="text-[11px] sm:text-xs font-semibold text-[#8C6B28] mt-1">
                       {course.instructor.name}
                     </div>
-                    <p className="text-xs text-[#6B5E52] mt-2 leading-relaxed">
+                    <p className="text-[11px] sm:text-xs text-[#6B5E52] mt-1.5 sm:mt-2 leading-relaxed">
                       {course.shortDesc[language] || course.shortDesc.fr}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#F1ECE1] flex items-center justify-between gap-3">
+                  <div className="pt-3 sm:pt-4 border-t border-[#F1ECE1] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3">
                     <button
                       onClick={() => onNavigate('courses')}
-                      className="text-xs font-semibold text-[#6B5E52] hover:text-[#8C6B28] transition-colors"
+                      className="text-[11px] sm:text-xs font-semibold text-[#6B5E52] hover:text-[#8C6B28] transition-colors text-left rtl:text-right py-1"
                     >
                       {t('viewDetails')}
                     </button>
 
                     <button
                       onClick={() => onOpenRegistration(course.id)}
-                      className="px-4 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider transition-colors whitespace-nowrap shadow-xs"
+                      className="w-full sm:w-auto px-3 sm:px-4 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-colors whitespace-nowrap shadow-xs text-center"
                     >
                       {t('registerShort')}
                     </button>
@@ -259,7 +259,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
       </section>
 
       {/* 3. POPULAR BOUTIQUE CREATIONS */}
-      <section className="bg-white border-y border-[#E8DEC8] py-20">
+      <section className="bg-white border-y border-[#E8DEC8] py-12 sm:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
             <div>
@@ -282,13 +282,13 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {popularProducts.map((product) => (
               <div
                 key={product.id}
                 className="bg-[#FAF7F2] rounded-xl border border-[#E8DEC8] shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col group"
               >
-                <div className="relative h-60 overflow-hidden bg-neutral-100">
+                <div className="relative h-52 sm:h-60 overflow-hidden bg-neutral-100">
                   <img
                     src={product.image}
                     alt={product.name[language] || product.name.fr}
@@ -304,7 +304,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                   </div>
                 </div>
 
-                <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+                <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-4">
                   <div>
                     <h3 className="text-base font-bold text-[#2D241E] font-display">
                       {product.name[language] || product.name.fr}
@@ -314,7 +314,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#EAE3D6] flex items-center justify-between">
+                  <div className="pt-4 border-t border-[#EAE3D6] flex flex-wrap items-center justify-between gap-3">
                     <div>
                       <span className="text-[10px] uppercase text-[#7A6E63] block">Prix atelier</span>
                       <span className="text-base font-bold font-mono text-[#8C6B28] tabular-nums">
@@ -341,7 +341,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
       {/* 4. SALON & BARBERSHOP TEASER */}
       <section className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="bg-gradient-to-br from-[#FAF7F2] to-[#F5EEDB] text-[#2D241E] rounded-2xl border border-[#E8DEC8] overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center shadow-sm">
-          <div className="p-8 sm:p-12 lg:p-16 space-y-6">
+          <div className="p-6 sm:p-10 lg:p-16 space-y-5 sm:space-y-6">
             <div className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#8C6B28]">
               <Scissors className="w-4 h-4 text-[#C9A45C]" />
               <span>Studio d'application & Coiffure</span>
@@ -355,23 +355,23 @@ export const HomeView: React.FC<HomeViewProps> = ({
               {t('salonSubtitle')}. Bénéficiez de prestations haut de gamme (dégradé américain, rasage traditionnel, brushing glamour, soins kératine) dans notre salon chic à Mostaganem.
             </p>
 
-            <div className="pt-2 flex flex-wrap gap-4">
+            <div className="pt-2 flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">
               <button
                 onClick={() => onOpenBooking()}
-                className="px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded transition-colors shadow-xs"
+                className="w-full sm:w-auto px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded transition-colors shadow-xs text-center"
               >
                 {t('bookAppointment')}
               </button>
               <button
                 onClick={() => onNavigate('salon')}
-                className="px-6 py-3 bg-white hover:bg-[#FBF8F1] text-[#8C6B28] text-xs font-bold uppercase tracking-wider rounded border border-[#C9A45C] transition-colors shadow-xs"
+                className="w-full sm:w-auto px-6 py-3 bg-white hover:bg-[#FBF8F1] text-[#8C6B28] text-xs font-bold uppercase tracking-wider rounded border border-[#C9A45C] transition-colors shadow-xs text-center"
               >
                 Découvrir la carte des soins
               </button>
             </div>
           </div>
 
-          <div className="h-72 lg:h-full relative overflow-hidden bg-neutral-100">
+          <div className="h-64 sm:h-80 lg:h-full relative overflow-hidden bg-neutral-100">
             <img
               src="/src/assets/images/barber_coiffure_master_1794418834548.jpg"
               alt="Salon barbier et coiffure de l'école Benzaza"
@@ -384,7 +384,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       {/* 5. WHY CHOOSE OUR SCHOOL (Claim-to-Proof Adjacency) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-3">
           <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
             L'Engagement Benzaza
           </div>
@@ -396,7 +396,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
           <div className="bg-white p-6 rounded-xl border border-[#E8DEC8] space-y-3 shadow-xs">
             <div className="w-12 h-12 rounded-lg bg-[#FAF4E6] text-[#8C6B28] flex items-center justify-center font-bold border border-[#E8DEC8]">
               01
@@ -448,9 +448,9 @@ export const HomeView: React.FC<HomeViewProps> = ({
       </section>
 
       {/* 6. TESTIMONIALS */}
-      <section className="bg-white text-[#2D241E] py-20 border-y border-[#E8DEC8]">
+      <section className="bg-white text-[#2D241E] py-12 sm:py-20 border-y border-[#E8DEC8]">
         <div className="max-w-7xl mx-auto px-4 sm:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-3">
             <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
               {t('testimonialsTitle')}
             </div>
@@ -459,11 +459,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((test) => (
               <div
                 key={test.id}
-                className="bg-[#FAF7F2] p-6 rounded-xl border border-[#E8DEC8] flex flex-col justify-between space-y-4 shadow-xs"
+                className="bg-[#FAF7F2] p-5 sm:p-6 rounded-xl border border-[#E8DEC8] flex flex-col justify-between space-y-4 shadow-xs"
               >
                 <div className="space-y-3">
                   <div className="flex items-center gap-1 text-[#C9A45C]">
@@ -490,10 +490,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
       {/* 7. LOCATION & ACCESS BANNER (Mostaganem, Algeria) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="bg-gradient-to-br from-white to-[#FAF7F2] border border-[#E8DEC8] rounded-2xl p-8 sm:p-12 flex flex-col lg:flex-row items-center justify-between gap-8 shadow-sm">
+        <div className="bg-gradient-to-br from-white to-[#FAF7F2] border border-[#E8DEC8] rounded-2xl p-6 sm:p-10 lg:p-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 sm:gap-8 shadow-sm">
           <div className="space-y-3 max-w-xl">
             <div className="flex items-center gap-2 text-xs font-bold text-[#8C6B28] uppercase tracking-wider">
-              <MapPin className="w-4 h-4 text-[#C9A45C]" />
+              <MapPin className="w-4 h-4 text-[#C9A45C] shrink-0" />
               <span>Implantation au cœur de Mostaganem</span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold text-[#2D241E] font-display">
@@ -504,10 +504,10 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 shrink-0">
+          <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 w-full lg:w-auto shrink-0">
             <button
               onClick={() => onNavigate('contact')}
-              className="px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-xs"
+              className="w-full sm:w-auto px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors shadow-xs text-center"
             >
               Plan d’accès & Horaires
             </button>
@@ -515,7 +515,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
               href={`https://wa.me/${settings.whatsapp.replace(/\+/g, '')}`}
               target="_blank"
               rel="noreferrer"
-              className="px-6 py-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center gap-2 shadow-xs"
+              className="w-full sm:w-auto px-6 py-3 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors flex items-center justify-center gap-2 shadow-xs"
             >
               <span>Discuter sur WhatsApp</span>
             </a>

@@ -7,9 +7,11 @@
     --font-arabic: 'Cairo', 'Plus Jakarta Sans', sans-serif;
   }
 
-  html {
+  html, body {
     scroll-behavior: smooth;
     font-family: var(--font-body);
+    overflow-x: clip;
+    max-width: 100%;
   }
 
   html[dir="rtl"] {
@@ -26,6 +28,15 @@
   html[dir="rtl"] .font-display {
     font-family: var(--font-arabic);
   }
+}
+
+/* Hide scrollbars for horizontal mobile filter strips */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Custom scrollbars */

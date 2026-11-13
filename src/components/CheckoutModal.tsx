@@ -83,41 +83,41 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
   const currentTotal = cartSubtotal + currentFee;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative bg-white text-[#2D241E] w-full max-w-xl rounded-2xl border border-[#E8DEC8] shadow-2xl overflow-hidden my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-start sm:items-center justify-center p-2 sm:p-4">
+      <div className="relative bg-white text-[#2D241E] w-full max-w-xl rounded-2xl border border-[#E8DEC8] shadow-2xl overflow-hidden my-4 sm:my-8">
         
         {/* Header */}
-        <div className="p-6 bg-[#FAF7F2] border-b border-[#E8DEC8] flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-[#C9A45C] text-white flex items-center justify-center font-bold shadow-xs">
+        <div className="p-4 sm:p-6 bg-[#FAF7F2] border-b border-[#E8DEC8] flex items-center justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#C9A45C] text-white flex items-center justify-center font-bold shadow-xs shrink-0">
               <ShoppingBag className="w-5 h-5" />
             </div>
-            <div>
-              <h3 className="text-base font-bold text-[#2D241E] uppercase tracking-wider font-display">
+            <div className="min-w-0">
+              <h3 className="text-sm sm:text-base font-bold text-[#2D241E] uppercase tracking-wider font-display truncate">
                 {t('checkoutTitle')}
               </h3>
-              <p className="text-xs text-[#8C6B28] font-semibold">Boutique Gourmande — Mostaganem</p>
+              <p className="text-[11px] sm:text-xs text-[#8C6B28] font-semibold truncate">Boutique Gourmande — Mostaganem</p>
             </div>
           </div>
           <button
             onClick={handleReset}
-            className="p-1.5 text-[#7A6E63] hover:text-[#2D241E] rounded-lg hover:bg-[#F5EEDB] transition-colors"
+            className="p-1.5 text-[#7A6E63] hover:text-[#2D241E] rounded-lg hover:bg-[#F5EEDB] transition-colors shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {confirmedOrder ? (
             /* Order confirmation state */
-            <div className="space-y-6 text-center py-2">
+            <div className="space-y-5 sm:space-y-6 text-center py-2">
               <div className="w-14 h-14 mx-auto rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
                 <CheckCircle className="w-8 h-8" />
               </div>
 
               <div>
-                <h4 className="text-lg font-bold text-[#2D241E] font-display">
+                <h4 className="text-base sm:text-lg font-bold text-[#2D241E] font-display">
                   {t('orderSuccessTitle')}
                 </h4>
                 <p className="text-xs text-[#5C4F44] mt-1">
@@ -126,21 +126,21 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
               </div>
 
               {/* Order slip */}
-              <div className="bg-[#FAF7F2] border border-[#E8DEC8] p-5 rounded-xl text-left rtl:text-right space-y-3 font-sans">
-                <div className="flex justify-between items-center border-b border-[#E8DEC8] pb-3">
+              <div className="bg-[#FAF7F2] border border-[#E8DEC8] p-4 sm:p-5 rounded-xl text-left rtl:text-right space-y-3 font-sans">
+                <div className="flex flex-wrap justify-between items-center gap-2 border-b border-[#E8DEC8] pb-3">
                   <div>
                     <span className="text-[10px] uppercase tracking-wider text-[#7A6E63] block font-semibold">
                       N° Commande
                     </span>
-                    <span className="text-base font-bold font-mono text-[#8C6B28]">
+                    <span className="text-sm sm:text-base font-bold font-mono text-[#8C6B28]">
                       {confirmedOrder.orderCode}
                     </span>
                   </div>
-                  <div className="text-right rtl:text-left">
+                  <div className="text-left sm:text-right rtl:sm:text-left">
                     <span className="text-[10px] uppercase tracking-wider text-[#7A6E63] block font-semibold">
                       Paiement
                     </span>
-                    <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded uppercase">
+                    <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded uppercase inline-block">
                       {confirmedOrder.paymentMethod === 'cod'
                         ? 'Espèces à la livraison'
                         : 'Espèces au retrait'}
@@ -151,9 +151,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
                 <div className="space-y-2 py-1 text-xs">
                   <div className="text-[#2D241E] font-semibold mb-1">Articles commandés :</div>
                   {confirmedOrder.items.map((it, idx) => (
-                    <div key={idx} className="flex justify-between text-[#5C4F44]">
-                      <span>{it.quantity}x {it.name}</span>
-                      <span className="font-mono tabular-nums text-[#2D241E] font-medium">{it.unitPrice * it.quantity} {t('dzd')}</span>
+                    <div key={idx} className="flex justify-between gap-2 text-[#5C4F44]">
+                      <span className="break-words">{it.quantity}x {it.name}</span>
+                      <span className="font-mono tabular-nums text-[#2D241E] font-medium shrink-0">{it.unitPrice * it.quantity} {t('dzd')}</span>
                     </div>
                   ))}
                   <div className="border-t border-[#E8DEC8] pt-2 flex justify-between text-[#7A6E63]">
@@ -209,7 +209,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
                 <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-2">
                   {t('deliveryMethod')}
                 </label>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
                   <button
                     type="button"
                     onClick={() => setDeliveryType('delivery')}
@@ -284,7 +284,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
               {/* Delivery Address fields (if delivery) */}
               {deliveryType === 'delivery' && (
                 <div className="space-y-3 pt-1">
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1">
                         {t('wilaya')}

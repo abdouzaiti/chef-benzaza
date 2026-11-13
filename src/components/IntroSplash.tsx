@@ -60,7 +60,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
 
   return (
     <div
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-[#FAF7F2] select-none transition-opacity duration-500 ease-out ${
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-[#FAF7F2] select-none overflow-y-auto py-14 sm:py-0 transition-opacity duration-500 ease-out ${
         phase === 'flying' ? 'bg-opacity-0 pointer-events-none' : 'opacity-100'
       }`}
       style={{
@@ -79,13 +79,13 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
         <div className="absolute inset-0 bg-[#FAF7F2]" />
         
         {/* Decorative solid dark gold frames */}
-        <div className="absolute inset-x-6 sm:inset-x-10 top-6 sm:top-10 bottom-6 sm:bottom-10 border border-[#8C6B28]/30 pointer-events-none rounded-3xl" />
-        <div className="absolute inset-x-8 sm:inset-x-12 top-8 sm:top-12 bottom-8 sm:bottom-12 border border-[#8C6B28]/20 pointer-events-none rounded-2xl" />
+        <div className="absolute inset-x-3 sm:inset-x-10 top-3 sm:top-10 bottom-3 sm:bottom-10 border border-[#8C6B28]/30 pointer-events-none rounded-2xl sm:rounded-3xl" />
+        <div className="absolute inset-x-5 sm:inset-x-12 top-5 sm:top-12 bottom-5 sm:bottom-12 border border-[#8C6B28]/20 pointer-events-none rounded-xl sm:rounded-2xl" />
       </div>
 
       {/* Top Bar inside Splash: Language Selector */}
       <div
-        className={`absolute top-6 right-6 rtl:right-auto rtl:left-6 z-20 flex items-center gap-2 transition-all duration-300 ${
+        className={`absolute top-4 right-4 sm:top-6 sm:right-6 rtl:right-auto rtl:left-4 sm:rtl:left-6 z-20 flex items-center gap-2 transition-all duration-300 ${
           phase === 'flying' ? 'opacity-0 translate-y-[-10px] pointer-events-none' : 'opacity-100'
         }`}
       >
@@ -153,13 +153,13 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
               : 'opacity-100 translate-y-0'
           }`}
         >
-          <div className="flex items-center justify-center gap-3 text-xs uppercase tracking-[0.25em] text-[#8C6B28] font-mono font-semibold">
-            <span className="w-8 h-[1px] bg-[#8C6B28]" />
+          <div className="flex items-center justify-center gap-2 sm:gap-3 text-[11px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#8C6B28] font-mono font-semibold">
+            <span className="w-5 sm:w-8 h-[1px] bg-[#8C6B28] shrink-0" />
             <span>Académie Professionnelle</span>
-            <span className="w-8 h-[1px] bg-[#8C6B28]" />
+            <span className="w-5 sm:w-8 h-[1px] bg-[#8C6B28] shrink-0" />
           </div>
 
-          <p className="text-xs sm:text-sm text-[#5C4F44] font-medium tracking-wider">
+          <p className="text-xs sm:text-sm text-[#5C4F44] font-medium tracking-wider px-2">
             {language === 'ar'
               ? 'مستغانم، الجزائر · التميز من خلال التكوين'
               : "Mostaganem, Algérie · L'excellence par la formation"}
@@ -168,7 +168,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
 
         {/* MANDATORY VISIT BUTTON: Triggers smooth flight animation to header */}
         <div
-          className={`mt-8 transform transition-all duration-400 ease-out ${
+          className={`mt-6 sm:mt-8 transform transition-all duration-400 ease-out ${
             phase === 'enter'
               ? 'opacity-0 translate-y-6 scale-95'
               : phase === 'flying'
@@ -178,7 +178,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
         >
           <button
             onClick={handleEnterSite}
-            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-[#8C6B28] hover:bg-[#7A5B1D] text-white font-bold text-sm uppercase tracking-widest rounded-xl transition-all duration-300 shadow-[0_4px_25px_rgba(140,107,40,0.35)] hover:shadow-[0_4px_35px_rgba(140,107,40,0.5)] hover:scale-105 active:scale-95 cursor-pointer"
+            className="group relative inline-flex items-center gap-2.5 sm:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 bg-[#8C6B28] hover:bg-[#7A5B1D] text-white font-bold text-xs sm:text-sm uppercase tracking-widest rounded-xl transition-all duration-300 shadow-[0_4px_25px_rgba(140,107,40,0.35)] hover:shadow-[0_4px_35px_rgba(140,107,40,0.5)] hover:scale-105 active:scale-95 cursor-pointer"
           >
             <Compass className="w-5 h-5 text-white group-hover:rotate-45 transition-transform duration-300" />
             <span>

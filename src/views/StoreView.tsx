@@ -48,14 +48,14 @@ export const StoreView: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-8 sm:space-y-12">
       
       {/* Store Header Banner */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
           Ateliers & Créations d'Élite
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
           {t('storeTitle')}
         </h1>
         <p className="text-sm text-[#6B5E52] leading-relaxed">
@@ -126,7 +126,7 @@ export const StoreView: React.FC = () => {
           <p className="text-xs text-[#6B5E52] mt-1">Modifiez vos critères pour voir nos douceurs.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
           {filteredProducts.map((product) => {
             const qty = getQty(product.id);
             return (
@@ -135,7 +135,7 @@ export const StoreView: React.FC = () => {
                 className="bg-white rounded-xl border border-[#E8DEC8] shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col group"
               >
                 {/* Product Image */}
-                <div className="relative h-64 overflow-hidden bg-neutral-100">
+                <div className="relative h-56 sm:h-64 overflow-hidden bg-neutral-100">
                   <img
                     src={product.image}
                     alt={product.name[language] || product.name.fr}

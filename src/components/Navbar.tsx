@@ -47,33 +47,33 @@ export const Navbar: React.FC<NavbarProps> = ({
     <>
       {/* Main Navigation Bar — 3 Zones Contract */}
       <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EADFC7] text-[#2D241E] shadow-xs">
-        <div className="w-[987px] max-w-full mx-auto px-4 sm:px-8 h-[60px] flex items-center justify-between gap-8">
+        <div className="w-full max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 h-[60px] sm:h-[64px] flex items-center justify-between gap-2 sm:gap-4 lg:gap-8">
           
           {/* Zone 1: Single brand logo */}
           <button
             onClick={() => handleNavClick('home')}
-            className="flex items-center gap-3 text-left rtl:text-right group shrink-0 focus:outline-none"
+            className="flex items-center gap-2 sm:gap-3 text-left rtl:text-right group min-w-0 shrink focus:outline-none cursor-pointer"
             aria-label="Accueil École Chef Benzaza"
           >
             <img
               id="header-brand-logo-img"
               src="/logo.png"
               alt="Logo Officiel École Chef Benzaza"
-              className={`h-11 sm:h-12 w-auto object-contain transition-all group-hover:scale-105 drop-shadow-[0_2px_8px_rgba(140,107,40,0.35)] ${
+              className={`h-9 sm:h-12 w-auto max-w-[96px] sm:max-w-none object-contain transition-all group-hover:scale-105 drop-shadow-[0_2px_8px_rgba(140,107,40,0.35)] ${
                 isLogoHidden ? 'opacity-0' : 'opacity-100 duration-300'
               }`}
             />
           </button>
 
-          {/* Zone 2: 4-5 concise single-line text navigation links */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-[#5C4F44]">
+          {/* Zone 2: Concise single-line text navigation links */}
+          <nav className="hidden lg:flex items-center gap-6 xl:gap-7 text-sm font-medium text-[#5C4F44]">
             {navLinks.map((link) => {
               const isActive = currentView === link.id;
               return (
                 <button
                   key={link.id}
                   onClick={() => handleNavClick(link.id)}
-                  className={`relative py-1.5 transition-colors whitespace-nowrap shrink-0 hover:text-[#C9A45C] ${
+                  className={`relative py-1.5 transition-colors whitespace-nowrap shrink-0 hover:text-[#C9A45C] cursor-pointer ${
                     isActive ? 'text-[#8C6B28] font-bold' : 'text-[#5C4F44]'
                   }`}
                 >
@@ -87,14 +87,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           </nav>
 
           {/* Zone 3: Language Selector, Cart Button & Primary CTA */}
-          <div className="flex items-center gap-3.5 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
             {/* Language Switcher */}
-            <div className="flex items-center bg-[#FBF8F1] rounded-md p-1 border border-[#E8DEC8]">
+            <div className="inline-flex items-center h-9 sm:h-10 bg-[#FBF8F1] rounded-md p-0.5 sm:p-1 border border-[#E8DEC8] shrink-0">
               {(['fr', 'ar'] as Language[]).map((lang) => (
                 <button
                   key={lang}
                   onClick={() => handleLangChange(lang)}
-                  className={`px-2 py-0.5 text-xs font-semibold rounded transition-colors whitespace-nowrap ${
+                  className={`h-full px-1.5 sm:px-2.5 flex items-center justify-center text-[11px] sm:text-xs font-semibold rounded transition-colors whitespace-nowrap cursor-pointer ${
                     language === lang
                       ? 'bg-[#C9A45C] text-white shadow-xs'
                       : 'text-[#7A6E63] hover:text-[#2D241E]'
@@ -108,21 +108,21 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Shopping Cart button with badge */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-2.5 rounded-md text-[#5C4F44] hover:text-[#8C6B28] hover:bg-[#FBF8F1] border border-[#EADFC7] transition-colors focus:outline-none"
+              className="relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-md text-[#5C4F44] hover:text-[#8C6B28] hover:bg-[#FBF8F1] border border-[#EADFC7] transition-colors focus:outline-none shrink-0 cursor-pointer"
               aria-label={t('cart')}
             >
-              <ShoppingBag className="w-5 h-5 text-[#C9A45C]" />
+              <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5 text-[#C9A45C]" />
               {cartTotalQuantity > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#C9A45C] text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center tabular-nums shadow-xs">
+                <span className="absolute -top-1.5 -right-1.5 bg-[#C9A45C] text-white text-[10px] sm:text-[11px] font-bold w-4 h-4 sm:w-5 sm:h-5 rounded-full flex items-center justify-center tabular-nums shadow-xs">
                   {cartTotalQuantity}
                 </span>
               )}
             </button>
 
-            {/* Primary Action Button */}
+            {/* Primary Action Button — visible across mobile, tablet, and desktop */}
             <button
               onClick={onOpenRegistration}
-              className="hidden sm:inline-flex items-center px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-[#C9A45C] hover:bg-[#DFC283] rounded-md transition-all shadow-sm shadow-[#C9A45C]/20 whitespace-nowrap shrink-0"
+              className="inline-flex items-center justify-center h-9 sm:h-10 px-2.5 sm:px-4 text-[11px] sm:text-xs font-bold uppercase tracking-wide sm:tracking-wider text-white bg-[#C9A45C] hover:bg-[#DFC283] rounded-md transition-all shadow-sm shadow-[#C9A45C]/20 whitespace-nowrap shrink-0 cursor-pointer"
             >
               {t('registerShort')}
             </button>
@@ -130,17 +130,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile menu trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-[#5C4F44] hover:text-[#2D241E] hover:bg-[#FBF8F1] border border-[#EADFC7] focus:outline-none"
+              className="lg:hidden w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-md text-[#5C4F44] hover:text-[#2D241E] hover:bg-[#FBF8F1] border border-[#EADFC7] focus:outline-none shrink-0 cursor-pointer"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6 text-[#C9A45C]" /> : <Menu className="w-6 h-6 text-[#C9A45C]" />}
+              {mobileMenuOpen ? <X className="w-5 h-5 text-[#C9A45C]" /> : <Menu className="w-5 h-5 text-[#C9A45C]" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-white border-b border-[#EADFC7] px-4 pt-3 pb-6 shadow-lg animate-in fade-in duration-150">
+          <div className="lg:hidden bg-white border-b border-[#EADFC7] px-4 pt-3 pb-6 shadow-lg max-h-[calc(100vh-60px)] sm:max-h-[calc(100vh-64px)] overflow-y-auto animate-in fade-in duration-150">
             <nav className="flex flex-col gap-2">
               {navLinks.map((link) => {
                 const isActive = currentView === link.id;
@@ -148,7 +148,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   <button
                     key={link.id}
                     onClick={() => handleNavClick(link.id)}
-                    className={`text-left rtl:text-right px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
+                    className={`text-left rtl:text-right px-4 py-3 rounded-md text-sm font-medium transition-colors ${
                       isActive
                         ? 'bg-[#FBF8F1] text-[#8C6B28] font-bold border border-[#EADFC7]'
                         : 'text-[#5C4F44] hover:bg-[#FBF8F1]'
@@ -164,13 +164,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                     setMobileMenuOpen(false);
                     onOpenRegistration();
                   }}
-                  className="w-full py-2.5 text-center text-xs font-bold uppercase tracking-wider text-white bg-[#C9A45C] hover:bg-[#DFC283] rounded-md shadow-xs"
+                  className="w-full py-3 text-center text-xs font-bold uppercase tracking-wider text-white bg-[#C9A45C] hover:bg-[#DFC283] rounded-md shadow-xs"
                 >
                   {t('registerNow')}
                 </button>
                 <button
                   onClick={() => handleNavClick('admin')}
-                  className="w-full py-2 text-center text-xs font-medium text-[#7A6E63] hover:text-[#2D241E] bg-[#FBF8F1] border border-[#EADFC7] rounded-md"
+                  className="w-full py-2.5 text-center text-xs font-medium text-[#7A6E63] hover:text-[#2D241E] bg-[#FBF8F1] border border-[#EADFC7] rounded-md"
                 >
                   {t('navAdmin')}
                 </button>

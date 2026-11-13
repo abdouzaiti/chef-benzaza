@@ -16,14 +16,14 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-8 sm:space-y-12">
       
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
           Atelier d'Application Coiffure & Beauté
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
           {t('salonTitle')}
         </h1>
         <p className="text-sm text-[#6B5E52] leading-relaxed">
@@ -33,13 +33,13 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
 
       {/* Hero Showcase Split */}
       <div className="bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] rounded-2xl border border-[#E8DEC8] overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center shadow-sm">
-        <div className="p-8 sm:p-12 space-y-5">
+        <div className="p-6 sm:p-10 lg:p-12 space-y-5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-[#FAF4E6] text-[#8C6B28] border border-[#E8DEC8] text-xs font-bold">
             <Sparkles className="w-3.5 h-3.5 text-[#C9A45C]" />
             <span>Salon d'Application École Benzaza</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-bold font-display leading-tight text-[#2D241E]">
+          <h2 className="text-xl sm:text-3xl font-bold font-display leading-tight text-[#2D241E]">
             L'Élégance du Ciseau & du Rasoir
           </h2>
 
@@ -61,14 +61,14 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
           <div className="pt-2">
             <button
               onClick={() => onOpenBooking()}
-              className="px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded transition-colors shadow-md shadow-[#C9A45C]/20"
+              className="w-full sm:w-auto px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded transition-colors shadow-md shadow-[#C9A45C]/20 text-center"
             >
               {t('bookAppointment')}
             </button>
           </div>
         </div>
 
-        <div className="h-72 lg:h-full relative overflow-hidden bg-neutral-100">
+        <div className="h-64 sm:h-72 lg:h-full relative overflow-hidden bg-neutral-100">
           <img
             src="/src/assets/images/barber_coiffure_master_1794418834548.jpg"
             alt="Atelier Coiffure et Barbier Chef Benzaza"
@@ -80,10 +80,10 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
 
       {/* Filter Tabs */}
       <div className="flex justify-center">
-        <div className="inline-flex p-1 bg-white border border-[#E8DEC8] rounded-lg shadow-xs">
+        <div className="flex items-center gap-1 overflow-x-auto max-w-full scrollbar-none p-1 bg-white border border-[#E8DEC8] rounded-lg shadow-xs">
           <button
             onClick={() => setFilter('all')}
-            className={`px-4 py-2 text-xs font-semibold rounded-md transition-colors ${
+            className={`px-3 sm:px-4 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 ${
               filter === 'all'
                 ? 'bg-[#C9A45C] text-white shadow-xs'
                 : 'text-[#6B5E52] hover:text-[#8C6B28]'
@@ -93,7 +93,7 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
           </button>
           <button
             onClick={() => setFilter('men')}
-            className={`px-4 py-2 text-xs font-semibold rounded-md transition-colors ${
+            className={`px-3 sm:px-4 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 ${
               filter === 'men'
                 ? 'bg-[#C9A45C] text-white shadow-xs'
                 : 'text-[#6B5E52] hover:text-[#8C6B28]'
@@ -103,7 +103,7 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
           </button>
           <button
             onClick={() => setFilter('women')}
-            className={`px-4 py-2 text-xs font-semibold rounded-md transition-colors ${
+            className={`px-3 sm:px-4 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 ${
               filter === 'women'
                 ? 'bg-[#C9A45C] text-white shadow-xs'
                 : 'text-[#6B5E52] hover:text-[#8C6B28]'
@@ -115,13 +115,13 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
       </div>
 
       {/* Services Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
         {filteredServices.map((service) => (
           <div
             key={service.id}
             className="bg-white rounded-xl border border-[#E8DEC8] shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col sm:flex-row group"
           >
-            <div className="sm:w-2/5 h-48 sm:h-auto relative overflow-hidden bg-neutral-100 shrink-0">
+            <div className="sm:w-2/5 h-52 sm:h-auto relative overflow-hidden bg-neutral-100 shrink-0">
               <img
                 src={service.image}
                 alt={service.title[language] || service.title.fr}
@@ -133,7 +133,7 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
               </div>
             </div>
 
-            <div className="p-6 sm:w-3/5 flex flex-col justify-between space-y-4">
+            <div className="p-5 sm:p-6 sm:w-3/5 flex flex-col justify-between space-y-4">
               <div>
                 <div className="flex items-center gap-2 text-xs text-[#7A6E63] mb-2">
                   <Clock className="w-3.5 h-3.5 text-[#C9A45C]" />
@@ -149,7 +149,7 @@ export const SalonView: React.FC<SalonViewProps> = ({ onOpenBooking }) => {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-[#F1ECE1] flex items-center justify-between">
+              <div className="pt-4 border-t border-[#F1ECE1] flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <span className="text-[10px] uppercase text-[#7A6E63] block">Tarif soin</span>
                   <span className="text-base font-bold font-mono text-[#8C6B28] tabular-nums">

@@ -578,7 +578,7 @@ export const INITIAL_COURSES: Course[] = [
       ar: 'تكوين تطبيقي احترافي مع الأستاذ آدم بوخاتم لتعلم الحلاقة الرجالية العصرية. تعلم التدرج السلس للقصات، التحديد بالموس، والعناية بالبشرة بالبخار والزيوت.',
       en: 'Master men’s grooming with Adem Boukhatem. Learn seamless skin fades, straight razor beard sculpting, and luxury hot towel facial treatments.',
     },
-    image: '/src/assets/images/barber_coiffure_master_1794418834548.jpg',
+    image: '/adem.png',
     priceDZD: 32000,
     duration: {
       fr: '2 Mois (90 Heures en salon)',

@@ -103,11 +103,11 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-10">
+    <div className="max-w-7xl mx-auto px-3 sm:px-8 py-6 sm:py-10 space-y-6 sm:space-y-10">
       
       {/* 1. SECTION HEADER */}
       <div className="text-center max-w-3xl mx-auto">
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
           {t('featuredCoursesTitle')}
         </h1>
       </div>
@@ -150,15 +150,15 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
           <p className="text-xs text-[#6B5E52] mt-1">Essayez de modifier vos filtres ou termes de recherche.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-12 gap-2.5 sm:gap-6 lg:gap-8 items-start">
+        <div className="grid grid-cols-12 gap-2 sm:gap-6 lg:gap-8 items-start">
           
           {/* LEFT SIDEBAR: Simple Rectangular Formation & Formateur Path List (Visible on ALL Screen Sizes) */}
           <div className="col-span-4 sm:col-span-4 lg:col-span-4 sticky top-16 sm:top-24 self-start">
             <div className="bg-white border border-[#E8DEC8] flex flex-col shadow-xs overflow-hidden">
               
               {/* Sidebar Header */}
-              <div className="p-2.5 sm:p-4 bg-[#FAF7F2] border-b border-[#E8DEC8]">
-                <h3 className="text-xs sm:text-sm font-bold text-[#2D241E] font-display uppercase tracking-wider">
+              <div className="p-2 sm:p-4 bg-[#FAF7F2] border-b border-[#E8DEC8]">
+                <h3 className="text-[11px] sm:text-sm font-bold text-[#2D241E] font-display uppercase tracking-wider">
                   Nos Formations
                 </h3>
               </div>
@@ -175,21 +175,21 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
                       key={`path-item-${course.id}`}
                       id={`path-item-${course.id}`}
                       onClick={() => handleSelectCoursePath(course.id)}
-                      className={`w-full text-left p-2.5 sm:p-4 transition-colors flex flex-col ${
+                      className={`w-full text-left rtl:text-right p-2 sm:p-4 transition-colors flex flex-col ${
                         isActive
-                          ? 'bg-[#FAF4E6] border-l-2 sm:border-l-4 border-l-[#8C6B28] text-[#2D241E]'
+                          ? 'bg-[#FAF4E6] border-l-2 sm:border-l-4 rtl:border-l-0 rtl:border-r-2 sm:rtl:border-r-4 border-l-[#8C6B28] rtl:border-r-[#8C6B28] text-[#2D241E]'
                           : 'bg-white hover:bg-[#FAF7F2] text-[#2D241E]'
                       }`}
                     >
                       {/* BIG BOLD FORMATION TITLE */}
-                      <span className={`text-xs sm:text-base font-bold font-display leading-tight line-clamp-2 ${
+                      <span className={`text-[11px] sm:text-base font-bold font-display leading-tight line-clamp-2 break-words ${
                         isActive ? 'text-[#8C6B28]' : 'text-[#2D241E]'
                       }`}>
                         {course.title[language] || course.title.fr}
                       </span>
 
                       {/* FORMATEUR NAME DOWNSIDE THE FORMATION NAME */}
-                      <span className="text-[10px] sm:text-xs font-semibold text-[#8C6B28] mt-1 block">
+                      <span className="text-[10px] sm:text-xs font-semibold text-[#8C6B28] mt-1 block truncate w-full">
                         {course.instructor.name}
                       </span>
                     </button>
@@ -201,13 +201,13 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
           </div>
 
           {/* RIGHT COLUMN: Full Detailed Formation Cards (Visible on ALL Screen Sizes) */}
-          <div className="col-span-8 sm:col-span-8 lg:col-span-8 space-y-4 sm:space-y-10">
+          <div className="col-span-8 sm:col-span-8 lg:col-span-8 space-y-4 sm:space-y-10 min-w-0">
             {filteredCourses.map((course) => (
               <div
                 key={course.id}
                 id={`course-card-${course.id}`}
                 data-course-id={course.id}
-                className={`bg-white rounded-2xl border transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md ${
+                className={`bg-white rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md ${
                   activeCourseId === course.id ? 'border-[#C9A45C] ring-2 ring-[#C9A45C]/20' : 'border-[#E8DEC8]'
                 }`}
               >
@@ -219,54 +219,54 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
                     referrerPolicy="no-referrer"
                     className="w-full h-auto max-h-full object-contain object-center"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#2D241E]/80 via-transparent to-transparent opacity-80" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#2D241E]/80 via-transparent to-transparent opacity-80 pointer-events-none" />
                   
                   {/* Price Tag Badge */}
-                  <div className="absolute top-4 right-4 rtl:right-auto rtl:left-4 bg-white/95 backdrop-blur-md text-[#8C6B28] text-xs font-mono font-bold px-3 py-1.5 rounded-lg border border-[#EADFC7] shadow-md">
+                  <div className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 rtl:right-auto rtl:left-2.5 sm:rtl:left-4 bg-white/95 backdrop-blur-md text-[#8C6B28] text-[10px] sm:text-xs font-mono font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg border border-[#EADFC7] shadow-md">
                     {course.priceDZD} {t('dzd')}
                   </div>
 
                   {/* Formateur Badge over Banner */}
-                  <div className="absolute bottom-4 left-4 right-4 text-white flex items-center justify-between">
-                    <div>
-                      <span className="text-[10px] uppercase font-bold tracking-widest text-[#DFC283] block">
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-4 sm:left-4 sm:right-4 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                    <div className="min-w-0">
+                      <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-[#DFC283] block">
                         Formation dirigée par
                       </span>
-                      <h4 className="text-base font-bold text-white font-display flex items-center gap-1.5">
-                        <User className="w-4 h-4 text-[#C9A45C]" />
-                        <span>{course.instructor.name}</span>
+                      <h4 className="text-xs sm:text-base font-bold text-white font-display flex items-center gap-1 sm:gap-1.5 truncate">
+                        <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A45C] shrink-0" />
+                        <span className="truncate">{course.instructor.name}</span>
                       </h4>
                     </div>
 
-                    <div className="bg-black/30 backdrop-blur-xs px-3 py-1 rounded text-xs text-white/90 font-medium flex items-center gap-1.5 border border-white/20">
-                      <Clock className="w-3.5 h-3.5 text-[#C9A45C]" />
-                      <span>{course.duration[language] || course.duration.fr}</span>
+                    <div className="self-start sm:self-auto bg-black/30 backdrop-blur-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs text-white/90 font-medium flex items-center gap-1 sm:gap-1.5 border border-white/20 max-w-full">
+                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C9A45C] shrink-0" />
+                      <span className="truncate">{course.duration[language] || course.duration.fr}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Card Body */}
-                <div className="p-6 sm:p-8 space-y-6">
+                <div className="p-3.5 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
                   
                   {/* Title & Short Description */}
                   <div>
-                    <h2 className="text-2xl font-bold text-[#2D241E] font-display leading-tight">
+                    <h2 className="text-base sm:text-2xl font-bold text-[#2D241E] font-display leading-tight">
                       {course.title[language] || course.title.fr}
                     </h2>
-                    <p className="text-xs sm:text-sm text-[#6B5E52] mt-2 leading-relaxed">
+                    <p className="text-[11px] sm:text-sm text-[#6B5E52] mt-1.5 sm:mt-2 leading-relaxed">
                       {course.fullDesc[language] || course.fullDesc.fr}
                     </p>
                   </div>
 
                   {/* Objectives Highlights */}
-                  <div className="bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DEC8] space-y-2">
-                    <h4 className="text-xs font-bold text-[#2D241E] uppercase tracking-wider font-display flex items-center gap-1.5">
-                      <CheckCircle2 className="w-4 h-4 text-[#C9A45C]" />
+                  <div className="bg-[#FAF7F2] p-3 sm:p-4 rounded-xl border border-[#E8DEC8] space-y-2">
+                    <h4 className="text-[11px] sm:text-xs font-bold text-[#2D241E] uppercase tracking-wider font-display flex items-center gap-1.5">
+                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A45C] shrink-0" />
                       <span>Compétences clés acquises</span>
                     </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 pt-1">
                       {(course.objectives[language] || course.objectives.fr).map((obj, i) => (
-                        <div key={i} className="flex items-start gap-2 text-xs text-[#6B5E52]">
+                        <div key={i} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#6B5E52]">
                           <span className="text-[#C9A45C] font-bold">•</span>
                           <span>{obj}</span>
                         </div>
@@ -274,21 +274,19 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
                     </div>
                   </div>
 
-
-
                   {/* Action CTAs */}
-                  <div className="pt-4 border-t border-[#F1ECE1] flex flex-wrap items-center justify-between gap-4">
+                  <div className="pt-3 sm:pt-4 border-t border-[#F1ECE1] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4">
                     <button
                       onClick={() => setSelectedCourse(course)}
-                      className="px-4 py-2.5 bg-white hover:bg-[#FAF7F2] text-[#8C6B28] border border-[#C9A45C] text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center gap-2 shadow-xs"
+                      className="w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-2.5 bg-white hover:bg-[#FAF7F2] text-[#8C6B28] border border-[#C9A45C] text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center justify-center gap-2 shadow-xs"
                     >
                       <span>{t('viewDetails')}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <ArrowRight className={`w-3.5 h-3.5 ${isRtl ? 'rotate-180' : ''}`} />
                     </button>
 
                     <button
                       onClick={() => onOpenRegistration(course.id)}
-                      className="px-6 py-2.5 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md shadow-[#C9A45C]/20"
+                      className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md shadow-[#C9A45C]/20 text-center"
                     >
                       {t('registerNow')} — {course.priceDZD} {t('dzd')}
                     </button>
@@ -304,41 +302,41 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
 
       {/* 5. DETAILED SYLLABUS MODAL */}
       {selectedCourse && (
-        <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="relative bg-white text-[#2D241E] w-full max-w-3xl rounded-2xl border border-[#E8DEC8] shadow-2xl overflow-hidden my-8 max-h-[90vh] flex flex-col">
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-start sm:items-center justify-center p-2 sm:p-4">
+          <div className="relative bg-white text-[#2D241E] w-full max-w-3xl rounded-2xl border border-[#E8DEC8] shadow-2xl overflow-hidden my-4 sm:my-8 max-h-[92vh] flex flex-col">
             
             {/* Modal Header */}
-            <div className="relative w-full aspect-[9/10] max-h-[55vh] bg-[#FAF7F2] flex items-center justify-center overflow-hidden shrink-0">
+            <div className="relative w-full aspect-[9/10] max-h-[45vh] sm:max-h-[55vh] bg-[#FAF7F2] flex items-center justify-center overflow-hidden shrink-0">
               <img
                 src={selectedCourse.image}
                 alt={selectedCourse.title[language] || selectedCourse.title.fr}
                 referrerPolicy="no-referrer"
                 className="w-full h-auto max-h-full object-contain object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-white via-white/60 to-transparent pointer-events-none" />
               
               <button
                 onClick={() => setSelectedCourse(null)}
-                className="absolute top-4 right-4 rtl:right-auto rtl:left-4 p-2 bg-white/90 text-[#2D241E] rounded-full hover:bg-white shadow-md transition-colors border border-[#E8DEC8]"
+                className="absolute top-3 right-3 sm:top-4 sm:right-4 rtl:right-auto rtl:left-3 sm:rtl:left-4 p-2 bg-white/90 text-[#2D241E] rounded-full hover:bg-white shadow-md transition-colors border border-[#E8DEC8]"
               >
                 <X className="w-5 h-5 text-[#8C6B28]" />
               </button>
 
-              <div className="absolute bottom-4 left-6 right-6">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#8C6B28] block mb-1">
+              <div className="absolute bottom-3 left-4 right-4 sm:bottom-4 sm:left-6 sm:right-6">
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#8C6B28] block mb-1">
                   Programme de Formation Certifiante — Mostaganem
                 </span>
-                <h3 className="text-2xl font-bold font-display text-[#2D241E]">
+                <h3 className="text-lg sm:text-2xl font-bold font-display text-[#2D241E]">
                   {selectedCourse.title[language] || selectedCourse.title.fr}
                 </h3>
               </div>
             </div>
 
             {/* Modal Scrollable Body */}
-            <div className="p-6 overflow-y-auto space-y-6">
+            <div className="p-4 sm:p-6 overflow-y-auto space-y-5 sm:space-y-6">
               
               {/* Key Metadata Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 bg-[#FAF7F2] rounded-xl border border-[#E8DEC8]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 p-3.5 sm:p-4 bg-[#FAF7F2] rounded-xl border border-[#E8DEC8]">
                 <div>
                   <span className="text-[10px] uppercase text-[#7A6E63] block">{t('courseDuration')}</span>
                   <strong className="text-xs text-[#2D241E] block mt-0.5">
@@ -384,8 +382,6 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
                 </div>
               </div>
 
-
-
               {/* Schedules */}
               <div>
                 <h4 className="text-sm font-bold text-[#2D241E] uppercase tracking-wider mb-2 font-display">
@@ -405,7 +401,7 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
             </div>
 
             {/* Modal Footer CTA */}
-            <div className="p-4 bg-[#FAF7F2] border-t border-[#E8DEC8] flex items-center justify-between gap-4 shrink-0">
+            <div className="p-4 bg-[#FAF7F2] border-t border-[#E8DEC8] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 shrink-0">
               <div>
                 <span className="text-[10px] uppercase text-[#7A6E63] block">Tarif de la session</span>
                 <span className="text-base font-bold font-mono text-[#8C6B28] tabular-nums">
@@ -413,10 +409,10 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
                 </span>
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-2.5 sm:gap-3">
                 <button
                   onClick={() => setSelectedCourse(null)}
-                  className="px-4 py-2 bg-white hover:bg-[#F5EEDB] text-[#6B5E52] border border-[#E8DEC8] text-xs font-semibold rounded-lg shadow-xs"
+                  className="flex-1 sm:flex-none px-4 py-2.5 sm:py-2 bg-white hover:bg-[#F5EEDB] text-[#6B5E52] border border-[#E8DEC8] text-xs font-semibold rounded-lg shadow-xs text-center"
                 >
                   {t('close')}
                 </button>
@@ -426,7 +422,7 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
                     setSelectedCourse(null);
                     onOpenRegistration(id);
                   }}
-                  className="px-5 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-xs"
+                  className="flex-1 sm:flex-none px-5 py-2.5 sm:py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-xs text-center"
                 >
                   {t('registerNow')}
                 </button>

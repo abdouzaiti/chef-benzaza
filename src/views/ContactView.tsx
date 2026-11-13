@@ -46,14 +46,14 @@ export const ContactView: React.FC = () => {
   )}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-10 sm:space-y-16">
       
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
           Accès & Renseignements
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
           {t('contactTitle')}
         </h1>
         <p className="text-sm text-[#6B5E52] leading-relaxed">
@@ -61,10 +61,10 @@ export const ContactView: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
         {/* Contact Info Card */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-8 sm:p-10 rounded-2xl border border-[#E8DEC8] shadow-sm space-y-8">
+        <div className="lg:col-span-5 bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-5 sm:p-8 lg:p-10 rounded-2xl border border-[#E8DEC8] shadow-sm space-y-6 sm:space-y-8">
           <div>
             <span className="text-xs font-mono uppercase tracking-widest text-[#8C6B28] font-bold block mb-1">
               Siège Officiel
@@ -148,7 +148,7 @@ export const ContactView: React.FC = () => {
           {/* Social Links */}
           <div className="pt-2 text-center text-xs text-[#7A6E63]">
             <span className="block mb-2">Suivez nos ateliers sur les réseaux :</span>
-            <div className="flex justify-center gap-4 text-xs font-semibold text-[#6B5E52]">
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs font-semibold text-[#6B5E52]">
               <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[#8C6B28]">Facebook</a>
               <span>·</span>
               <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-[#8C6B28]">Instagram</a>
@@ -161,7 +161,7 @@ export const ContactView: React.FC = () => {
         </div>
 
         {/* Contact Form */}
-        <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-2xl border border-[#E8DEC8] shadow-sm space-y-6">
+        <div className="lg:col-span-7 bg-white p-5 sm:p-8 lg:p-10 rounded-2xl border border-[#E8DEC8] shadow-sm space-y-6">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold text-[#2D241E] font-display">
               {t('sendMessageTitle')}

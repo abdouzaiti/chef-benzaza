@@ -200,13 +200,13 @@ export const AdminView: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-8">
       
       {/* Top Admin Header Bar */}
-      <div className="bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-6 rounded-2xl border border-[#E8DEC8] shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-4 sm:p-6 rounded-2xl border border-[#E8DEC8] shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[#FAF4E6] text-[#8C6B28] border border-[#E8DEC8] flex items-center justify-center font-bold">
+          <div className="w-10 h-10 rounded-lg bg-[#FAF4E6] text-[#8C6B28] border border-[#E8DEC8] flex items-center justify-center font-bold shrink-0">
             <ShieldCheck className="w-6 h-6 text-[#C9A45C]" />
           </div>
           <div>
-            <h1 className="text-xl font-bold font-display text-[#2D241E]">
+            <h1 className="text-lg sm:text-xl font-bold font-display text-[#2D241E]">
               {t('adminTitle')}
             </h1>
             <p className="text-xs text-[#7A6E63]">
@@ -215,7 +215,7 @@ export const AdminView: React.FC = () => {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
           <button
             onClick={resetToDemoData}
             className="px-3.5 py-2 bg-white hover:bg-[#FAF4E6] text-[#6B5E52] border border-[#E8DEC8] text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-xs"
@@ -387,7 +387,7 @@ export const AdminView: React.FC = () => {
       {/* 2. COURSES MANAGEMENT */}
       {activeTab === 'courses' && (
         <div className="space-y-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <h2 className="text-lg font-bold text-[#2D241E] font-display">
               Gestion des Formations & Tarifs DZD
             </h2>
@@ -506,10 +506,10 @@ export const AdminView: React.FC = () => {
 
           {/* Course Edit Drawer/Modal */}
           {editingCourse && (
-            <div className="fixed inset-0 z-50 bg-[#2D241E]/40 backdrop-blur-xs flex items-center justify-center p-4">
-              <div className="bg-white text-[#2D241E] w-full max-w-2xl rounded-xl border border-[#E8DEC8] shadow-2xl p-6 space-y-4 max-h-[90vh] overflow-y-auto">
-                <div className="flex justify-between items-center border-b border-[#E8DEC8] pb-3">
-                  <h3 className="text-base font-bold font-display text-[#2D241E]">
+            <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-start sm:items-center justify-center p-2 sm:p-4">
+              <div className="bg-white text-[#2D241E] w-full max-w-2xl rounded-xl border border-[#E8DEC8] shadow-2xl p-4 sm:p-6 space-y-4 my-4 sm:my-8 max-h-[90vh] overflow-y-auto">
+                <div className="flex justify-between items-center gap-2 border-b border-[#E8DEC8] pb-3">
+                  <h3 className="text-sm sm:text-base font-bold font-display text-[#2D241E]">
                     Modifier la formation : {editingCourse.title.fr}
                   </h3>
                   <button
@@ -552,7 +552,7 @@ export const AdminView: React.FC = () => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[#5C4F44] font-semibold mb-1">Tarif en DZD *</label>
                       <input
@@ -720,7 +720,7 @@ export const AdminView: React.FC = () => {
       {/* 4. PRODUCTS & STOCK MANAGEMENT */}
       {activeTab === 'products' && (
         <div className="space-y-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <h2 className="text-lg font-bold text-[#2D241E] font-display">
               Boutique & Gestion des Stocks
             </h2>
@@ -817,8 +817,8 @@ export const AdminView: React.FC = () => {
 
           {/* Edit Product Modal */}
           {editingProduct && (
-            <div className="fixed inset-0 z-50 bg-[#2D241E]/40 backdrop-blur-xs flex items-center justify-center p-4">
-              <div className="bg-white text-[#2D241E] w-full max-w-lg rounded-xl border border-[#E8DEC8] shadow-2xl p-6 space-y-4">
+            <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-start sm:items-center justify-center p-2 sm:p-4">
+              <div className="bg-white text-[#2D241E] w-full max-w-lg rounded-xl border border-[#E8DEC8] shadow-2xl p-4 sm:p-6 space-y-4 my-4 sm:my-8">
                 <div className="flex justify-between items-center border-b border-[#E8DEC8] pb-3">
                   <h3 className="text-base font-bold text-[#2D241E]">Modifier le produit</h3>
                   <button onClick={() => setEditingProduct(null)} className="text-[#7A6E63] hover:text-[#2D241E]">✕</button>
@@ -840,7 +840,7 @@ export const AdminView: React.FC = () => {
                     />
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
                       <label className="block text-[#5C4F44] font-semibold mb-1">Prix DZD</label>
                       <input
@@ -1148,7 +1148,7 @@ export const AdminView: React.FC = () => {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {gallery.map((g) => (
               <div
                 key={g.id}
@@ -1195,7 +1195,7 @@ export const AdminView: React.FC = () => {
                     : 'bg-white border-[#E6DFD3]'
                 }`}
               >
-                <div className="flex items-start justify-between gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 sm:gap-4">
                   <div>
                     <h3 className="text-sm font-bold text-neutral-900">
                       {msg.subject}
@@ -1239,8 +1239,8 @@ export const AdminView: React.FC = () => {
 
       {/* 9. SITE SETTINGS */}
       {activeTab === 'settings' && (
-        <div className="bg-white p-8 rounded-xl border border-[#E6DFD3] space-y-6">
-          <div className="flex items-center justify-between border-b border-[#F1ECE1] pb-4">
+        <div className="bg-white p-5 sm:p-8 rounded-xl border border-[#E6DFD3] space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#F1ECE1] pb-4">
             <div>
               <h2 className="text-lg font-bold text-[#2D241E] font-display">
                 Paramètres & Coordonnées de l'École

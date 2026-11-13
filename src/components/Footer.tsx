@@ -24,9 +24,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegistration }
   };
 
   return (
-    <footer className="bg-white text-[#5C4F44] border-t border-[#E8DEC8] pt-16 pb-12">
+    <footer className="bg-white text-[#5C4F44] border-t border-[#E8DEC8] pt-12 sm:pt-16 pb-10 sm:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-10 sm:mb-16">
           
           {/* Col 1: Brand & Slogan */}
           <div className="space-y-4">
@@ -206,11 +206,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegistration }
         </div>
 
         {/* Bottom Bar with Copyright & Admin Portal */}
-        <div className="pt-8 border-t border-[#E8DEC8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8C7E72]">
+        <div className="pt-8 border-t border-[#E8DEC8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8C7E72] text-center sm:text-left rtl:sm:text-right">
           <div>
             © {new Date().getFullYear()} ECOLE CHEF BENZAZA — Tous droits réservés. Mostaganem, Algérie.
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
             <button
               onClick={() => handleNav('admin')}
               className="hover:text-[#8C6B28] transition-colors flex items-center gap-1.5"

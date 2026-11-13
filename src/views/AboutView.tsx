@@ -21,14 +21,14 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
   const { t, language, settings, courses } = useApp();
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-12 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-10 sm:space-y-16">
       
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
         <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
           Histoire & Savoir-Faire
         </div>
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
           L'Académie Professionnelle Chef Benzaza
         </h1>
         <p className="text-sm text-[#6B5E52] leading-relaxed">
@@ -38,7 +38,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
 
       {/* Founder Story Split */}
       <div className="bg-white rounded-2xl border border-[#E8DEC8] overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center shadow-xs">
-        <div className="p-8 sm:p-12 space-y-6">
+        <div className="p-6 sm:p-10 lg:p-12 space-y-5 sm:space-y-6">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8C6B28]">
             <Award className="w-4 h-4 text-[#C9A45C]" />
             <span>Fondation & Vision</span>
@@ -146,11 +146,11 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
           {courses.slice(0, 4).map((c) => (
             <div
               key={c.id}
-              className="bg-white p-6 rounded-xl border border-[#E8DEC8] space-y-3 text-center shadow-xs"
+              className="bg-white p-5 sm:p-6 rounded-xl border border-[#E8DEC8] space-y-3 text-center shadow-xs"
             >
               <div className="w-16 h-16 mx-auto rounded-full bg-[#FAF4E6] text-[#8C6B28] flex items-center justify-center font-bold text-lg font-display border-2 border-[#C9A45C] shadow-xs">
                 {c.instructor.name.split(' ').map((n) => n[0]).join('')}
@@ -170,8 +170,8 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
       </div>
 
       {/* CTA Box */}
-      <div className="bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-8 sm:p-12 rounded-2xl border border-[#E8DEC8] text-center space-y-5 shadow-sm">
-        <h3 className="text-2xl font-bold font-display text-[#2D241E]">
+      <div className="bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-6 sm:p-12 rounded-2xl border border-[#E8DEC8] text-center space-y-5 shadow-sm">
+        <h3 className="text-xl sm:text-2xl font-bold font-display text-[#2D241E]">
           Prêt à transformer votre passion en carrière d'avenir ?
         </h3>
         <p className="text-xs sm:text-sm text-[#6B5E52] max-w-xl mx-auto leading-relaxed">
@@ -180,7 +180,7 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
         <div className="pt-2 flex justify-center gap-4">
           <button
             onClick={onOpenRegistration}
-            className="px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded transition-colors shadow-xs"
+            className="w-full sm:w-auto px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded transition-colors shadow-xs"
           >
             {t('registerNow')}
           </button>
