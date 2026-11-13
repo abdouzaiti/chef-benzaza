@@ -79,25 +79,25 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-start sm:items-center justify-center p-2 sm:p-4">
-      <div className="relative bg-white text-[#2D241E] w-full max-w-xl rounded-2xl border border-[#E8DEC8] shadow-2xl overflow-hidden my-4 sm:my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#021510]/60 backdrop-blur-xs flex items-start sm:items-center justify-center p-2 sm:p-4">
+      <div className="relative bg-white text-[#062B22] w-full max-w-xl rounded-2xl border border-[#D6AD4F]/50 shadow-2xl overflow-hidden my-4 sm:my-8">
         
         {/* Header */}
-        <div className="p-4 sm:p-6 bg-[#FAF7F2] border-b border-[#E8DEC8] flex items-center justify-between gap-3">
+        <div className="p-4 sm:p-6 bg-[#063B2E] border-b border-[#D6AD4F]/40 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#C9A45C] text-white flex items-center justify-center font-bold shadow-xs shrink-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#D6AD4F] to-[#C89B3C] text-[#05261D] flex items-center justify-center font-bold shadow-xs shrink-0">
               <GraduationCap className="w-5 h-5" />
             </div>
             <div className="min-w-0">
-              <h3 className="text-sm sm:text-base font-bold text-[#2D241E] uppercase tracking-wider font-display truncate">
+              <h3 className="text-sm sm:text-base font-bold text-[#FAF6ED] uppercase tracking-wider font-display truncate">
                 {t('regModalTitle')}
               </h3>
-              <p className="text-[11px] sm:text-xs text-[#8C6B28] font-semibold truncate">ECOLE CHEF BENZAZA — Mostaganem</p>
+              <p className="text-[11px] sm:text-xs text-[#E5BD5B] font-semibold truncate">ECOLE CHEF BENZAZA — Mostaganem</p>
             </div>
           </div>
           <button
             onClick={handleReset}
-            className="p-1.5 text-[#7A6E63] hover:text-[#2D241E] rounded-lg hover:bg-[#F5EEDB] transition-colors shrink-0"
+            className="p-1.5 text-[#EAE2CF]/80 hover:text-[#E5BD5B] rounded-lg hover:bg-[#042119] transition-colors shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -177,15 +177,15 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 <button
                   type="button"
                   onClick={handlePrint}
-                  className="flex-1 py-2.5 px-4 bg-white hover:bg-[#FAF4E6] text-[#2D241E] border border-[#E8DEC8] text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors"
+                  className="flex-1 py-2.5 px-4 bg-white hover:bg-[#FAF7F2] text-[#062B22] border border-[#E8DEC8] text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors"
                 >
-                  <Printer className="w-4 h-4 text-[#8C6B28]" />
+                  <Printer className="w-4 h-4 text-[#063B2E]" />
                   <span>{t('downloadReceipt')}</span>
                 </button>
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 py-2.5 px-4 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
+                  className="flex-1 py-2.5 px-4 bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
                 >
                   {t('close')}
                 </button>
@@ -297,8 +297,8 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                       key={item}
                       className={`flex items-center gap-2 p-2.5 rounded-lg border cursor-pointer text-xs transition-colors ${
                         schedule === item
-                          ? 'border-[#C9A45C] bg-[#FAF4E6] text-[#8C6B28] font-semibold'
-                          : 'border-[#E8DEC8] bg-[#FAF7F2] text-[#5C4F44] hover:bg-white hover:border-[#C9A45C]/50'
+                          ? 'border-[#063B2E] bg-[#063B2E] text-[#E5BD5B] font-semibold'
+                          : 'border-[#E8DEC8] bg-[#FAF7F2] text-[#062B22] hover:bg-white hover:border-[#063B2E]/50'
                       }`}
                     >
                       <input
@@ -307,7 +307,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                         value={item}
                         checked={schedule === item}
                         onChange={(e) => setSchedule(e.target.value)}
-                        className="accent-[#C9A45C]"
+                        className="accent-[#D6AD4F]"
                       />
                       <span>{item}</span>
                     </label>
@@ -317,7 +317,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
               {/* Additional message */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#062B22] mb-1.5">
                   {t('message')}
                 </label>
                 <textarea
@@ -325,14 +325,14 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Questions sur le matériel, projet professionnel, facilités de paiement..."
-                  className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded-lg p-3 text-xs text-[#2D241E] placeholder:text-[#A89F91] focus:bg-white focus:outline-none focus:border-[#C9A45C] resize-none"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded-lg p-3 text-xs text-[#062B22] placeholder:text-[#A89F91] focus:bg-white focus:outline-none focus:border-[#063B2E] resize-none"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-md shadow-[#C9A45C]/25"
+                  className="w-full py-3 bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50 font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-md shadow-[#063B2E]/20"
                 >
                   {t('submitRegistration')}
                 </button>

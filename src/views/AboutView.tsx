@@ -25,13 +25,13 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
       
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
+        <div className="text-xs font-bold uppercase tracking-widest text-[#063B2E]">
           Histoire & Savoir-Faire
         </div>
-        <h1 className="text-2xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#062B22] font-display text-balance">
           L'Académie Professionnelle Chef Benzaza
         </h1>
-        <p className="text-sm text-[#6B5E52] leading-relaxed">
+        <p className="text-sm text-[#5C6660] leading-relaxed">
           {t('slogan')} — Un engagement sans compromis pour l'excellence et la transmission des métiers manuels et techniques à Mostaganem.
         </p>
       </div>
@@ -39,40 +39,40 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
       {/* Founder Story Split */}
       <div className="bg-white rounded-2xl border border-[#E8DEC8] overflow-hidden grid grid-cols-1 lg:grid-cols-2 items-center shadow-xs">
         <div className="p-6 sm:p-10 lg:p-12 space-y-5 sm:space-y-6">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8C6B28]">
-            <Award className="w-4 h-4 text-[#C9A45C]" />
+          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#063B2E]">
+            <Award className="w-4 h-4 text-[#D6AD4F]" />
             <span>Fondation & Vision</span>
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#2D241E] font-display">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#062B22] font-display">
             {t('aboutHistoryTitle')}
           </h2>
 
-          <p className="text-xs sm:text-sm text-[#6B5E52] leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#5C6660] leading-relaxed">
             {t('aboutHistoryDesc')}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-[#F1ECE1]">
             <div className="space-y-1">
-              <span className="text-xs font-bold text-[#2D241E] block">
+              <span className="text-xs font-bold text-[#062B22] block">
                 {t('aboutMissionTitle')}
               </span>
-              <p className="text-[11px] text-[#7A6E63] leading-relaxed">
+              <p className="text-[11px] text-[#5C6660] leading-relaxed">
                 {t('aboutMissionDesc')}
               </p>
             </div>
             <div className="space-y-1">
-              <span className="text-xs font-bold text-[#2D241E] block">
+              <span className="text-xs font-bold text-[#062B22] block">
                 {t('aboutVisionTitle')}
               </span>
-              <p className="text-[11px] text-[#7A6E63] leading-relaxed">
+              <p className="text-[11px] text-[#5C6660] leading-relaxed">
                 {t('aboutVisionDesc')}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="h-80 lg:h-full relative overflow-hidden bg-neutral-100">
+        <div className="h-80 lg:h-full relative overflow-hidden bg-[#021510]">
           <img
             src="/src/assets/images/hero_chef_kitchen_1794418831073.jpg"
             alt="Chef Benzaza dans les cuisines de l'école"
@@ -85,47 +85,47 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
       {/* Facilities & Classrooms */}
       <div className="space-y-8">
         <div className="text-center max-w-xl mx-auto space-y-2">
-          <h2 className="text-2xl font-bold text-[#2D241E] font-display">
+          <h2 className="text-2xl font-bold text-[#062B22] font-display">
             {t('aboutFacilitiesTitle')}
           </h2>
-          <p className="text-xs text-[#6B5E52]">
+          <p className="text-xs text-[#5C6660]">
             {t('aboutFacilitiesDesc')}
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl border border-[#E8DEC8] p-6 space-y-3 shadow-xs">
-            <div className="w-10 h-10 rounded-lg bg-[#FAF4E6] text-[#8C6B28] flex items-center justify-center font-bold border border-[#E8DEC8]">
-              <Flame className="w-5 h-5 text-[#C9A45C]" />
+          <div className="bg-white rounded-xl border border-[#E8DEC8] hover:border-[#063B2E]/35 p-6 space-y-3 shadow-xs transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#063B2E] text-[#E5BD5B] flex items-center justify-center font-bold border border-[#D6AD4F]/40">
+              <Flame className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-bold text-[#2D241E] font-display">
+            <h3 className="text-base font-bold text-[#062B22] font-display">
               Laboratoire de Pâtisserie & Boulangerie
             </h3>
-            <p className="text-xs text-[#6B5E52] leading-relaxed">
+            <p className="text-xs text-[#5C6660] leading-relaxed">
               Plan de travail en marbre et inox, laminoirs professionnels, cellules de refroidissement rapide, fours rotatifs et tempéreuses à chocolat.
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-[#E8DEC8] p-6 space-y-3 shadow-xs">
-            <div className="w-10 h-10 rounded-lg bg-[#FAF4E6] text-[#8C6B28] flex items-center justify-center font-bold border border-[#E8DEC8]">
-              <Scissors className="w-5 h-5 text-[#C9A45C]" />
+          <div className="bg-white rounded-xl border border-[#E8DEC8] hover:border-[#063B2E]/35 p-6 space-y-3 shadow-xs transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#063B2E] text-[#E5BD5B] flex items-center justify-center font-bold border border-[#D6AD4F]/40">
+              <Scissors className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-bold text-[#2D241E] font-display">
+            <h3 className="text-base font-bold text-[#062B22] font-display">
               Salon d'Application Coiffure & Barbier
             </h3>
-            <p className="text-xs text-[#6B5E52] leading-relaxed">
+            <p className="text-xs text-[#5C6660] leading-relaxed">
               Postes de coiffage individuels avec grands miroirs biseautés, fauteuils barbier en cuir, stérilisateurs UV et bacs massants.
             </p>
           </div>
 
-          <div className="bg-white rounded-xl border border-[#E8DEC8] p-6 space-y-3 shadow-xs">
-            <div className="w-10 h-10 rounded-lg bg-[#FAF4E6] text-[#8C6B28] flex items-center justify-center font-bold border border-[#E8DEC8]">
-              <Building className="w-5 h-5 text-[#C9A45C]" />
+          <div className="bg-white rounded-xl border border-[#E8DEC8] hover:border-[#063B2E]/35 p-6 space-y-3 shadow-xs transition-colors">
+            <div className="w-10 h-10 rounded-lg bg-[#063B2E] text-[#E5BD5B] flex items-center justify-center font-bold border border-[#D6AD4F]/40">
+              <Building className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-bold text-[#2D241E] font-display">
+            <h3 className="text-base font-bold text-[#062B22] font-display">
               Laboratoire Informatique & Four à Bois
             </h3>
-            <p className="text-xs text-[#6B5E52] leading-relaxed">
+            <p className="text-xs text-[#5C6660] leading-relaxed">
               Postes de travail PC modernes connectés en fibre optique, et espace pizzeria équipé d’un authentique four à sole napolitain.
             </p>
           </div>
@@ -135,13 +135,13 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
       {/* Instructors & Master Chefs */}
       <div className="space-y-8">
         <div className="text-center max-w-xl mx-auto space-y-2">
-          <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
+          <div className="text-xs font-bold uppercase tracking-widest text-[#063B2E]">
             L'Excellence de la Transmission
           </div>
-          <h2 className="text-2xl font-bold text-[#2D241E] font-display">
+          <h2 className="text-2xl font-bold text-[#062B22] font-display">
             {t('aboutInstructorsTitle')}
           </h2>
-          <p className="text-xs text-[#6B5E52]">
+          <p className="text-xs text-[#5C6660]">
             {t('aboutInstructorsSubtitle')}
           </p>
         </div>
@@ -150,18 +150,18 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
           {courses.slice(0, 4).map((c) => (
             <div
               key={c.id}
-              className="bg-white p-5 sm:p-6 rounded-xl border border-[#E8DEC8] space-y-3 text-center shadow-xs"
+              className="bg-white p-5 sm:p-6 rounded-xl border border-[#E8DEC8] hover:border-[#063B2E]/35 space-y-3 text-center shadow-xs transition-colors"
             >
-              <div className="w-16 h-16 mx-auto rounded-full bg-[#FAF4E6] text-[#8C6B28] flex items-center justify-center font-bold text-lg font-display border-2 border-[#C9A45C] shadow-xs">
+              <div className="w-16 h-16 mx-auto rounded-full bg-[#063B2E] text-[#E5BD5B] flex items-center justify-center font-bold text-lg font-display border-2 border-[#D6AD4F] shadow-xs">
                 {c.instructor.name.split(' ').map((n) => n[0]).join('')}
               </div>
               <div>
-                <h4 className="text-sm font-bold text-[#2D241E]">{c.instructor.name}</h4>
-                <p className="text-[11px] text-[#8C6B28] font-bold mt-0.5">
+                <h4 className="text-sm font-bold text-[#062B22]">{c.instructor.name}</h4>
+                <p className="text-[11px] text-[#063B2E] font-bold mt-0.5">
                   {c.instructor.role[language] || c.instructor.role.fr}
                 </p>
               </div>
-              <p className="text-xs text-[#7A6E63] leading-relaxed">
+              <p className="text-xs text-[#5C6660] leading-relaxed">
                 {c.instructor.experience[language] || c.instructor.experience.fr}
               </p>
             </div>
@@ -170,17 +170,17 @@ export const AboutView: React.FC<AboutViewProps> = ({ onNavigate, onOpenRegistra
       </div>
 
       {/* CTA Box */}
-      <div className="bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-6 sm:p-12 rounded-2xl border border-[#E8DEC8] text-center space-y-5 shadow-sm">
-        <h3 className="text-xl sm:text-2xl font-bold font-display text-[#2D241E]">
+      <div className="bg-gradient-to-br from-[#063B2E] via-[#062B22] to-[#021510] text-[#FAF6ED] p-6 sm:p-12 rounded-2xl border border-[#D6AD4F]/40 text-center space-y-5 shadow-lg">
+        <h3 className="text-xl sm:text-2xl font-bold font-display text-[#FAF6ED]">
           Prêt à transformer votre passion en carrière d'avenir ?
         </h3>
-        <p className="text-xs sm:text-sm text-[#6B5E52] max-w-xl mx-auto leading-relaxed">
+        <p className="text-xs sm:text-sm text-[#EAE2CF]/90 max-w-xl mx-auto leading-relaxed">
           Les inscriptions pour les prochaines promotions sont ouvertes. Nombre de places limité par atelier pour garantir un encadrement personnalisé.
         </p>
         <div className="pt-2 flex justify-center gap-4">
           <button
             onClick={onOpenRegistration}
-            className="w-full sm:w-auto px-6 py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded transition-colors shadow-xs"
+            className="w-full sm:w-auto px-7 py-3 bg-gradient-to-r from-[#D6AD4F] via-[#E5BD5B] to-[#C89B3C] hover:from-[#E5BD5B] hover:to-[#D6AD4F] text-[#05261D] font-bold text-xs uppercase tracking-wider rounded transition-all shadow-lg shadow-black/25"
           >
             {t('registerNow')}
           </button>

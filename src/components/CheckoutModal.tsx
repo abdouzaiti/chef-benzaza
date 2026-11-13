@@ -83,25 +83,25 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
   const currentTotal = cartSubtotal + currentFee;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-start sm:items-center justify-center p-2 sm:p-4">
-      <div className="relative bg-white text-[#2D241E] w-full max-w-xl rounded-2xl border border-[#E8DEC8] shadow-2xl overflow-hidden my-4 sm:my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#021510]/60 backdrop-blur-xs flex items-start sm:items-center justify-center p-2 sm:p-4">
+      <div className="relative bg-white text-[#062B22] w-full max-w-xl rounded-2xl border border-[#D6AD4F]/50 shadow-2xl overflow-hidden my-4 sm:my-8">
         
         {/* Header */}
-        <div className="p-4 sm:p-6 bg-[#FAF7F2] border-b border-[#E8DEC8] flex items-center justify-between gap-3">
+        <div className="p-4 sm:p-6 bg-[#063B2E] border-b border-[#D6AD4F]/40 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#C9A45C] text-white flex items-center justify-center font-bold shadow-xs shrink-0">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#D6AD4F] to-[#C89B3C] text-[#05261D] flex items-center justify-center font-bold shadow-xs shrink-0">
               <ShoppingBag className="w-5 h-5" />
             </div>
             <div className="min-w-0">
-              <h3 className="text-sm sm:text-base font-bold text-[#2D241E] uppercase tracking-wider font-display truncate">
+              <h3 className="text-sm sm:text-base font-bold text-[#FAF6ED] uppercase tracking-wider font-display truncate">
                 {t('checkoutTitle')}
               </h3>
-              <p className="text-[11px] sm:text-xs text-[#8C6B28] font-semibold truncate">Boutique Gourmande — Mostaganem</p>
+              <p className="text-[11px] sm:text-xs text-[#E5BD5B] font-semibold truncate">Boutique Gourmande — Mostaganem</p>
             </div>
           </div>
           <button
             onClick={handleReset}
-            className="p-1.5 text-[#7A6E63] hover:text-[#2D241E] rounded-lg hover:bg-[#F5EEDB] transition-colors shrink-0"
+            className="p-1.5 text-[#EAE2CF]/80 hover:text-[#E5BD5B] rounded-lg hover:bg-[#042119] transition-colors shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -186,15 +186,15 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
                 <button
                   type="button"
                   onClick={handlePrint}
-                  className="flex-1 py-2.5 px-4 bg-white hover:bg-[#FAF4E6] text-[#2D241E] border border-[#E8DEC8] text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors"
+                  className="flex-1 py-2.5 px-4 bg-white hover:bg-[#FAF7F2] text-[#062B22] border border-[#E8DEC8] text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors"
                 >
-                  <Printer className="w-4 h-4 text-[#8C6B28]" />
+                  <Printer className="w-4 h-4 text-[#063B2E]" />
                   <span>Imprimer le reçu</span>
                 </button>
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 py-2.5 px-4 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
+                  className="flex-1 py-2.5 px-4 bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
                 >
                   {t('close')}
                 </button>
@@ -206,7 +206,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
               
               {/* Delivery method toggle */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-2">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#062B22] mb-2">
                   {t('deliveryMethod')}
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
@@ -215,14 +215,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
                     onClick={() => setDeliveryType('delivery')}
                     className={`p-3 rounded-xl border text-left rtl:text-right flex items-start gap-2.5 transition-colors ${
                       deliveryType === 'delivery'
-                        ? 'border-[#C9A45C] bg-[#FAF4E6] text-[#2D241E]'
-                        : 'border-[#E8DEC8] bg-[#FAF7F2] text-[#5C4F44] hover:bg-white'
+                        ? 'border-[#063B2E] bg-[#063B2E] text-[#FAF6ED]'
+                        : 'border-[#E8DEC8] bg-[#FAF7F2] text-[#062B22] hover:bg-white'
                     }`}
                   >
-                    <Truck className="w-5 h-5 text-[#8C6B28] shrink-0 mt-0.5" />
+                    <Truck className={`w-5 h-5 shrink-0 mt-0.5 ${deliveryType === 'delivery' ? 'text-[#E5BD5B]' : 'text-[#063B2E]'}`} />
                     <div>
-                      <span className="block text-xs font-bold text-[#2D241E]">Livraison à domicile</span>
-                      <span className="text-[11px] text-[#7A6E63]">Wilaya de Mostaganem</span>
+                      <span className={`block text-xs font-bold ${deliveryType === 'delivery' ? 'text-[#FAF6ED]' : 'text-[#062B22]'}`}>Livraison à domicile</span>
+                      <span className={`text-[11px] ${deliveryType === 'delivery' ? 'text-[#EAE2CF]/85' : 'text-[#5C6660]'}`}>Wilaya de Mostaganem</span>
                     </div>
                   </button>
 
@@ -231,14 +231,14 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
                     onClick={() => setDeliveryType('pickup')}
                     className={`p-3 rounded-xl border text-left rtl:text-right flex items-start gap-2.5 transition-colors ${
                       deliveryType === 'pickup'
-                        ? 'border-[#C9A45C] bg-[#FAF4E6] text-[#2D241E]'
-                        : 'border-[#E8DEC8] bg-[#FAF7F2] text-[#5C4F44] hover:bg-white'
+                        ? 'border-[#063B2E] bg-[#063B2E] text-[#FAF6ED]'
+                        : 'border-[#E8DEC8] bg-[#FAF7F2] text-[#062B22] hover:bg-white'
                     }`}
                   >
-                    <Store className="w-5 h-5 text-[#8C6B28] shrink-0 mt-0.5" />
+                    <Store className={`w-5 h-5 shrink-0 mt-0.5 ${deliveryType === 'pickup' ? 'text-[#E5BD5B]' : 'text-[#063B2E]'}`} />
                     <div>
-                      <span className="block text-xs font-bold text-[#2D241E]">Retrait à l’École</span>
-                      <span className="text-[11px] text-[#8C6B28] font-semibold">Gratuit (Mostaganem Centre)</span>
+                      <span className={`block text-xs font-bold ${deliveryType === 'pickup' ? 'text-[#FAF6ED]' : 'text-[#062B22]'}`}>Retrait à l’École</span>
+                      <span className={`text-[11px] font-semibold ${deliveryType === 'pickup' ? 'text-[#E5BD5B]' : 'text-[#063B2E]'}`}>Gratuit (Mostaganem Centre)</span>
                     </div>
                   </button>
                 </div>
@@ -368,25 +368,25 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
 
               {/* Summary */}
               <div className="bg-[#FAF7F2] p-4 rounded-xl border border-[#E8DEC8] text-xs space-y-1.5">
-                <div className="flex justify-between text-[#5C4F44]">
+                <div className="flex justify-between text-[#5C6660]">
                   <span>{t('subtotal')} ({cart.reduce((a, b) => a + b.quantity, 0)} articles)</span>
-                  <span className="font-mono tabular-nums text-[#2D241E] font-medium">{cartSubtotal} {t('dzd')}</span>
+                  <span className="font-mono tabular-nums text-[#062B22] font-medium">{cartSubtotal} {t('dzd')}</span>
                 </div>
-                <div className="flex justify-between text-[#5C4F44]">
+                <div className="flex justify-between text-[#5C6660]">
                   <span>{t('deliveryFee')}</span>
-                  <span className="font-mono tabular-nums text-[#2D241E] font-medium">
+                  <span className="font-mono tabular-nums text-[#062B22] font-medium">
                     {currentFee === 0 ? t('deliveryFree') : `${currentFee} ${t('dzd')}`}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm font-bold text-[#2D241E] pt-2 border-t border-[#E8DEC8]">
+                <div className="flex justify-between text-sm font-bold text-[#062B22] pt-2 border-t border-[#E8DEC8]">
                   <span>{t('totalAmount')}</span>
-                  <span className="font-mono text-[#8C6B28] tabular-nums">{currentTotal} {t('dzd')}</span>
+                  <span className="font-mono text-[#063B2E] tabular-nums">{currentTotal} {t('dzd')}</span>
                 </div>
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-md shadow-[#C9A45C]/25"
+                className="w-full py-3 bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50 font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-md shadow-[#063B2E]/20"
               >
                 {t('confirmOrder')}
               </button>

@@ -52,13 +52,13 @@ export const StoreView: React.FC = () => {
       
       {/* Store Header Banner */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
+        <div className="text-xs font-bold uppercase tracking-widest text-[#063B2E]">
           Ateliers & Créations d'Élite
         </div>
-        <h1 className="text-2xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#062B22] font-display text-balance">
           {t('storeTitle')}
         </h1>
-        <p className="text-sm text-[#6B5E52] leading-relaxed">
+        <p className="text-sm text-[#5C6660] leading-relaxed">
           {t('storeSubtitle')}. Préparations artisanales avec livraison sur la wilaya de Mostaganem ou retrait direct à l'école.
         </p>
       </div>
@@ -66,24 +66,30 @@ export const StoreView: React.FC = () => {
       {/* Trust Callouts */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-5 bg-white rounded-xl border border-[#E8DEC8] text-xs shadow-xs">
         <div className="flex items-center gap-3">
-          <Truck className="w-5 h-5 text-[#C9A45C] shrink-0" />
+          <div className="p-2 rounded-lg bg-[#063B2E] text-[#E5BD5B] shrink-0">
+            <Truck className="w-4 h-4" />
+          </div>
           <div>
-            <strong className="block text-[#2D241E]">Livraison Wilaya de Mostaganem</strong>
-            <span className="text-[#7A6E63]">Gratuite dès {settings.freeDeliveryThreshold} {t('dzd')}</span>
+            <strong className="block text-[#062B22]">Livraison Wilaya de Mostaganem</strong>
+            <span className="text-[#5C6660]">Gratuite dès {settings.freeDeliveryThreshold} {t('dzd')}</span>
           </div>
         </div>
         <div className="flex items-center gap-3 border-t sm:border-t-0 sm:border-l rtl:sm:border-l-0 rtl:sm:border-r border-[#EAE3D6] pt-3 sm:pt-0 sm:pl-4 rtl:sm:pl-0 rtl:sm:pr-4">
-          <Sparkles className="w-5 h-5 text-[#C9A45C] shrink-0" />
+          <div className="p-2 rounded-lg bg-[#063B2E] text-[#E5BD5B] shrink-0">
+            <Sparkles className="w-4 h-4" />
+          </div>
           <div>
-            <strong className="block text-[#2D241E]">100% Fait Maison</strong>
-            <span className="text-[#7A6E63]">Matières premières de haute gastronomie</span>
+            <strong className="block text-[#062B22]">100% Fait Maison</strong>
+            <span className="text-[#5C6660]">Matières premières de haute gastronomie</span>
           </div>
         </div>
         <div className="flex items-center gap-3 border-t sm:border-t-0 sm:border-l rtl:sm:border-l-0 rtl:sm:border-r border-[#EAE3D6] pt-3 sm:pt-0 sm:pl-4 rtl:sm:pl-0 rtl:sm:pr-4">
-          <ShieldCheck className="w-5 h-5 text-[#C9A45C] shrink-0" />
+          <div className="p-2 rounded-lg bg-[#063B2E] text-[#E5BD5B] shrink-0">
+            <ShieldCheck className="w-4 h-4" />
+          </div>
           <div>
-            <strong className="block text-[#2D241E]">Paiement à la Livraison</strong>
-            <span className="text-[#7A6E63]">Réglez en espèces à réception</span>
+            <strong className="block text-[#062B22]">Paiement à la Livraison</strong>
+            <span className="text-[#5C6660]">Réglez en espèces à réception</span>
           </div>
         </div>
       </div>
@@ -97,8 +103,8 @@ export const StoreView: React.FC = () => {
               onClick={() => setActiveCategory(cat.id)}
               className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors whitespace-nowrap shrink-0 ${
                 activeCategory === cat.id
-                  ? 'bg-[#C9A45C] text-white shadow-xs'
-                  : 'text-[#6B5E52] hover:text-[#8C6B28] hover:bg-[#FAF7F2]'
+                  ? 'bg-[#063B2E] text-[#E5BD5B] border border-[#D6AD4F]/50 shadow-xs'
+                  : 'text-[#5C6660] hover:text-[#063B2E] hover:bg-[#FAF7F2]'
               }`}
             >
               {cat.label}
@@ -107,13 +113,13 @@ export const StoreView: React.FC = () => {
         </div>
 
         <div className="relative w-full md:w-72 shrink-0">
-          <Search className="w-4 h-4 text-[#8C6B28] absolute left-3 rtl:left-auto rtl:right-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#063B2E] absolute left-3 rtl:left-auto rtl:right-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Rechercher une pâtisserie, pizza..."
-            className="w-full pl-9 pr-4 rtl:pl-4 rtl:pr-9 py-2 text-xs bg-[#FAF7F2] border border-[#E8DEC8] text-[#2D241E] rounded-md focus:outline-none focus:border-[#C9A45C]"
+            className="w-full pl-9 pr-4 rtl:pl-4 rtl:pr-9 py-2 text-xs bg-[#FAF7F2] border border-[#E8DEC8] text-[#062B22] rounded-md focus:outline-none focus:border-[#063B2E]"
           />
         </div>
       </div>
@@ -121,9 +127,9 @@ export const StoreView: React.FC = () => {
       {/* Product Grid */}
       {filteredProducts.length === 0 ? (
         <div className="text-center py-20 bg-white rounded-xl border border-[#E8DEC8]">
-          <ShoppingBag className="w-12 h-12 mx-auto text-[#C9A45C] opacity-60 mb-3" />
-          <h3 className="text-base font-bold text-[#2D241E]">Aucun produit disponible</h3>
-          <p className="text-xs text-[#6B5E52] mt-1">Modifiez vos critères pour voir nos douceurs.</p>
+          <ShoppingBag className="w-12 h-12 mx-auto text-[#063B2E] opacity-60 mb-3" />
+          <h3 className="text-base font-bold text-[#062B22]">Aucun produit disponible</h3>
+          <p className="text-xs text-[#5C6660] mt-1">Modifiez vos critères pour voir nos douceurs.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
@@ -132,7 +138,7 @@ export const StoreView: React.FC = () => {
             return (
               <div
                 key={product.id}
-                className="bg-white rounded-xl border border-[#E8DEC8] shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col group"
+                className="bg-white rounded-xl border border-[#E8DEC8] hover:border-[#063B2E]/35 shadow-sm hover:shadow-md transition-all overflow-hidden flex flex-col group"
               >
                 {/* Product Image */}
                 <div className="relative h-56 sm:h-64 overflow-hidden bg-neutral-100">
@@ -142,11 +148,11 @@ export const StoreView: React.FC = () => {
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 left-3 rtl:left-auto rtl:right-3 bg-white/95 text-neutral-800 text-[11px] font-semibold px-2.5 py-0.5 rounded shadow-xs border border-[#EADFC7]">
+                  <div className="absolute top-3 left-3 rtl:left-auto rtl:right-3 bg-[#062B22]/90 backdrop-blur-xs text-[11px] font-semibold px-2.5 py-0.5 rounded shadow-xs border border-[#D6AD4F]/40">
                     {product.stock > 0 ? (
-                      <span className="text-emerald-700">En stock ({product.stock})</span>
+                      <span className="text-[#E5BD5B]">En stock ({product.stock})</span>
                     ) : (
-                      <span className="text-red-700">Rupture</span>
+                      <span className="text-red-300">Rupture</span>
                     )}
                   </div>
                 </div>
@@ -154,10 +160,10 @@ export const StoreView: React.FC = () => {
                 {/* Content */}
                 <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <h2 className="text-base font-bold text-[#2D241E] font-display">
+                    <h2 className="text-base font-bold text-[#062B22] font-display">
                       {product.name[language] || product.name.fr}
                     </h2>
-                    <p className="text-xs text-[#6B5E52] line-clamp-2 mt-2 leading-relaxed">
+                    <p className="text-xs text-[#5C6660] line-clamp-2 mt-2 leading-relaxed">
                       {product.description[language] || product.description.fr}
                     </p>
                   </div>
@@ -165,8 +171,8 @@ export const StoreView: React.FC = () => {
                   <div className="pt-4 border-t border-[#F1ECE1] space-y-3">
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="text-[10px] uppercase text-[#7A6E63] block">{t('unitPrice')}</span>
-                        <span className="text-base font-bold font-mono text-[#8C6B28] tabular-nums">
+                        <span className="text-[10px] uppercase text-[#5C6660] block">{t('unitPrice')}</span>
+                        <span className="text-base font-bold font-mono text-[#063B2E] tabular-nums">
                           {product.priceDZD} {t('dzd')}
                         </span>
                       </div>
@@ -176,16 +182,16 @@ export const StoreView: React.FC = () => {
                         <div className="flex items-center bg-[#FAF7F2] rounded border border-[#E8DEC8]">
                           <button
                             onClick={() => setQty(product.id, qty - 1)}
-                            className="px-2 py-1 text-[#6B5E52] hover:text-[#8C6B28] transition-colors"
+                            className="px-2 py-1 text-[#5C6660] hover:text-[#063B2E] transition-colors"
                           >
                             <Minus className="w-3 h-3" />
                           </button>
-                          <span className="px-2.5 py-0.5 text-xs font-mono font-bold text-[#2D241E]">
+                          <span className="px-2.5 py-0.5 text-xs font-mono font-bold text-[#062B22]">
                             {qty}
                           </span>
                           <button
                             onClick={() => setQty(product.id, qty + 1)}
-                            className="px-2 py-1 text-[#6B5E52] hover:text-[#8C6B28] transition-colors"
+                            className="px-2 py-1 text-[#5C6660] hover:text-[#063B2E] transition-colors"
                           >
                             <Plus className="w-3 h-3" />
                           </button>
@@ -199,10 +205,10 @@ export const StoreView: React.FC = () => {
                       className={`w-full py-2.5 rounded text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2 shadow-xs ${
                         product.stock <= 0
                           ? 'bg-neutral-200 text-neutral-400 cursor-not-allowed'
-                          : 'bg-[#C9A45C] hover:bg-[#DFC283] text-white'
+                          : 'bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50'
                       }`}
                     >
-                      <ShoppingBag className="w-4 h-4" />
+                      <ShoppingBag className={`w-4 h-4 ${product.stock > 0 ? 'text-[#E5BD5B]' : ''}`} />
                       <span>{t('addToCart')}</span>
                     </button>
                   </div>

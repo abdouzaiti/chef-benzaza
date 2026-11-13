@@ -50,13 +50,13 @@ export const ContactView: React.FC = () => {
       
       {/* Header */}
       <div className="text-center max-w-2xl mx-auto space-y-3">
-        <div className="text-xs font-bold uppercase tracking-widest text-[#8C6B28]">
+        <div className="text-xs font-bold uppercase tracking-widest text-[#063B2E]">
           Accès & Renseignements
         </div>
-        <h1 className="text-2xl sm:text-4xl font-bold text-[#2D241E] font-display text-balance">
+        <h1 className="text-2xl sm:text-4xl font-bold text-[#062B22] font-display text-balance">
           {t('contactTitle')}
         </h1>
-        <p className="text-sm text-[#6B5E52] leading-relaxed">
+        <p className="text-sm text-[#5C6660] leading-relaxed">
           {t('contactSubtitle')}
         </p>
       </div>
@@ -64,41 +64,41 @@ export const ContactView: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
         {/* Contact Info Card */}
-        <div className="lg:col-span-5 bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-5 sm:p-8 lg:p-10 rounded-2xl border border-[#E8DEC8] shadow-sm space-y-6 sm:space-y-8">
+        <div className="lg:col-span-5 bg-gradient-to-br from-[#063B2E] via-[#062B22] to-[#021510] text-[#FAF6ED] p-5 sm:p-8 lg:p-10 rounded-2xl border border-[#D6AD4F]/40 shadow-lg space-y-6 sm:space-y-8">
           <div>
-            <span className="text-xs font-mono uppercase tracking-widest text-[#8C6B28] font-bold block mb-1">
+            <span className="text-xs font-mono uppercase tracking-widest text-[#E5BD5B] font-bold block mb-1">
               Siège Officiel
             </span>
-            <h2 className="text-2xl font-bold font-display text-[#2D241E]">
+            <h2 className="text-2xl font-bold font-display text-[#FAF6ED]">
               {settings.schoolName}
             </h2>
-            <p className="text-xs text-[#7A6E63] mt-1">
+            <p className="text-xs text-[#EAE2CF]/80 mt-1">
               Institut de Formation Professionnelle Agréé — Mostaganem, Algérie
             </p>
           </div>
 
           <div className="space-y-5 text-xs">
             <div className="flex items-start gap-3.5">
-              <div className="p-2.5 rounded bg-[#FAF4E6] text-[#8C6B28] shrink-0 border border-[#E8DEC8]">
-                <MapPin className="w-5 h-5 text-[#C9A45C]" />
+              <div className="p-2.5 rounded bg-[#042119] text-[#E5BD5B] shrink-0 border border-[#D6AD4F]/35">
+                <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <strong className="block text-[#2D241E] text-sm">{t('address')}</strong>
-                <span className="text-[#6B5E52] mt-0.5 block leading-relaxed">
+                <strong className="block text-[#FAF6ED] text-sm">{t('address')}</strong>
+                <span className="text-[#EAE2CF]/85 mt-0.5 block leading-relaxed">
                   {settings.address}, {settings.city}, {settings.country}
                 </span>
               </div>
             </div>
 
             <div className="flex items-start gap-3.5">
-              <div className="p-2.5 rounded bg-[#FAF4E6] text-[#8C6B28] shrink-0 border border-[#E8DEC8]">
-                <Phone className="w-5 h-5 text-[#C9A45C]" />
+              <div className="p-2.5 rounded bg-[#042119] text-[#E5BD5B] shrink-0 border border-[#D6AD4F]/35">
+                <Phone className="w-5 h-5" />
               </div>
               <div>
-                <strong className="block text-[#2D241E] text-sm">{t('callUs')}</strong>
+                <strong className="block text-[#FAF6ED] text-sm">{t('callUs')}</strong>
                 <a
                   href={`tel:${settings.phone}`}
-                  className="text-[#6B5E52] hover:text-[#8C6B28] font-mono tabular-nums block mt-0.5 transition-colors font-medium"
+                  className="text-[#EAE2CF]/90 hover:text-[#E5BD5B] font-mono tabular-nums block mt-0.5 transition-colors font-medium"
                 >
                   {settings.phone} / {settings.phoneSecondary}
                 </a>
@@ -106,14 +106,14 @@ export const ContactView: React.FC = () => {
             </div>
 
             <div className="flex items-start gap-3.5">
-              <div className="p-2.5 rounded bg-[#FAF4E6] text-[#8C6B28] shrink-0 border border-[#E8DEC8]">
-                <Mail className="w-5 h-5 text-[#C9A45C]" />
+              <div className="p-2.5 rounded bg-[#042119] text-[#E5BD5B] shrink-0 border border-[#D6AD4F]/35">
+                <Mail className="w-5 h-5" />
               </div>
               <div>
-                <strong className="block text-[#2D241E] text-sm">Email</strong>
+                <strong className="block text-[#FAF6ED] text-sm">Email</strong>
                 <a
                   href={`mailto:${settings.email}`}
-                  className="text-[#6B5E52] hover:text-[#8C6B28] block mt-0.5 transition-colors"
+                  className="text-[#EAE2CF]/90 hover:text-[#E5BD5B] block mt-0.5 transition-colors"
                 >
                   {settings.email}
                 </a>
@@ -121,19 +121,19 @@ export const ContactView: React.FC = () => {
             </div>
 
             <div className="flex items-start gap-3.5">
-              <div className="p-2.5 rounded bg-[#FAF4E6] text-[#8C6B28] shrink-0 border border-[#E8DEC8]">
-                <Clock className="w-5 h-5 text-[#C9A45C]" />
+              <div className="p-2.5 rounded bg-[#042119] text-[#E5BD5B] shrink-0 border border-[#D6AD4F]/35">
+                <Clock className="w-5 h-5" />
               </div>
               <div>
-                <strong className="block text-[#2D241E] text-sm">{t('openingHoursTitle')}</strong>
-                <span className="text-[#6B5E52] mt-0.5 block leading-relaxed">
+                <strong className="block text-[#FAF6ED] text-sm">{t('openingHoursTitle')}</strong>
+                <span className="text-[#EAE2CF]/85 mt-0.5 block leading-relaxed">
                   {settings.openingHours[language] || settings.openingHours.fr}
                 </span>
               </div>
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[#EAE3D6]">
+          <div className="pt-4 border-t border-[#D6AD4F]/25">
             <a
               href={`https://wa.me/${settings.whatsapp.replace(/\+/g, '')}`}
               target="_blank"
@@ -146,16 +146,16 @@ export const ContactView: React.FC = () => {
           </div>
 
           {/* Social Links */}
-          <div className="pt-2 text-center text-xs text-[#7A6E63]">
+          <div className="pt-2 text-center text-xs text-[#EAE2CF]/70">
             <span className="block mb-2">Suivez nos ateliers sur les réseaux :</span>
-            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs font-semibold text-[#6B5E52]">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[#8C6B28]">Facebook</a>
+            <div className="flex flex-wrap justify-center gap-3 sm:gap-4 text-xs font-semibold text-[#EAE2CF]/90">
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="hover:text-[#E5BD5B]">Facebook</a>
               <span>·</span>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-[#8C6B28]">Instagram</a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="hover:text-[#E5BD5B]">Instagram</a>
               <span>·</span>
-              <a href="https://tiktok.com" target="_blank" rel="noreferrer" className="hover:text-[#8C6B28]">TikTok</a>
+              <a href="https://tiktok.com" target="_blank" rel="noreferrer" className="hover:text-[#E5BD5B]">TikTok</a>
               <span>·</span>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-[#8C6B28]">YouTube</a>
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="hover:text-[#E5BD5B]">YouTube</a>
             </div>
           </div>
         </div>
@@ -163,26 +163,26 @@ export const ContactView: React.FC = () => {
         {/* Contact Form */}
         <div className="lg:col-span-7 bg-white p-5 sm:p-8 lg:p-10 rounded-2xl border border-[#E8DEC8] shadow-sm space-y-6">
           <div>
-            <h2 className="text-xl sm:text-2xl font-bold text-[#2D241E] font-display">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#062B22] font-display">
               {t('sendMessageTitle')}
             </h2>
-            <p className="text-xs text-[#6B5E52] mt-1">
+            <p className="text-xs text-[#5C6660] mt-1">
               Une question sur les tarifs, les dates de rentrée ou nos ateliers ? Écrivez-nous directement.
             </p>
           </div>
 
           {isSubmitted ? (
             <div className="text-center py-10 space-y-4">
-              <div className="w-12 h-12 mx-auto rounded-full bg-[#FAF4E6] text-[#8C6B28] border border-[#E8DEC8] flex items-center justify-center">
-                <CheckCircle className="w-6 h-6 text-[#C9A45C]" />
+              <div className="w-12 h-12 mx-auto rounded-full bg-[#063B2E] text-[#E5BD5B] border border-[#D6AD4F]/50 flex items-center justify-center">
+                <CheckCircle className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-[#2D241E]">Message envoyé avec succès !</h3>
-              <p className="text-xs text-[#6B5E52] max-w-sm mx-auto">
+              <h3 className="text-base font-bold text-[#062B22]">Message envoyé avec succès !</h3>
+              <p className="text-xs text-[#5C6660] max-w-sm mx-auto">
                 {t('messageSentSuccess')}
               </p>
               <button
                 onClick={() => setIsSubmitted(false)}
-                className="px-4 py-2 bg-[#C9A45C] text-white text-xs font-semibold rounded hover:bg-[#DFC283] transition-colors shadow-xs"
+                className="px-4 py-2 bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50 text-xs font-semibold rounded transition-colors shadow-xs"
               >
                 Envoyer un autre message
               </button>
@@ -191,7 +191,7 @@ export const ContactView: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold text-[#5C4F44] uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-semibold text-[#062B22] uppercase tracking-wider mb-1">
                     {t('fullName')} *
                   </label>
                   <input
@@ -200,12 +200,12 @@ export const ContactView: React.FC = () => {
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Ex: Sofiane Belkacem"
-                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2 text-xs text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2 text-xs text-[#062B22] focus:outline-none focus:border-[#063B2E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#5C4F44] uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-semibold text-[#062B22] uppercase tracking-wider mb-1">
                     {t('phone')} *
                   </label>
                   <input
@@ -214,14 +214,14 @@ export const ContactView: React.FC = () => {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder={t('phonePlaceholder')}
-                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2 text-xs text-[#2D241E] font-mono focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2 text-xs text-[#062B22] font-mono focus:outline-none focus:border-[#063B2E]"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#6B5E52] mb-1">
+                  <label className="block text-xs font-medium text-[#5C6660] mb-1">
                     {t('email')}
                   </label>
                   <input
@@ -229,12 +229,12 @@ export const ContactView: React.FC = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="email@domaine.com"
-                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2 text-xs text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2 text-xs text-[#062B22] focus:outline-none focus:border-[#063B2E]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#5C4F44] uppercase tracking-wider mb-1">
+                  <label className="block text-xs font-semibold text-[#062B22] uppercase tracking-wider mb-1">
                     {t('subject')}
                   </label>
                   <input
@@ -242,13 +242,13 @@ export const ContactView: React.FC = () => {
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                     placeholder="Ex: Renseignement formation Pizza"
-                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2 text-xs text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2 text-xs text-[#062B22] focus:outline-none focus:border-[#063B2E]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#5C4F44] uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-[#062B22] uppercase tracking-wider mb-1">
                   {t('yourMessage')} *
                 </label>
                 <textarea
@@ -257,15 +257,15 @@ export const ContactView: React.FC = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Écrivez votre message ici..."
-                  className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded p-3 text-xs text-[#2D241E] focus:outline-none focus:border-[#C9A45C] resize-none"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded p-3 text-xs text-[#062B22] focus:outline-none focus:border-[#063B2E] resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md flex items-center justify-center gap-2"
+                className="w-full py-3 bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50 font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md flex items-center justify-center gap-2"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-4 h-4 text-[#E5BD5B]" />
                 <span>{t('sendButton')}</span>
               </button>
             </form>
@@ -275,10 +275,10 @@ export const ContactView: React.FC = () => {
       </div>
 
       {/* Google Maps Embed with editable location in Mostaganem */}
-      <div className="bg-white p-4 rounded-2xl border border-[#E6DFD3] shadow-sm space-y-3">
+      <div className="bg-white p-4 rounded-2xl border border-[#E8DEC8] shadow-sm space-y-3">
         <div className="flex items-center justify-between px-2">
-          <div className="flex items-center gap-2 text-xs font-semibold text-neutral-800">
-            <MapPin className="w-4 h-4 text-[#C9A45C]" />
+          <div className="flex items-center gap-2 text-xs font-semibold text-[#062B22]">
+            <MapPin className="w-4 h-4 text-[#063B2E]" />
             <span>Localisation satellite de l'école à Mostaganem</span>
           </div>
           <a
@@ -287,7 +287,7 @@ export const ContactView: React.FC = () => {
             )}`}
             target="_blank"
             rel="noreferrer"
-            className="text-xs text-[#8C6B28] hover:underline flex items-center gap-1 font-medium"
+            className="text-xs text-[#063B2E] hover:underline flex items-center gap-1 font-medium"
           >
             <span>Ouvrir dans Google Maps</span>
             <ExternalLink className="w-3 h-3" />
