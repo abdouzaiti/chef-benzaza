@@ -5,23 +5,22 @@ import {
   ShoppingBag,
   Menu,
   X,
-  Phone,
-  ShieldCheck,
-  GraduationCap,
 } from 'lucide-react';
 
 interface NavbarProps {
   currentView: string;
   onNavigate: (view: string) => void;
   onOpenRegistration: () => void;
+  isLogoHidden?: boolean;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentView,
   onNavigate,
   onOpenRegistration,
+  isLogoHidden = false,
 }) => {
-  const { language, setLanguage, t, isRtl, cartTotalQuantity, setIsCartOpen, settings } = useApp();
+  const { language, setLanguage, t, cartTotalQuantity, setIsCartOpen } = useApp();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -46,40 +45,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <>
-      {/* Top micro-bar with contact info in Oran */}
-      <div className="bg-[#171717] text-[#C9A45C] text-xs py-1.5 px-4 sm:px-8 border-b border-[#2b2b2b]">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4 text-neutral-300">
-            <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A45C]"></span>
-              <span className="text-[#F8F5EF] font-medium">{t('locationName')}</span>
-              <span className="hidden md:inline text-neutral-400">| {settings.address}</span>
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <a
-              href={`tel:${settings.phone}`}
-              className="hidden sm:flex items-center gap-1.5 text-neutral-300 hover:text-[#C9A45C] transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 text-[#C9A45C]" />
-              <span className="tabular-nums font-mono">{settings.phone}</span>
-            </a>
-            <button
-              onClick={() => handleNavClick('admin')}
-              className="flex items-center gap-1 text-neutral-400 hover:text-white transition-colors"
-              title={t('navAdmin')}
-            >
-              <ShieldCheck className="w-3.5 h-3.5 text-[#C9A45C]" />
-              <span className="text-[11px] uppercase tracking-wider">{t('navAdmin')}</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navigation Bar — 3 Zones Contract */}
-      <header className="sticky top-0 z-40 bg-[#171717]/95 backdrop-blur-md border-b border-[#2d2a24] text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between gap-8">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EADFC7] text-[#2D241E] shadow-xs">
+        <div className="w-[987px] max-w-full mx-auto px-4 sm:px-8 h-[60px] flex items-center justify-between gap-8">
           
           {/* Zone 1: Single brand logo */}
           <button
@@ -88,14 +56,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label="Accueil École Chef Benzaza"
           >
             <img
+              id="header-brand-logo-img"
               src="/logo.png"
               alt="Logo Officiel École Chef Benzaza"
-              className="h-14 sm:h-16 w-auto object-contain transition-transform group-hover:scale-105 drop-shadow-[0_2px_8px_rgba(201,164,92,0.3)]"
+              className={`h-11 sm:h-12 w-auto object-contain transition-all group-hover:scale-105 drop-shadow-[0_2px_8px_rgba(140,107,40,0.35)] ${
+                isLogoHidden ? 'opacity-0' : 'opacity-100 duration-300'
+              }`}
             />
           </button>
 
           {/* Zone 2: 4-5 concise single-line text navigation links */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-neutral-300">
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-medium text-[#5C4F44]">
             {navLinks.map((link) => {
               const isActive = currentView === link.id;
               return (
@@ -103,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={link.id}
                   onClick={() => handleNavClick(link.id)}
                   className={`relative py-1.5 transition-colors whitespace-nowrap shrink-0 hover:text-[#C9A45C] ${
-                    isActive ? 'text-[#C9A45C] font-semibold' : 'text-neutral-300'
+                    isActive ? 'text-[#8C6B28] font-bold' : 'text-[#5C4F44]'
                   }`}
                 >
                   {link.label}
@@ -118,15 +89,15 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Zone 3: Language Selector, Cart Button & Primary CTA */}
           <div className="flex items-center gap-3.5 shrink-0">
             {/* Language Switcher */}
-            <div className="flex items-center bg-[#242424] rounded-md p-1 border border-[#333333]">
-              {(['fr', 'ar', 'en'] as Language[]).map((lang) => (
+            <div className="flex items-center bg-[#FBF8F1] rounded-md p-1 border border-[#E8DEC8]">
+              {(['fr', 'ar'] as Language[]).map((lang) => (
                 <button
                   key={lang}
                   onClick={() => handleLangChange(lang)}
                   className={`px-2 py-0.5 text-xs font-semibold rounded transition-colors whitespace-nowrap ${
                     language === lang
-                      ? 'bg-[#C9A45C] text-[#171717] shadow-sm'
-                      : 'text-neutral-400 hover:text-white'
+                      ? 'bg-[#C9A45C] text-white shadow-xs'
+                      : 'text-[#7A6E63] hover:text-[#2D241E]'
                   }`}
                 >
                   {lang.toUpperCase()}
@@ -137,12 +108,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Shopping Cart button with badge */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-2.5 rounded-md text-neutral-300 hover:text-white hover:bg-[#242424] border border-transparent hover:border-[#333333] transition-colors focus:outline-none"
+              className="relative p-2.5 rounded-md text-[#5C4F44] hover:text-[#8C6B28] hover:bg-[#FBF8F1] border border-[#EADFC7] transition-colors focus:outline-none"
               aria-label={t('cart')}
             >
               <ShoppingBag className="w-5 h-5 text-[#C9A45C]" />
               {cartTotalQuantity > 0 && (
-                <span className="absolute -top-1 -right-1 bg-[#C9A45C] text-[#171717] text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center tabular-nums">
+                <span className="absolute -top-1 -right-1 bg-[#C9A45C] text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center tabular-nums shadow-xs">
                   {cartTotalQuantity}
                 </span>
               )}
@@ -151,7 +122,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Primary Action Button */}
             <button
               onClick={onOpenRegistration}
-              className="hidden sm:inline-flex items-center px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#171717] bg-[#C9A45C] hover:bg-[#DFC283] rounded-md transition-all shadow-sm shadow-[#C9A45C]/20 whitespace-nowrap shrink-0"
+              className="hidden sm:inline-flex items-center px-4 py-2 text-xs font-bold uppercase tracking-wider text-white bg-[#C9A45C] hover:bg-[#DFC283] rounded-md transition-all shadow-sm shadow-[#C9A45C]/20 whitespace-nowrap shrink-0"
             >
               {t('registerShort')}
             </button>
@@ -159,17 +130,17 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile menu trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-neutral-300 hover:text-white hover:bg-[#242424] focus:outline-none"
+              className="lg:hidden p-2 rounded-md text-[#5C4F44] hover:text-[#2D241E] hover:bg-[#FBF8F1] border border-[#EADFC7] focus:outline-none"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {mobileMenuOpen ? <X className="w-6 h-6 text-[#C9A45C]" /> : <Menu className="w-6 h-6 text-[#C9A45C]" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#171717] border-b border-[#2d2a24] px-4 pt-3 pb-6 animate-in fade-in duration-150">
+          <div className="lg:hidden bg-white border-b border-[#EADFC7] px-4 pt-3 pb-6 shadow-lg animate-in fade-in duration-150">
             <nav className="flex flex-col gap-2">
               {navLinks.map((link) => {
                 const isActive = currentView === link.id;
@@ -179,27 +150,27 @@ export const Navbar: React.FC<NavbarProps> = ({
                     onClick={() => handleNavClick(link.id)}
                     className={`text-left rtl:text-right px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
                       isActive
-                        ? 'bg-[#C9A45C]/15 text-[#C9A45C] font-semibold'
-                        : 'text-neutral-300 hover:bg-[#242424]'
+                        ? 'bg-[#FBF8F1] text-[#8C6B28] font-bold border border-[#EADFC7]'
+                        : 'text-[#5C4F44] hover:bg-[#FBF8F1]'
                     }`}
                   >
                     {link.label}
                   </button>
                 );
               })}
-              <div className="pt-3 mt-2 border-t border-[#2d2a24] flex flex-col gap-2.5">
+              <div className="pt-3 mt-2 border-t border-[#EADFC7] flex flex-col gap-2.5">
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     onOpenRegistration();
                   }}
-                  className="w-full py-2.5 text-center text-xs font-bold uppercase tracking-wider text-[#171717] bg-[#C9A45C] rounded-md"
+                  className="w-full py-2.5 text-center text-xs font-bold uppercase tracking-wider text-white bg-[#C9A45C] hover:bg-[#DFC283] rounded-md shadow-xs"
                 >
                   {t('registerNow')}
                 </button>
                 <button
                   onClick={() => handleNavClick('admin')}
-                  className="w-full py-2 text-center text-xs font-medium text-neutral-400 hover:text-white bg-[#242424] rounded-md"
+                  className="w-full py-2 text-center text-xs font-medium text-[#7A6E63] hover:text-[#2D241E] bg-[#FBF8F1] border border-[#EADFC7] rounded-md"
                 >
                   {t('navAdmin')}
                 </button>

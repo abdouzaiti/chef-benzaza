@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegistration }
   };
 
   return (
-    <footer className="bg-[#141414] text-neutral-300 border-t border-[#262626] pt-16 pb-12">
+    <footer className="bg-white text-[#5C4F44] border-t border-[#E8DEC8] pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           
@@ -34,82 +34,80 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegistration }
               <img
                 src="/logo.png"
                 alt="Logo École Chef Benzaza"
-                className="h-16 sm:h-20 w-auto object-contain drop-shadow-[0_2px_10px_rgba(201,164,92,0.3)]"
+                className="h-16 sm:h-20 w-auto object-contain drop-shadow-[0_2px_10px_rgba(140,107,40,0.35)]"
               />
             </div>
 
-            <p className="text-sm text-neutral-400 leading-relaxed italic border-l-2 rtl:border-l-0 rtl:border-r-2 border-[#C9A45C] pl-3 rtl:pl-0 rtl:pr-3">
+            <p className="text-sm text-[#6B5E52] leading-relaxed italic border-l-2 rtl:border-l-0 rtl:border-r-2 border-[#C9A45C] pl-3 rtl:pl-0 rtl:pr-3">
               "{settings.slogan[language] || settings.slogan.fr}"
             </p>
 
-            <p className="text-xs text-neutral-400 leading-relaxed">
+            <p className="text-xs text-[#7A6E63] leading-relaxed">
               {language === 'ar'
                 ? 'الصرح التكويني المرجعي في الغرب الجزائري لتعليم فنون الطبخ والحلويات، الحلاقة والإعلام الآلي بشهادات تأهيلية وتدريب تطبيقي مكثف.'
-                : language === 'en'
-                ? 'The premier vocational academy in Oran, Algeria specializing in high-mastery culinary arts, artisan bakery, barbering and office technology.'
-                : "L'académie professionnelle de référence à Oran pour l'apprentissage des métiers de la gastronomie, de la coiffure et des technologies appliquées."}
+                : "L'académie professionnelle de référence à Mostaganem pour l'apprentissage des métiers de la gastronomie, de la coiffure et des technologies appliquées."}
             </p>
           </div>
 
           {/* Col 2: Formations */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-5 flex items-center gap-2">
+            <h4 className="text-sm font-bold text-[#2D241E] uppercase tracking-wider mb-5 flex items-center gap-2">
               <span className="w-2 h-0.5 bg-[#C9A45C]"></span>
               {t('navCourses')}
             </h4>
-            <ul className="space-y-2.5 text-xs text-neutral-400">
+            <ul className="space-y-2.5 text-xs text-[#6B5E52]">
               <li>
                 <button
                   onClick={() => handleNav('courses')}
-                  className="hover:text-[#C9A45C] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
+                  className="hover:text-[#8C6B28] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
                 >
                   <span>{t('courseCategory_pastry')}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-60" />
+                  <ArrowUpRight className="w-3 h-3 text-[#C9A45C] opacity-75" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => handleNav('courses')}
-                  className="hover:text-[#C9A45C] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
+                  className="hover:text-[#8C6B28] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
                 >
                   <span>{t('courseCategory_pizza')}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-60" />
+                  <ArrowUpRight className="w-3 h-3 text-[#C9A45C] opacity-75" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => handleNav('courses')}
-                  className="hover:text-[#C9A45C] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
+                  className="hover:text-[#8C6B28] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
                 >
                   <span>{t('courseCategory_culinary')}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-60" />
+                  <ArrowUpRight className="w-3 h-3 text-[#C9A45C] opacity-75" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => handleNav('courses')}
-                  className="hover:text-[#C9A45C] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
+                  className="hover:text-[#8C6B28] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
                 >
                   <span>{t('courseCategory_barber')}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-60" />
+                  <ArrowUpRight className="w-3 h-3 text-[#C9A45C] opacity-75" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => handleNav('courses')}
-                  className="hover:text-[#C9A45C] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
+                  className="hover:text-[#8C6B28] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
                 >
                   <span>{t('courseCategory_hairdressing')}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-60" />
+                  <ArrowUpRight className="w-3 h-3 text-[#C9A45C] opacity-75" />
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => handleNav('courses')}
-                  className="hover:text-[#C9A45C] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
+                  className="hover:text-[#8C6B28] transition-colors flex items-center justify-between w-full text-left rtl:text-right"
                 >
                   <span>{t('courseCategory_it')}</span>
-                  <ArrowUpRight className="w-3 h-3 opacity-60" />
+                  <ArrowUpRight className="w-3 h-3 text-[#C9A45C] opacity-75" />
                 </button>
               </li>
             </ul>
@@ -117,45 +115,45 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegistration }
 
           {/* Col 3: Navigation Rapide */}
           <div>
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-5 flex items-center gap-2">
+            <h4 className="text-sm font-bold text-[#2D241E] uppercase tracking-wider mb-5 flex items-center gap-2">
               <span className="w-2 h-0.5 bg-[#C9A45C]"></span>
               Navigation
             </h4>
-            <ul className="space-y-2.5 text-xs text-neutral-400">
+            <ul className="space-y-2.5 text-xs text-[#6B5E52]">
               <li>
-                <button onClick={() => handleNav('home')} className="hover:text-white transition-colors">
+                <button onClick={() => handleNav('home')} className="hover:text-[#8C6B28] transition-colors">
                   {t('navHome')}
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('about')} className="hover:text-white transition-colors">
+                <button onClick={() => handleNav('about')} className="hover:text-[#8C6B28] transition-colors">
                   {t('navAbout')}
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('store')} className="hover:text-white transition-colors">
+                <button onClick={() => handleNav('store')} className="hover:text-[#8C6B28] transition-colors">
                   {t('navStore')}
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('salon')} className="hover:text-white transition-colors">
+                <button onClick={() => handleNav('salon')} className="hover:text-[#8C6B28] transition-colors">
                   {t('navSalon')}
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('gallery')} className="hover:text-white transition-colors">
+                <button onClick={() => handleNav('gallery')} className="hover:text-[#8C6B28] transition-colors">
                   {t('navGallery')}
                 </button>
               </li>
               <li>
-                <button onClick={() => handleNav('contact')} className="hover:text-white transition-colors">
+                <button onClick={() => handleNav('contact')} className="hover:text-[#8C6B28] transition-colors">
                   {t('navContact')}
                 </button>
               </li>
               <li>
                 <button
                   onClick={onOpenRegistration}
-                  className="text-[#C9A45C] font-semibold hover:underline"
+                  className="text-[#8C6B28] font-bold hover:underline"
                 >
                   {t('registerNow')}
                 </button>
@@ -163,14 +161,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegistration }
             </ul>
           </div>
 
-          {/* Col 4: Contact & Horaires à Oran */}
+          {/* Col 4: Contact & Horaires à Mostaganem */}
           <div className="space-y-4">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-5 flex items-center gap-2">
+            <h4 className="text-sm font-bold text-[#2D241E] uppercase tracking-wider mb-5 flex items-center gap-2">
               <span className="w-2 h-0.5 bg-[#C9A45C]"></span>
               {t('contactTitle')}
             </h4>
 
-            <div className="space-y-3 text-xs text-neutral-400">
+            <div className="space-y-3 text-xs text-[#6B5E52]">
               <div className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 text-[#C9A45C] shrink-0 mt-0.5" />
                 <span>{settings.address}, {settings.city}, {settings.country}</span>
@@ -198,7 +196,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegistration }
                 )}`}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] border border-[#25D366]/30 rounded text-xs font-semibold transition-colors"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#25D366]/15 hover:bg-[#25D366]/25 text-[#25D366] border border-[#25D366]/30 rounded text-xs font-semibold transition-colors shadow-xs"
               >
                 <span>WhatsApp Officiel</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -208,20 +206,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenRegistration }
         </div>
 
         {/* Bottom Bar with Copyright & Admin Portal */}
-        <div className="pt-8 border-t border-[#222222] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-500">
+        <div className="pt-8 border-t border-[#E8DEC8] flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#8C7E72]">
           <div>
-            © {new Date().getFullYear()} ECOLE CHEF BENZAZA — Tous droits réservés. Oran, Algérie.
+            © {new Date().getFullYear()} ECOLE CHEF BENZAZA — Tous droits réservés. Mostaganem, Algérie.
           </div>
           <div className="flex items-center gap-6">
             <button
               onClick={() => handleNav('admin')}
-              className="hover:text-white transition-colors flex items-center gap-1.5"
+              className="hover:text-[#8C6B28] transition-colors flex items-center gap-1.5"
             >
               <ShieldCheck className="w-3.5 h-3.5 text-[#C9A45C]" />
               <span>{t('navAdmin')}</span>
             </button>
-            <span className="text-neutral-700">|</span>
-            <button onClick={() => handleNav('contact')} className="hover:text-white transition-colors">
+            <span className="text-[#E0D5BE]">|</span>
+            <button onClick={() => handleNav('contact')} className="hover:text-[#8C6B28] transition-colors">
               Plan d’accès
             </button>
           </div>

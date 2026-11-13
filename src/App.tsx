@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { AppProvider, useApp } from './context/AppContext';
+import { AppProvider } from './context/AppContext';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { CartDrawer } from './components/CartDrawer';
@@ -13,6 +13,7 @@ import { CheckoutModal } from './components/CheckoutModal';
 import { SalonBookingModal } from './components/SalonBookingModal';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { ToastContainer } from './components/ToastContainer';
+import { IntroSplash } from './components/IntroSplash';
 
 import { HomeView } from './views/HomeView';
 import { AboutView } from './views/AboutView';
@@ -25,6 +26,8 @@ import { AdminView } from './views/AdminView';
 
 const MainLayout: React.FC = () => {
   const [currentView, setCurrentView] = useState<string>('home');
+  const [showSplash, setShowSplash] = useState<boolean>(true);
+  const [isHeaderLogoHidden, setIsHeaderLogoHidden] = useState<boolean>(true);
 
   // Modals
   const [isRegModalOpen, setIsRegModalOpen] = useState(false);
@@ -45,13 +48,33 @@ const MainLayout: React.FC = () => {
     setIsBookingModalOpen(true);
   };
 
+  const handleSplashFlightStart = () => {
+    // Keep header logo hidden during logo's flight animation
+    setIsHeaderLogoHidden(true);
+  };
+
+  const handleSplashComplete = () => {
+    // Reveal static header logo in navbar & unmount splash screen
+    setIsHeaderLogoHidden(false);
+    setShowSplash(false);
+  };
+
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8F5EF] text-[#171717]">
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#2D241E]">
+      {/* Intro Splash Overlay with smooth logo flight to top-left header */}
+      {showSplash && (
+        <IntroSplash
+          onStartFlight={handleSplashFlightStart}
+          onComplete={handleSplashComplete}
+        />
+      )}
+
       {/* Navbar with 3-zone contract */}
       <Navbar
         currentView={currentView}
         onNavigate={setCurrentView}
         onOpenRegistration={() => handleOpenRegistration()}
+        isLogoHidden={isHeaderLogoHidden}
       />
 
       {/* Main View Router */}

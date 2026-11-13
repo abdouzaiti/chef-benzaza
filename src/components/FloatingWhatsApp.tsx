@@ -9,10 +9,8 @@ export const FloatingWhatsApp: React.FC = () => {
 
   const prefilledMessage =
     language === 'ar'
-      ? 'السلام عليكم، أود الاستفسار عن برامج ودورات مدرسة الشيف بن زازة بوهران.'
-      : language === 'en'
-      ? 'Hello, I would like to inquire about training programs at Chef Benzaza Academy in Oran.'
-      : 'Bonjour, je souhaite obtenir des informations sur les formations de l’École Chef Benzaza à Oran.';
+      ? 'السلام عليكم، أود الاستفسار عن برامج ودورات مدرسة الشيف بن زازة بمستغانم.'
+      : 'Bonjour, je souhaite obtenir des informations sur les formations de l’École Chef Benzaza à Mostaganem.';
 
   const whatsappUrl = `https://wa.me/${cleanNumber}?text=${encodeURIComponent(prefilledMessage)}`;
 
@@ -30,7 +28,7 @@ export const FloatingWhatsApp: React.FC = () => {
       >
         <MessageCircle className="w-6 h-6 fill-white text-[#25D366]" />
         <span className="hidden sm:inline text-xs font-bold tracking-wide">
-          WhatsApp Oran
+          WhatsApp Mostaganem
         </span>
       </a>
     </aside>

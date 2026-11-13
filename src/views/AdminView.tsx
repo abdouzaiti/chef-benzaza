@@ -100,18 +100,18 @@ export const AdminView: React.FC = () => {
   if (!isAdminLoggedIn) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center px-4 py-16">
-        <div className="w-full max-w-md bg-[#171717] text-white p-8 rounded-2xl border border-[#2d2a24] shadow-2xl space-y-6">
+        <div className="w-full max-w-md bg-white text-[#2D241E] p-8 rounded-2xl border border-[#E8DEC8] shadow-xl space-y-6">
           <div className="text-center space-y-3">
             <img
               src="/logo.png"
               alt="Logo Chef Benzaza"
-              className="h-24 w-auto mx-auto object-contain drop-shadow-[0_4px_12px_rgba(201,164,92,0.4)]"
+              className="h-24 w-auto mx-auto object-contain drop-shadow-[0_4px_12px_rgba(140,107,40,0.35)]"
             />
-            <h2 className="text-xl font-bold font-display text-white">
+            <h2 className="text-xl font-bold font-display text-[#2D241E]">
               {t('adminLoginTitle')}
             </h2>
-            <p className="text-xs text-neutral-400">
-              Espace sécurisé d'administration — Oran
+            <p className="text-xs text-[#7A6E63]">
+              Espace sécurisé d'administration — Mostaganem
             </p>
           </div>
 
@@ -123,7 +123,7 @@ export const AdminView: React.FC = () => {
             className="space-y-4"
           >
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                 {t('adminEmail')}
               </label>
               <input
@@ -131,12 +131,12 @@ export const AdminView: React.FC = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-[#242424] border border-[#383838] rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#C9A45C]"
+                className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2.5 text-xs text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                 {t('adminPassword')}
               </label>
               <input
@@ -144,17 +144,17 @@ export const AdminView: React.FC = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-[#242424] border border-[#383838] rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#C9A45C]"
+                className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3.5 py-2.5 text-xs text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
               />
             </div>
 
-            <div className="p-3 bg-[#202020] rounded border border-[#2e2e2e] text-[11px] text-[#C9A45C]">
+            <div className="p-3 bg-[#FAF4E6] rounded border border-[#E8DEC8] text-[11px] text-[#8C6B28] font-medium">
               💡 {t('adminDemoHelp')} (admin@chefbenzaza.dz / admin123)
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-[#171717] font-bold text-xs uppercase tracking-wider rounded-md transition-colors"
+              className="w-full py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-md transition-colors shadow-xs"
             >
               {t('adminLoginButton')}
             </button>
@@ -200,17 +200,17 @@ export const AdminView: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-8">
       
       {/* Top Admin Header Bar */}
-      <div className="bg-[#171717] text-white p-6 rounded-2xl border border-[#2d2a24] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-gradient-to-br from-white to-[#FAF7F2] text-[#2D241E] p-6 rounded-2xl border border-[#E8DEC8] shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[#C9A45C] text-[#171717] flex items-center justify-center font-bold">
-            <ShieldCheck className="w-6 h-6" />
+          <div className="w-10 h-10 rounded-lg bg-[#FAF4E6] text-[#8C6B28] border border-[#E8DEC8] flex items-center justify-center font-bold">
+            <ShieldCheck className="w-6 h-6 text-[#C9A45C]" />
           </div>
           <div>
-            <h1 className="text-xl font-bold font-display text-white">
+            <h1 className="text-xl font-bold font-display text-[#2D241E]">
               {t('adminTitle')}
             </h1>
-            <p className="text-xs text-neutral-400">
-              Oran, Algérie — Connecté : admin@chefbenzaza.dz (Super Administrateur)
+            <p className="text-xs text-[#7A6E63]">
+              Mostaganem, Algérie — Connecté : admin@chefbenzaza.dz (Super Administrateur)
             </p>
           </div>
         </div>
@@ -218,7 +218,7 @@ export const AdminView: React.FC = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={resetToDemoData}
-            className="px-3.5 py-2 bg-[#252525] hover:bg-[#333] text-neutral-300 text-xs font-semibold rounded flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 bg-white hover:bg-[#FAF4E6] text-[#6B5E52] border border-[#E8DEC8] text-xs font-semibold rounded flex items-center gap-1.5 transition-colors shadow-xs"
             title="Réinitialiser toutes les données"
           >
             <RefreshCw className="w-3.5 h-3.5 text-[#C9A45C]" />
@@ -227,7 +227,7 @@ export const AdminView: React.FC = () => {
 
           <button
             onClick={adminLogout}
-            className="px-3.5 py-2 bg-red-950/60 hover:bg-red-900 text-red-200 border border-red-800/40 text-xs font-semibold rounded flex items-center gap-1.5 transition-colors"
+            className="px-3.5 py-2 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 text-xs font-semibold rounded flex items-center gap-1.5 transition-colors"
           >
             <LogOut className="w-3.5 h-3.5" />
             <span>{t('adminLogout')}</span>
@@ -236,7 +236,7 @@ export const AdminView: React.FC = () => {
       </div>
 
       {/* Tabs Navigation Bar */}
-      <div className="flex items-center gap-1.5 overflow-x-auto p-1.5 bg-white border border-[#E6DFD3] rounded-xl shadow-xs scrollbar-none">
+      <div className="flex items-center gap-1.5 overflow-x-auto p-1.5 bg-white border border-[#E8DEC8] rounded-xl shadow-xs scrollbar-none">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
@@ -246,8 +246,8 @@ export const AdminView: React.FC = () => {
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap shrink-0 ${
                 isActive
-                  ? 'bg-[#171717] text-[#C9A45C] shadow-sm'
-                  : 'text-neutral-600 hover:text-black hover:bg-neutral-100'
+                  ? 'bg-[#C9A45C] text-white shadow-xs'
+                  : 'text-[#6B5E52] hover:text-[#8C6B28] hover:bg-[#FAF7F2]'
               }`}
             >
               <Icon className="w-4 h-4" />
@@ -316,7 +316,7 @@ export const AdminView: React.FC = () => {
             {/* Recent Registrations */}
             <div className="bg-white p-6 rounded-xl border border-[#E6DFD3] space-y-4">
               <div className="flex items-center justify-between border-b border-[#F1ECE1] pb-3">
-                <h3 className="text-sm font-bold text-[#171717] uppercase tracking-wider">
+                <h3 className="text-sm font-bold text-[#2D241E] uppercase tracking-wider">
                   Dernières Inscriptions
                 </h3>
                 <button
@@ -350,7 +350,7 @@ export const AdminView: React.FC = () => {
             {/* Recent Store Orders */}
             <div className="bg-white p-6 rounded-xl border border-[#E6DFD3] space-y-4">
               <div className="flex items-center justify-between border-b border-[#F1ECE1] pb-3">
-                <h3 className="text-sm font-bold text-[#171717] uppercase tracking-wider">
+                <h3 className="text-sm font-bold text-[#2D241E] uppercase tracking-wider">
                   Commandes Boutique Récentes
                 </h3>
                 <button
@@ -388,7 +388,7 @@ export const AdminView: React.FC = () => {
       {activeTab === 'courses' && (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#171717] font-display">
+            <h2 className="text-lg font-bold text-[#2D241E] font-display">
               Gestion des Formations & Tarifs DZD
             </h2>
             <button
@@ -408,9 +408,9 @@ export const AdminView: React.FC = () => {
                     en: 'Short summary of the training course.',
                   },
                   fullDesc: {
-                    fr: 'Programme détaillé de formation pratique en atelier à Oran.',
-                    ar: 'برنامج تدريبي تطبيقي مفصل في ورشات وهران.',
-                    en: 'Full practical training syllabus in Oran.',
+                    fr: 'Programme détaillé de formation pratique en atelier à Mostaganem.',
+                    ar: 'برنامج تدريبي تطبيقي مفصل في ورشات مستغانم.',
+                    en: 'Full practical training syllabus in Mostaganem.',
                   },
                   image: '/src/assets/images/hero_chef_kitchen_1794418831073.jpg',
                   priceDZD: 35000,
@@ -444,7 +444,7 @@ export const AdminView: React.FC = () => {
                 addCourse(newCourse);
                 setEditingCourse(newCourse);
               }}
-              className="px-4 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-[#171717] font-bold text-xs uppercase tracking-wider rounded flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-lg flex items-center gap-1.5 transition-colors shadow-xs"
             >
               <Plus className="w-4 h-4" />
               <span>{t('addNewCourse')}</span>
@@ -470,7 +470,7 @@ export const AdminView: React.FC = () => {
                       {course.title[language] || course.title.fr}
                     </h3>
                     <p className="text-xs text-neutral-500 mt-0.5">
-                      {course.duration[language] || course.duration.fr} · Formateur : {course.instructor.name}
+                      {course.duration[language] || course.duration.fr} · {course.instructor.name}
                     </p>
                     <div className="flex items-center gap-3 mt-1.5 text-xs font-mono font-semibold text-[#8C6B28]">
                       <span>Tarif : {course.priceDZD} {t('dzd')}</span>
@@ -506,15 +506,15 @@ export const AdminView: React.FC = () => {
 
           {/* Course Edit Drawer/Modal */}
           {editingCourse && (
-            <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
-              <div className="bg-[#1A1A1A] text-white w-full max-w-2xl rounded-xl border border-[#333] shadow-2xl p-6 space-y-4 max-h-[90vh] overflow-y-auto">
-                <div className="flex justify-between items-center border-b border-[#333] pb-3">
-                  <h3 className="text-base font-bold font-display text-white">
+            <div className="fixed inset-0 z-50 bg-[#2D241E]/40 backdrop-blur-xs flex items-center justify-center p-4">
+              <div className="bg-white text-[#2D241E] w-full max-w-2xl rounded-xl border border-[#E8DEC8] shadow-2xl p-6 space-y-4 max-h-[90vh] overflow-y-auto">
+                <div className="flex justify-between items-center border-b border-[#E8DEC8] pb-3">
+                  <h3 className="text-base font-bold font-display text-[#2D241E]">
                     Modifier la formation : {editingCourse.title.fr}
                   </h3>
                   <button
                     onClick={() => setEditingCourse(null)}
-                    className="text-neutral-400 hover:text-white"
+                    className="text-[#7A6E63] hover:text-[#2D241E]"
                   >
                     ✕
                   </button>
@@ -522,7 +522,7 @@ export const AdminView: React.FC = () => {
 
                 <div className="space-y-4 text-xs">
                   <div>
-                    <label className="block text-neutral-400 mb-1">Titre (Français)</label>
+                    <label className="block text-[#5C4F44] font-semibold mb-1">Titre (Français)</label>
                     <input
                       type="text"
                       value={editingCourse.title.fr}
@@ -532,12 +532,12 @@ export const AdminView: React.FC = () => {
                           title: { ...editingCourse.title, fr: e.target.value },
                         })
                       }
-                      className="w-full bg-[#242424] border border-[#333] rounded px-3 py-2 text-white"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3 py-2 text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-neutral-400 mb-1">Titre (Arabe)</label>
+                    <label className="block text-[#5C4F44] font-semibold mb-1">Titre (Arabe)</label>
                     <input
                       type="text"
                       dir="rtl"
@@ -548,13 +548,13 @@ export const AdminView: React.FC = () => {
                           title: { ...editingCourse.title, ar: e.target.value },
                         })
                       }
-                      className="w-full bg-[#242424] border border-[#333] rounded px-3 py-2 text-white font-arabic"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3 py-2 text-[#2D241E] font-arabic focus:outline-none focus:border-[#C9A45C]"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-neutral-400 mb-1">Tarif en DZD *</label>
+                      <label className="block text-[#5C4F44] font-semibold mb-1">Tarif en DZD *</label>
                       <input
                         type="number"
                         value={editingCourse.priceDZD}
@@ -564,11 +564,11 @@ export const AdminView: React.FC = () => {
                             priceDZD: Number(e.target.value),
                           })
                         }
-                        className="w-full bg-[#242424] border border-[#333] rounded px-3 py-2 text-white font-mono"
+                        className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3 py-2 text-[#2D241E] font-mono focus:outline-none focus:border-[#C9A45C]"
                       />
                     </div>
                     <div>
-                      <label className="block text-neutral-400 mb-1">Durée (ex: 3 Mois)</label>
+                      <label className="block text-[#5C4F44] font-semibold mb-1">Durée (ex: 3 Mois)</label>
                       <input
                         type="text"
                         value={editingCourse.duration.fr}
@@ -578,13 +578,13 @@ export const AdminView: React.FC = () => {
                             duration: { ...editingCourse.duration, fr: e.target.value },
                           })
                         }
-                        className="w-full bg-[#242424] border border-[#333] rounded px-3 py-2 text-white"
+                        className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3 py-2 text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-neutral-400 mb-1">Nom du formateur</label>
+                    <label className="block text-[#5C4F44] font-semibold mb-1">Nom du formateur</label>
                     <input
                       type="text"
                       value={editingCourse.instructor.name}
@@ -594,12 +594,12 @@ export const AdminView: React.FC = () => {
                           instructor: { ...editingCourse.instructor, name: e.target.value },
                         })
                       }
-                      className="w-full bg-[#242424] border border-[#333] rounded px-3 py-2 text-white"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3 py-2 text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-neutral-400 mb-1">Description courte</label>
+                    <label className="block text-[#5C4F44] font-semibold mb-1">Description courte</label>
                     <textarea
                       rows={3}
                       value={editingCourse.shortDesc.fr}
@@ -609,15 +609,15 @@ export const AdminView: React.FC = () => {
                           shortDesc: { ...editingCourse.shortDesc, fr: e.target.value },
                         })
                       }
-                      className="w-full bg-[#242424] border border-[#333] rounded p-2.5 text-white resize-none"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded p-2.5 text-[#2D241E] resize-none focus:outline-none focus:border-[#C9A45C]"
                     />
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#333] flex justify-end gap-3">
+                <div className="pt-3 border-t border-[#E8DEC8] flex justify-end gap-3">
                   <button
                     onClick={() => setEditingCourse(null)}
-                    className="px-4 py-2 bg-[#2a2a2a] text-white rounded text-xs"
+                    className="px-4 py-2 bg-white text-[#6B5E52] border border-[#E8DEC8] rounded text-xs hover:bg-[#FAF7F2]"
                   >
                     Annuler
                   </button>
@@ -626,7 +626,7 @@ export const AdminView: React.FC = () => {
                       updateCourse(editingCourse);
                       setEditingCourse(null);
                     }}
-                    className="px-5 py-2 bg-[#C9A45C] text-[#171717] font-bold rounded text-xs uppercase tracking-wider"
+                    className="px-5 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold rounded text-xs uppercase tracking-wider shadow-xs"
                   >
                     Enregistrer la formation
                   </button>
@@ -640,7 +640,7 @@ export const AdminView: React.FC = () => {
       {/* 3. REGISTRATIONS MANAGEMENT */}
       {activeTab === 'registrations' && (
         <div className="space-y-6">
-          <h2 className="text-lg font-bold text-[#171717] font-display">
+          <h2 className="text-lg font-bold text-[#2D241E] font-display">
             Gestion des Inscriptions ({registrations.length} dossiers)
           </h2>
 
@@ -721,7 +721,7 @@ export const AdminView: React.FC = () => {
       {activeTab === 'products' && (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#171717] font-display">
+            <h2 className="text-lg font-bold text-[#2D241E] font-display">
               Boutique & Gestion des Stocks
             </h2>
             <button
@@ -747,7 +747,7 @@ export const AdminView: React.FC = () => {
                 addProduct(newProd);
                 setEditingProduct(newProd);
               }}
-              className="px-4 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-[#171717] font-bold text-xs uppercase tracking-wider rounded flex items-center gap-1.5 transition-colors"
+              className="px-4 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-lg flex items-center gap-1.5 transition-colors shadow-xs"
             >
               <Plus className="w-4 h-4" />
               <span>{t('addNewProduct')}</span>
@@ -797,7 +797,7 @@ export const AdminView: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => setEditingProduct(product)}
-                      className="p-1.5 text-neutral-600 hover:text-black transition-colors"
+                      className="p-1.5 text-neutral-500 hover:text-[#2D241E] transition-colors"
                     >
                       <Edit className="w-4 h-4" />
                     </button>
@@ -817,16 +817,16 @@ export const AdminView: React.FC = () => {
 
           {/* Edit Product Modal */}
           {editingProduct && (
-            <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
-              <div className="bg-[#1A1A1A] text-white w-full max-w-lg rounded-xl border border-[#333] shadow-2xl p-6 space-y-4">
-                <div className="flex justify-between items-center border-b border-[#333] pb-3">
-                  <h3 className="text-base font-bold text-white">Modifier le produit</h3>
-                  <button onClick={() => setEditingProduct(null)}>✕</button>
+            <div className="fixed inset-0 z-50 bg-[#2D241E]/40 backdrop-blur-xs flex items-center justify-center p-4">
+              <div className="bg-white text-[#2D241E] w-full max-w-lg rounded-xl border border-[#E8DEC8] shadow-2xl p-6 space-y-4">
+                <div className="flex justify-between items-center border-b border-[#E8DEC8] pb-3">
+                  <h3 className="text-base font-bold text-[#2D241E]">Modifier le produit</h3>
+                  <button onClick={() => setEditingProduct(null)} className="text-[#7A6E63] hover:text-[#2D241E]">✕</button>
                 </div>
 
                 <div className="space-y-3 text-xs">
                   <div>
-                    <label className="block text-neutral-400 mb-1">Nom (FR)</label>
+                    <label className="block text-[#5C4F44] font-semibold mb-1">Nom (FR)</label>
                     <input
                       type="text"
                       value={editingProduct.name.fr}
@@ -836,13 +836,13 @@ export const AdminView: React.FC = () => {
                           name: { ...editingProduct.name, fr: e.target.value },
                         })
                       }
-                      className="w-full bg-[#242424] border border-[#333] rounded px-3 py-2 text-white"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3 py-2 text-[#2D241E] focus:outline-none focus:border-[#C9A45C]"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="block text-neutral-400 mb-1">Prix DZD</label>
+                      <label className="block text-[#5C4F44] font-semibold mb-1">Prix DZD</label>
                       <input
                         type="number"
                         value={editingProduct.priceDZD}
@@ -852,11 +852,11 @@ export const AdminView: React.FC = () => {
                             priceDZD: Number(e.target.value),
                           })
                         }
-                        className="w-full bg-[#242424] border border-[#333] rounded px-3 py-2 text-white font-mono"
+                        className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3 py-2 text-[#2D241E] font-mono focus:outline-none focus:border-[#C9A45C]"
                       />
                     </div>
                     <div>
-                      <label className="block text-neutral-400 mb-1">Stock disponible</label>
+                      <label className="block text-[#5C4F44] font-semibold mb-1">Stock disponible</label>
                       <input
                         type="number"
                         value={editingProduct.stock}
@@ -866,13 +866,13 @@ export const AdminView: React.FC = () => {
                             stock: Number(e.target.value),
                           })
                         }
-                        className="w-full bg-[#242424] border border-[#333] rounded px-3 py-2 text-white font-mono"
+                        className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded px-3 py-2 text-[#2D241E] font-mono focus:outline-none focus:border-[#C9A45C]"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-neutral-400 mb-1">Description (FR)</label>
+                    <label className="block text-[#5C4F44] font-semibold mb-1">Description (FR)</label>
                     <textarea
                       rows={2}
                       value={editingProduct.description.fr}
@@ -882,15 +882,15 @@ export const AdminView: React.FC = () => {
                           description: { ...editingProduct.description, fr: e.target.value },
                         })
                       }
-                      className="w-full bg-[#242424] border border-[#333] rounded p-2 text-white resize-none"
+                      className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded p-2 text-[#2D241E] resize-none focus:outline-none focus:border-[#C9A45C]"
                     />
                   </div>
                 </div>
 
-                <div className="pt-3 border-t border-[#333] flex justify-end gap-3">
+                <div className="pt-3 border-t border-[#E8DEC8] flex justify-end gap-3">
                   <button
                     onClick={() => setEditingProduct(null)}
-                    className="px-4 py-2 bg-[#2a2a2a] text-white rounded text-xs"
+                    className="px-4 py-2 bg-white text-[#6B5E52] border border-[#E8DEC8] rounded text-xs hover:bg-[#FAF7F2]"
                   >
                     Annuler
                   </button>
@@ -899,7 +899,7 @@ export const AdminView: React.FC = () => {
                       updateProduct(editingProduct);
                       setEditingProduct(null);
                     }}
-                    className="px-5 py-2 bg-[#C9A45C] text-[#171717] font-bold rounded text-xs uppercase tracking-wider"
+                    className="px-5 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold rounded text-xs uppercase tracking-wider shadow-xs"
                   >
                     Enregistrer
                   </button>
@@ -913,7 +913,7 @@ export const AdminView: React.FC = () => {
       {/* 5. CUSTOMER ORDERS MANAGEMENT */}
       {activeTab === 'orders' && (
         <div className="space-y-6">
-          <h2 className="text-lg font-bold text-[#171717] font-display">
+          <h2 className="text-lg font-bold text-[#2D241E] font-display">
             Gestion des Commandes Boutique ({orders.length} commandes)
           </h2>
 
@@ -958,7 +958,7 @@ export const AdminView: React.FC = () => {
                       </td>
                       <td className="p-3.5">
                         <span className="text-[11px] font-semibold">
-                          {ord.deliveryType === 'delivery' ? 'Livraison Oran' : 'Retrait École'}
+                          {ord.deliveryType === 'delivery' ? 'Livraison Mostaganem' : 'Retrait École'}
                         </span>
                       </td>
                       <td className="p-3.5">
@@ -1006,7 +1006,7 @@ export const AdminView: React.FC = () => {
       {/* 6. APPOINTMENTS MANAGEMENT */}
       {activeTab === 'appointments' && (
         <div className="space-y-6">
-          <h2 className="text-lg font-bold text-[#171717] font-display">
+          <h2 className="text-lg font-bold text-[#2D241E] font-display">
             Gestion des Rendez-vous Salon & Barbershop
           </h2>
 
@@ -1076,14 +1076,14 @@ export const AdminView: React.FC = () => {
       {activeTab === 'gallery' && (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#171717] font-display">
+            <h2 className="text-lg font-bold text-[#2D241E] font-display">
               Gestion de la Galerie Étudiants
             </h2>
           </div>
 
           {/* Quick add photo box */}
           <div className="bg-white p-6 rounded-xl border border-[#E6DFD3] space-y-4">
-            <h3 className="text-sm font-bold text-[#171717] uppercase tracking-wider">
+            <h3 className="text-sm font-bold text-[#2D241E] uppercase tracking-wider">
               Ajouter une nouvelle réalisation
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
@@ -1141,7 +1141,7 @@ export const AdminView: React.FC = () => {
                   setNewGalleryTitle('');
                   setNewGalleryStudent('');
                 }}
-                className="px-4 py-2 bg-[#171717] hover:bg-[#C9A45C] hover:text-[#171717] text-white text-xs font-bold uppercase tracking-wider rounded transition-colors"
+                className="px-4 py-2 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-xs"
               >
                 Ajouter à la galerie
               </button>
@@ -1168,7 +1168,7 @@ export const AdminView: React.FC = () => {
                 </div>
                 <button
                   onClick={() => deleteGalleryItem(g.id)}
-                  className="absolute top-2 right-2 p-1.5 bg-black/70 hover:bg-red-600 text-white rounded transition-colors"
+                  className="absolute top-2 right-2 p-1.5 bg-[#2D241E]/70 hover:bg-red-600 text-white rounded transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                 </button>
@@ -1181,7 +1181,7 @@ export const AdminView: React.FC = () => {
       {/* 8. CONTACT MESSAGES */}
       {activeTab === 'messages' && (
         <div className="space-y-6">
-          <h2 className="text-lg font-bold text-[#171717] font-display">
+          <h2 className="text-lg font-bold text-[#2D241E] font-display">
             Messages & Demandes d'Information
           </h2>
 
@@ -1242,7 +1242,7 @@ export const AdminView: React.FC = () => {
         <div className="bg-white p-8 rounded-xl border border-[#E6DFD3] space-y-6">
           <div className="flex items-center justify-between border-b border-[#F1ECE1] pb-4">
             <div>
-              <h2 className="text-lg font-bold text-[#171717] font-display">
+              <h2 className="text-lg font-bold text-[#2D241E] font-display">
                 Paramètres & Coordonnées de l'École
               </h2>
               <p className="text-xs text-neutral-500">
@@ -1251,7 +1251,7 @@ export const AdminView: React.FC = () => {
             </div>
             <button
               onClick={() => updateSettings(localSettings)}
-              className="px-5 py-2.5 bg-[#C9A45C] hover:bg-[#DFC283] text-[#171717] font-bold text-xs uppercase tracking-wider rounded flex items-center gap-1.5 transition-colors shadow-sm"
+              className="px-5 py-2.5 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-lg flex items-center gap-1.5 transition-colors shadow-sm"
             >
               <Save className="w-4 h-4" />
               <span>{t('saveChanges')}</span>
@@ -1270,7 +1270,7 @@ export const AdminView: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-neutral-700 font-semibold mb-1">Adresse à Oran</label>
+              <label className="block text-neutral-700 font-semibold mb-1">Adresse à Mostaganem</label>
               <input
                 type="text"
                 value={localSettings.address}
@@ -1310,7 +1310,7 @@ export const AdminView: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-neutral-700 font-semibold mb-1">Frais de livraison standard (Oran)</label>
+              <label className="block text-neutral-700 font-semibold mb-1">Frais de livraison standard (Mostaganem)</label>
               <input
                 type="number"
                 value={localSettings.standardDeliveryFee}
@@ -1324,24 +1324,24 @@ export const AdminView: React.FC = () => {
 
       {/* 10. SUPABASE DATABASE SETUP GUIDE */}
       {activeTab === 'database' && (
-        <div className="bg-[#171717] text-white p-8 rounded-2xl border border-[#2d2a24] space-y-6">
+        <div className="bg-white text-[#2D241E] p-8 rounded-2xl border border-[#E8DEC8] shadow-xs space-y-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
-              <Database className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center font-bold">
+              <Database className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-xl font-bold font-display text-white">
+              <h2 className="text-xl font-bold font-display text-[#2D241E]">
                 Architecture & Connexion Supabase
               </h2>
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-[#7A6E63]">
                 Guide d'intégration et schéma PostgreSQL prêt pour déploiement en production
               </p>
             </div>
           </div>
 
-          <div className="p-4 bg-[#222] rounded-xl border border-[#333] text-xs text-neutral-300 space-y-2">
-            <div className="flex items-center gap-2 text-emerald-400 font-bold">
-              <CheckCircle className="w-4 h-4" />
+          <div className="p-4 bg-[#FAF7F2] rounded-xl border border-[#E8DEC8] text-xs text-[#5C4F44] space-y-2">
+            <div className="flex items-center gap-2 text-emerald-700 font-bold">
+              <CheckCircle className="w-4 h-4 text-emerald-600" />
               <span>Système actuel opérationnel avec stockage persistant local</span>
             </div>
             <p>
@@ -1350,10 +1350,10 @@ export const AdminView: React.FC = () => {
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A45C]">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#8C6B28]">
               1. Variables d'environnement requises (.env)
             </h4>
-            <pre className="bg-[#111] p-4 rounded-lg font-mono text-[11px] text-neutral-300 overflow-x-auto border border-[#333]">
+            <pre className="bg-[#FAF7F2] p-4 rounded-xl font-mono text-[11px] text-[#2D241E] overflow-x-auto border border-[#E8DEC8]">
 {`VITE_SUPABASE_URL="https://votre-projet.supabase.co"
 VITE_SUPABASE_ANON_KEY="votre-anon-key-publique"
 SUPABASE_SERVICE_ROLE_KEY="votre-cle-service-secrete"`}
@@ -1361,10 +1361,10 @@ SUPABASE_SERVICE_ROLE_KEY="votre-cle-service-secrete"`}
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-[#C9A45C]">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-[#8C6B28]">
               2. Schéma SQL pour tables & Row Level Security (RLS)
             </h4>
-            <pre className="bg-[#111] p-4 rounded-lg font-mono text-[11px] text-neutral-300 overflow-x-auto border border-[#333] max-h-60 overflow-y-auto">
+            <pre className="bg-[#FAF7F2] p-4 rounded-xl font-mono text-[11px] text-[#2D241E] overflow-x-auto border border-[#E8DEC8] max-h-60 overflow-y-auto">
 {`-- Tables pour ECOLE CHEF BENZAZA
 CREATE TABLE courses (
   id TEXT PRIMARY KEY,

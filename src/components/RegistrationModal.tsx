@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
-import { X, CheckCircle, Printer, GraduationCap, Calendar, Clock, Phone, User } from 'lucide-react';
+import { X, CheckCircle, Printer, GraduationCap } from 'lucide-react';
 import { Registration } from '../types';
 
 interface RegistrationModalProps {
@@ -14,7 +14,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   onClose,
   preselectedCourseId,
 }) => {
-  const { courses, addRegistration, t, language, settings } = useApp();
+  const { courses, addRegistration, t, language } = useApp();
 
   const [courseId, setCourseId] = useState(preselectedCourseId || (courses[0]?.id || ''));
   const [fullName, setFullName] = useState('');
@@ -79,25 +79,25 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/70 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="relative bg-[#1A1A1A] text-white w-full max-w-xl rounded-xl border border-[#2e2e2e] shadow-2xl overflow-hidden my-8">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-[#2D241E]/40 backdrop-blur-xs flex items-center justify-center p-4">
+      <div className="relative bg-white text-[#2D241E] w-full max-w-xl rounded-2xl border border-[#E8DEC8] shadow-2xl overflow-hidden my-8">
         
         {/* Header */}
-        <div className="p-6 bg-[#141414] border-b border-[#2d2a24] flex items-center justify-between">
+        <div className="p-6 bg-[#FAF7F2] border-b border-[#E8DEC8] flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-md bg-[#C9A45C] text-[#171717] flex items-center justify-center font-bold">
+            <div className="w-10 h-10 rounded-xl bg-[#C9A45C] text-white flex items-center justify-center font-bold shadow-xs">
               <GraduationCap className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-white uppercase tracking-wider font-display">
+              <h3 className="text-base font-bold text-[#2D241E] uppercase tracking-wider font-display">
                 {t('regModalTitle')}
               </h3>
-              <p className="text-xs text-[#C9A45C]">ECOLE CHEF BENZAZA — Oran</p>
+              <p className="text-xs text-[#8C6B28] font-semibold">ECOLE CHEF BENZAZA — Mostaganem</p>
             </div>
           </div>
           <button
             onClick={handleReset}
-            className="p-1.5 text-neutral-400 hover:text-white rounded hover:bg-[#252525] transition-colors"
+            className="p-1.5 text-[#7A6E63] hover:text-[#2D241E] rounded-lg hover:bg-[#F5EEDB] transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -108,15 +108,15 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
           {submittedReg ? (
             /* Success confirmation ticket */
             <div className="space-y-6 text-center py-2">
-              <div className="w-14 h-14 mx-auto rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+              <div className="w-14 h-14 mx-auto rounded-full bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
                 <CheckCircle className="w-8 h-8" />
               </div>
 
               <div>
-                <h4 className="text-lg font-bold text-white font-display">
+                <h4 className="text-lg font-bold text-[#2D241E] font-display">
                   {t('regSuccessTitle')}
                 </h4>
-                <p className="text-xs text-neutral-400 mt-1 max-w-md mx-auto">
+                <p className="text-xs text-[#5C4F44] mt-1 max-w-md mx-auto">
                   {t('regSuccessDesc')}
                 </p>
               </div>
@@ -124,22 +124,22 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               {/* Printable Registration Slip */}
               <div
                 id="registration-ticket"
-                className="bg-[#242424] border border-[#383838] p-5 rounded-lg text-left rtl:text-right space-y-3 font-sans"
+                className="bg-[#FAF7F2] border border-[#E8DEC8] p-5 rounded-xl text-left rtl:text-right space-y-3 font-sans"
               >
-                <div className="flex justify-between items-center border-b border-[#333] pb-3">
+                <div className="flex justify-between items-center border-b border-[#E8DEC8] pb-3">
                   <div>
-                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 block">
+                    <span className="text-[10px] uppercase tracking-wider text-[#7A6E63] block font-semibold">
                       Code Dossier
                     </span>
-                    <span className="text-base font-bold font-mono text-[#C9A45C]">
+                    <span className="text-base font-bold font-mono text-[#8C6B28]">
                       {submittedReg.registrationCode}
                     </span>
                   </div>
                   <div className="text-right rtl:text-left">
-                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 block">
+                    <span className="text-[10px] uppercase tracking-wider text-[#7A6E63] block font-semibold">
                       Statut
                     </span>
-                    <span className="text-xs font-semibold text-amber-400 uppercase">
+                    <span className="text-xs font-semibold text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded uppercase">
                       {t('status_pending')}
                     </span>
                   </div>
@@ -147,28 +147,28 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
                 <div className="grid grid-cols-2 gap-4 text-xs pt-1">
                   <div>
-                    <span className="text-neutral-400 block">Candidat :</span>
-                    <strong className="text-white block mt-0.5">{submittedReg.fullName}</strong>
+                    <span className="text-[#7A6E63] block">Candidat :</span>
+                    <strong className="text-[#2D241E] block mt-0.5 font-semibold">{submittedReg.fullName}</strong>
                   </div>
                   <div>
-                    <span className="text-neutral-400 block">Téléphone :</span>
-                    <strong className="text-white block font-mono mt-0.5">{submittedReg.phone}</strong>
+                    <span className="text-[#7A6E63] block">Téléphone :</span>
+                    <strong className="text-[#2D241E] block font-mono mt-0.5">{submittedReg.phone}</strong>
                   </div>
                   <div className="col-span-2">
-                    <span className="text-neutral-400 block">Formation choisie :</span>
-                    <strong className="text-[#C9A45C] block mt-0.5">{submittedReg.courseTitle}</strong>
+                    <span className="text-[#7A6E63] block">Formation choisie :</span>
+                    <strong className="text-[#8C6B28] block mt-0.5">{submittedReg.courseTitle}</strong>
                   </div>
                   <div>
-                    <span className="text-neutral-400 block">Session préférée :</span>
-                    <span className="text-white block mt-0.5">{submittedReg.preferredSchedule}</span>
+                    <span className="text-[#7A6E63] block">Session préférée :</span>
+                    <span className="text-[#2D241E] block mt-0.5">{submittedReg.preferredSchedule}</span>
                   </div>
                   <div>
-                    <span className="text-neutral-400 block">Lieu de formation :</span>
-                    <span className="text-white block mt-0.5">Oran (Siège Benzaza)</span>
+                    <span className="text-[#7A6E63] block">Lieu de formation :</span>
+                    <span className="text-[#2D241E] block mt-0.5">Mostaganem (Siège Benzaza)</span>
                   </div>
                 </div>
 
-                <div className="text-[11px] text-neutral-400 pt-3 border-t border-[#333] italic">
+                <div className="text-[11px] text-[#7A6E63] pt-3 border-t border-[#E8DEC8] italic">
                   {t('regSuccessNotice')}
                 </div>
               </div>
@@ -177,15 +177,15 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                 <button
                   type="button"
                   onClick={handlePrint}
-                  className="flex-1 py-2.5 px-4 bg-[#2e2e2e] hover:bg-[#383838] text-white text-xs font-semibold rounded flex items-center justify-center gap-2 transition-colors"
+                  className="flex-1 py-2.5 px-4 bg-white hover:bg-[#FAF4E6] text-[#2D241E] border border-[#E8DEC8] text-xs font-semibold rounded-lg flex items-center justify-center gap-2 transition-colors"
                 >
-                  <Printer className="w-4 h-4 text-[#C9A45C]" />
+                  <Printer className="w-4 h-4 text-[#8C6B28]" />
                   <span>{t('downloadReceipt')}</span>
                 </button>
                 <button
                   type="button"
                   onClick={handleReset}
-                  className="flex-1 py-2.5 px-4 bg-[#C9A45C] hover:bg-[#DFC283] text-[#171717] text-xs font-bold uppercase tracking-wider rounded transition-colors"
+                  className="flex-1 py-2.5 px-4 bg-[#C9A45C] hover:bg-[#DFC283] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-sm"
                 >
                   {t('close')}
                 </button>
@@ -194,19 +194,19 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
           ) : (
             /* Registration Form */
             <form onSubmit={handleSubmit} className="space-y-4">
-              <p className="text-xs text-neutral-400">
+              <p className="text-xs text-[#5C4F44]">
                 {t('regSubtitle')}
               </p>
 
               {/* Course selection */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                   {t('selectCourse')} *
                 </label>
                 <select
                   value={courseId}
                   onChange={(e) => setCourseId(e.target.value)}
-                  className="w-full bg-[#242424] border border-[#333] rounded px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-[#C9A45C]"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded-lg px-3.5 py-2.5 text-xs text-[#2D241E] focus:bg-white focus:outline-none focus:border-[#C9A45C]"
                 >
                   {courses.map((c) => (
                     <option key={c.id} value={c.id}>
@@ -219,7 +219,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               {/* Full Name & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-1.5">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                     {t('fullName')} *
                   </label>
                   <input
@@ -228,15 +228,15 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                     placeholder="Ex: Karim Benali"
-                    className="w-full bg-[#242424] border border-[#333] rounded px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded-lg px-3.5 py-2 text-xs text-[#2D241E] placeholder:text-[#A89F91] focus:bg-white focus:outline-none focus:border-[#C9A45C]"
                   />
                   {errors.fullName && (
-                    <p className="text-[11px] text-red-400 mt-1">{errors.fullName}</p>
+                    <p className="text-[11px] text-red-500 mt-1">{errors.fullName}</p>
                   )}
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-1.5">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                     {t('phone')} *
                   </label>
                   <input
@@ -245,10 +245,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder={t('phonePlaceholder')}
-                    className="w-full bg-[#242424] border border-[#333] rounded px-3.5 py-2 text-xs text-white font-mono focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded-lg px-3.5 py-2 text-xs text-[#2D241E] font-mono placeholder:text-[#A89F91] focus:bg-white focus:outline-none focus:border-[#C9A45C]"
                   />
                   {errors.phone && (
-                    <p className="text-[11px] text-red-400 mt-1">{errors.phone}</p>
+                    <p className="text-[11px] text-red-500 mt-1">{errors.phone}</p>
                   )}
                 </div>
               </div>
@@ -256,7 +256,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
               {/* Email & Date of Birth */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-neutral-400 mb-1.5">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                     {t('email')}
                   </label>
                   <input
@@ -264,26 +264,26 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="email@domaine.com"
-                    className="w-full bg-[#242424] border border-[#333] rounded px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded-lg px-3.5 py-2 text-xs text-[#2D241E] placeholder:text-[#A89F91] focus:bg-white focus:outline-none focus:border-[#C9A45C]"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-neutral-400 mb-1.5">
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                     {t('dob')}
                   </label>
                   <input
                     type="date"
                     value={dateOfBirth}
                     onChange={(e) => setDateOfBirth(e.target.value)}
-                    className="w-full bg-[#242424] border border-[#333] rounded px-3.5 py-2 text-xs text-white focus:outline-none focus:border-[#C9A45C]"
+                    className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded-lg px-3.5 py-2 text-xs text-[#2D241E] focus:bg-white focus:outline-none focus:border-[#C9A45C]"
                   />
                 </div>
               </div>
 
               {/* Schedule selection */}
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-300 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                   {t('selectSchedule')}
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -295,10 +295,10 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                   ].map((item) => (
                     <label
                       key={item}
-                      className={`flex items-center gap-2 p-2.5 rounded border cursor-pointer text-xs transition-colors ${
+                      className={`flex items-center gap-2 p-2.5 rounded-lg border cursor-pointer text-xs transition-colors ${
                         schedule === item
-                          ? 'border-[#C9A45C] bg-[#C9A45C]/10 text-white font-medium'
-                          : 'border-[#333] bg-[#222] text-neutral-400 hover:border-neutral-500'
+                          ? 'border-[#C9A45C] bg-[#FAF4E6] text-[#8C6B28] font-semibold'
+                          : 'border-[#E8DEC8] bg-[#FAF7F2] text-[#5C4F44] hover:bg-white hover:border-[#C9A45C]/50'
                       }`}
                     >
                       <input
@@ -317,7 +317,7 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
 
               {/* Additional message */}
               <div>
-                <label className="block text-xs font-medium text-neutral-400 mb-1.5">
+                <label className="block text-xs font-semibold uppercase tracking-wider text-[#5C4F44] mb-1.5">
                   {t('message')}
                 </label>
                 <textarea
@@ -325,14 +325,14 @@ export const RegistrationModal: React.FC<RegistrationModalProps> = ({
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Questions sur le matériel, projet professionnel, facilités de paiement..."
-                  className="w-full bg-[#242424] border border-[#333] rounded p-3 text-xs text-white focus:outline-none focus:border-[#C9A45C] resize-none"
+                  className="w-full bg-[#FAF7F2] border border-[#E8DEC8] rounded-lg p-3 text-xs text-[#2D241E] placeholder:text-[#A89F91] focus:bg-white focus:outline-none focus:border-[#C9A45C] resize-none"
                 />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-[#171717] font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-md shadow-[#C9A45C]/20"
+                  className="w-full py-3 bg-[#C9A45C] hover:bg-[#DFC283] text-white font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-md shadow-[#C9A45C]/25"
                 >
                   {t('submitRegistration')}
                 </button>

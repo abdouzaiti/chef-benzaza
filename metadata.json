@@ -1,6 +1,6 @@
 {
   "name": " ECOLE CHEF BEN ZAZA",
-  "description": "École de formation professionnelle Chef Benzaza à Oran : Cuisine, Pâtisserie, Pizza, Coiffure \u0026 Informatique. Formations certifiantes, boutique artisanale et inscriptions.",
+  "description": "École de formation professionnelle Chef Benzaza à Mostaganem : Cuisine, Pâtisserie, Pizza, Coiffure \u0026 Informatique. Formations certifiantes, boutique artisanale et inscriptions.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

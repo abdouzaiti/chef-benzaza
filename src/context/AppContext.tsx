@@ -145,6 +145,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const STORAGE_PREFIX = 'chef_benzaza_';
+const DATA_VERSION = 'v10_coiffure_femme_laleg_djamila_img';
 
 function getStored<T>(key: string, fallback: T): T {
   try {
@@ -160,6 +161,21 @@ function setStored<T>(key: string, value: T) {
     localStorage.setItem(STORAGE_PREFIX + key, JSON.stringify(value));
   } catch (err) {
     console.error('Failed to save to localStorage', err);
+  }
+}
+
+if (typeof window !== 'undefined') {
+  const storedVersion = getStored<string>('data_version', '');
+  if (storedVersion !== DATA_VERSION) {
+    setStored('courses', INITIAL_COURSES);
+    setStored('products', INITIAL_PRODUCTS);
+    setStored('registrations', INITIAL_REGISTRATIONS);
+    setStored('orders', INITIAL_ORDERS);
+    setStored('appointments', INITIAL_APPOINTMENTS);
+    setStored('gallery', INITIAL_GALLERY);
+    setStored('messages', INITIAL_MESSAGES);
+    setStored('settings', INITIAL_SETTINGS);
+    setStored('data_version', DATA_VERSION);
   }
 }
 
@@ -228,8 +244,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     showToast(
       language === 'ar'
         ? `تمت إضافة "${product.name.ar}" إلى السلة`
-        : language === 'en'
-        ? `Added "${product.name.en}" to cart`
         : `Ajouté "${product.name.fr}" au panier`,
       'success'
     );

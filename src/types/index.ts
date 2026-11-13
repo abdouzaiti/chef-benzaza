@@ -1,9 +1,9 @@
-export type Language = 'fr' | 'ar' | 'en';
+export type Language = 'fr' | 'ar';
 
 export interface LocalizedString {
   fr: string;
   ar: string;
-  en: string;
+  en?: string;
 }
 
 export type CourseCategory = 'pastry' | 'pizza' | 'culinary' | 'barber' | 'hairdressing' | 'it';
@@ -26,12 +26,12 @@ export interface Course {
   schedules: {
     fr: string[];
     ar: string[];
-    en: string[];
+    en?: string[];
   };
   objectives: {
     fr: string[];
     ar: string[];
-    en: string[];
+    en?: string[];
   };
   modules: CourseModule[];
   instructor: {
