@@ -73,8 +73,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
   return (
     <div className="space-y-14 sm:space-y-20 lg:space-y-24 pb-14 sm:pb-20">
       
-      {/* 1. HERO SECTION — Deep Emerald & Champagne Gold Luxury Editorial */}
-      <section className="relative min-h-[480px] sm:min-h-[560px] lg:min-h-[650px] flex items-center bg-gradient-to-br from-[#021510] via-[#062B22] to-[#041E17] text-[#FAF6ED] overflow-hidden border-b border-[#D6AD4F]/50">
+      {/* 1. HERO SECTION — Unified Full-Screen Page 1 with Integrated Top Navigation */}
+      <section
+        id="home-hero-section"
+        className="relative min-h-[100svh] flex items-center bg-gradient-to-br from-[#021510] via-[#062B22] to-[#041E17] text-[#FAF6ED] overflow-hidden border-b border-[#D6AD4F]/50"
+      >
         {/* Background composition: deep emerald left canvas + cinematic warm chef photo on right */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Chef photograph anchored to the right on desktop (flipped for RTL) */}
@@ -98,8 +101,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
           {/* Smooth directional scrim blending photo seamlessly into deep emerald-black green on the left */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#021510] via-[#062B22]/95 via-45% to-[#062B22]/25 rtl:bg-gradient-to-l" />
-          {/* Mobile readability scrim + top/bottom cinematic shadow */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#021510]/95 via-[#062B22]/45 lg:via-transparent to-[#021510]/65" />
+          {/* Mobile readability scrim + top header contrast & bottom cinematic shadow */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#021510]/95 via-[#062B22]/45 lg:via-transparent to-[#021510]/80" />
           {/* Subtle left ambient warm gold glow behind headline */}
           <div
             className="absolute inset-0"
@@ -110,7 +113,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
           />
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-8 py-14 sm:py-20 lg:py-28 z-10 w-full">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-8 pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24 z-10 w-full">
           <div className="max-w-2xl space-y-5 sm:space-y-6">
             
             {/* Quiet unboxed luxury kicker */}
@@ -225,7 +228,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <div className="grid grid-cols-12 gap-2 sm:gap-6 lg:gap-8 items-start">
           
           {/* LEFT SIDEBAR: Simple Rectangular Formation List (Visible on ALL Screen Sizes) */}
-          <div className="col-span-4 sm:col-span-4 lg:col-span-4 sticky top-16 sm:top-24 self-start">
+          <div className="col-span-4 sm:col-span-4 lg:col-span-4 sticky top-[76px] sm:top-24 self-start">
             <div className="bg-white border border-[#063B2E]/20 flex flex-col shadow-sm overflow-hidden rounded-lg">
               <div className="p-2.5 sm:p-4 bg-[#063B2E] border-b border-[#D6AD4F]/60">
                 <h3 className="text-[11px] sm:text-sm font-bold text-[#E5BD5B] font-display uppercase tracking-wider">

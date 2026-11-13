@@ -60,7 +60,7 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#2D241E]">
+    <div className="relative min-h-screen flex flex-col bg-[#FAF7F2] text-[#2D241E]">
       {/* Intro Splash Overlay with smooth logo flight to top-left header */}
       {showSplash && (
         <IntroSplash
