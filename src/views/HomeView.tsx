@@ -10,6 +10,7 @@ import {
   CheckCircle2,
   Star,
   MapPin,
+  ChevronLeft,
   ChevronRight,
   User,
 } from 'lucide-react';
@@ -29,44 +30,99 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   const [activeCourseId, setActiveCourseId] = useState<string>(courses[0]?.id || '');
   const homeSidebarRef = useRef<HTMLDivElement>(null);
+  const homeCarouselRef = useRef<HTMLDivElement>(null);
+  const homeTabsRef = useRef<HTMLDivElement>(null);
 
   const popularProducts = products.filter((p) => p.isPopular).slice(0, 3);
+  const activeCourseIndex = Math.max(
+    0,
+    courses.findIndex((c) => c.id === activeCourseId)
+  );
 
-  // Scrollspy for Home page featured section
+  // Scrollspy for Home page featured section (horizontal carousel on mobile, vertical viewport on sm+)
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -50% 0px',
-      threshold: 0.1,
-    };
+    let observer: IntersectionObserver | null = null;
+    const mediaQuery = window.matchMedia('(max-width: 639px)');
 
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('data-home-course-id');
-          if (id) {
-            setActiveCourseId(id);
+    const setupObserver = () => {
+      if (observer) observer.disconnect();
+      const isMobile = mediaQuery.matches;
+
+      const observerOptions: IntersectionObserverInit = isMobile
+        ? {
+            root: homeCarouselRef.current,
+            rootMargin: '0px -15% 0px -15%',
+            threshold: 0.55,
           }
-        }
-      });
+        : {
+            root: null,
+            rootMargin: '-20% 0px -50% 0px',
+            threshold: 0.1,
+          };
+
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('data-home-course-id');
+            if (id) {
+              setActiveCourseId(id);
+            }
+          }
+        });
+      }, observerOptions);
+
+      const cards = document.querySelectorAll('[data-home-course-id]');
+      cards.forEach((card) => observer?.observe(card));
     };
 
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const cards = document.querySelectorAll('[data-home-course-id]');
-    cards.forEach((card) => observer.observe(card));
+    setupObserver();
+    mediaQuery.addEventListener('change', setupObserver);
 
-    return () => observer.disconnect();
+    return () => {
+      if (observer) observer.disconnect();
+      mediaQuery.removeEventListener('change', setupObserver);
+    };
   }, [courses]);
+
+  // Keep mobile formation tab strip scrolled horizontally to active tab
+  useEffect(() => {
+    if (!activeCourseId || !homeTabsRef.current) return;
+    const tabsEl = homeTabsRef.current;
+    const activeTab = tabsEl.querySelector(`#home-mobile-tab-${activeCourseId}`) as HTMLElement | null;
+    if (activeTab) {
+      const tabRect = activeTab.getBoundingClientRect();
+      const tabsRect = tabsEl.getBoundingClientRect();
+      const delta = tabRect.left - tabsRect.left - (tabsRect.width - tabRect.width) / 2;
+      tabsEl.scrollBy({ left: delta, behavior: 'smooth' });
+    }
+  }, [activeCourseId]);
 
   const handleSelectHomeCoursePath = (id: string) => {
     setActiveCourseId(id);
     const targetEl = document.getElementById(`home-course-card-${id}`);
-    if (targetEl) {
+    if (!targetEl) return;
+
+    if (window.innerWidth < 640 && homeCarouselRef.current) {
+      const carousel = homeCarouselRef.current;
+      const targetRect = targetEl.getBoundingClientRect();
+      const carouselRect = carousel.getBoundingClientRect();
+      const delta = targetRect.left - carouselRect.left - (carouselRect.width - targetRect.width) / 2;
+      carousel.scrollBy({ left: delta, behavior: 'smooth' });
+    } else {
       const yOffset = -90;
       const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  const handleStepMobileCourse = (direction: -1 | 1) => {
+    if (courses.length === 0) return;
+    const nextIndex = Math.min(courses.length - 1, Math.max(0, activeCourseIndex + direction));
+    const nextCourse = courses[nextIndex];
+    if (nextCourse) {
+      handleSelectHomeCoursePath(nextCourse.id);
     }
   };
 
@@ -80,21 +136,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
       >
         {/* Background composition: deep emerald left canvas + cinematic warm chef photo on right */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Chef photograph anchored to the right on desktop (flipped for RTL) */}
-          <div className="absolute inset-y-0 right-0 rtl:right-auto rtl:left-0 w-full lg:w-[62%] overflow-hidden">
+          {/* Chef photograph (/page.png) framed cleanly across the hero with subject on the right */}
+          <div className="absolute inset-0 overflow-hidden">
             <img
-              src="/src/assets/images/hero_chef_kitchen_1794418831073.jpg"
-              alt="Chef Exécutif dans la cuisine de l'école Benzaza à Mostaganem"
+              src="/page.png"
+              alt="Chef Benzaza dans la cuisine de l'académie à Mostaganem"
               referrerPolicy="no-referrer"
-              className="w-full h-full object-cover object-center opacity-55 sm:opacity-65 lg:opacity-80 brightness-[0.68] contrast-[1.08] saturate-[0.92] sepia-[0.14]"
+              className="w-full h-full object-cover object-[72%_center] lg:object-center opacity-70 sm:opacity-80 lg:opacity-90"
             />
             {/* Warm golden cinematic atmosphere tint */}
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#062B22]/75 via-[#D6AD4F]/10 to-[#021510]/65 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#062B22]/70 via-[#D6AD4F]/10 to-[#021510]/55 mix-blend-multiply" />
             <div
               className="absolute inset-0"
               style={{
                 background:
-                  'radial-gradient(circle at 68% 35%, rgba(229, 189, 91, 0.22) 0%, rgba(6, 43, 34, 0) 60%)',
+                  'radial-gradient(circle at 68% 35%, rgba(229, 189, 91, 0.2) 0%, rgba(6, 43, 34, 0) 60%)',
               }}
             />
           </div>
@@ -225,10 +281,70 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-12 gap-2 sm:gap-6 lg:gap-8 items-start">
+        {/* MOBILE HEADER & HORIZONTAL FORMATION SELECTOR (< 640px) */}
+        <div className="sm:hidden space-y-3">
+          <div className="bg-[#063B2E] border border-[#D6AD4F]/50 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-2 shadow-sm">
+            <div className="flex items-center gap-2 min-w-0">
+              <h3 className="text-xs font-bold text-[#E5BD5B] font-display uppercase tracking-wider truncate">
+                Nos Formations
+              </h3>
+              <span className="text-[11px] font-mono font-bold text-[#FAF6ED]/85 bg-[#042119] border border-[#D6AD4F]/40 px-2 py-0.5 rounded">
+                {activeCourseIndex + 1} / {courses.length}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-1.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => handleStepMobileCourse(-1)}
+                disabled={activeCourseIndex <= 0}
+                aria-label="Formation précédente"
+                className="w-8 h-8 rounded-lg bg-[#042119] border border-[#D6AD4F]/50 text-[#E5BD5B] flex items-center justify-center disabled:opacity-35 transition-opacity cursor-pointer"
+              >
+                <ChevronLeft className={`w-4 h-4 ${isRtl ? 'rotate-180' : ''}`} />
+              </button>
+              <button
+                type="button"
+                onClick={() => handleStepMobileCourse(1)}
+                disabled={activeCourseIndex >= courses.length - 1}
+                aria-label="Formation suivante"
+                className="w-8 h-8 rounded-lg bg-[#042119] border border-[#D6AD4F]/50 text-[#E5BD5B] flex items-center justify-center disabled:opacity-35 transition-opacity cursor-pointer"
+              >
+                <ChevronRight className={`w-4 h-4 ${isRtl ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+          </div>
+
+          {/* Horizontal Quick-Select Formation Tabs */}
+          <div
+            ref={homeTabsRef}
+            className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1"
+          >
+            {courses.map((course) => {
+              const isActive = activeCourseId === course.id;
+              return (
+                <button
+                  key={`home-mobile-tab-${course.id}`}
+                  id={`home-mobile-tab-${course.id}`}
+                  type="button"
+                  onClick={() => handleSelectHomeCoursePath(course.id)}
+                  className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
+                    isActive
+                      ? 'bg-[#063B2E] text-[#E5BD5B] border-[#D6AD4F] shadow-xs'
+                      : 'bg-white text-[#062B22] border-[#E8DEC8] hover:border-[#063B2E]/40'
+                  }`}
+                >
+                  {course.title[language] || course.title.fr}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-start">
           
-          {/* LEFT SIDEBAR: Simple Rectangular Formation List (Visible on ALL Screen Sizes) */}
-          <div className="col-span-4 sm:col-span-4 lg:col-span-4 sticky top-[76px] sm:top-24 self-start">
+          {/* LEFT SIDEBAR: Simple Rectangular Formation List (Desktop & Tablet) */}
+          <div className="hidden sm:block sm:col-span-4 lg:col-span-4 sticky top-[76px] sm:top-24 self-start">
             <div className="bg-white border border-[#063B2E]/20 flex flex-col shadow-sm overflow-hidden rounded-lg">
               <div className="p-2.5 sm:p-4 bg-[#063B2E] border-b border-[#D6AD4F]/60">
                 <h3 className="text-[11px] sm:text-sm font-bold text-[#E5BD5B] font-display uppercase tracking-wider">
@@ -272,64 +388,87 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Detailed Cards (Visible on ALL Screen Sizes) */}
-          <div className="col-span-8 sm:col-span-8 lg:col-span-8 space-y-4 sm:space-y-8 min-w-0">
-            {courses.map((course) => (
-              <div
-                key={`home-card-${course.id}`}
-                id={`home-course-card-${course.id}`}
-                data-home-course-id={course.id}
-                className={`bg-white border rounded-xl transition-all overflow-hidden shadow-xs ${
-                  activeCourseId === course.id ? 'border-[#063B2E] ring-1 ring-[#063B2E]/25 shadow-md' : 'border-[#E8DEC8]'
-                }`}
-              >
-                <div className="relative w-full aspect-[9/10] overflow-hidden bg-[#FAF7F2] flex items-center justify-center">
-                  <img
-                    src={course.image}
-                    alt={course.title[language] || course.title.fr}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-auto max-h-full object-contain object-center"
+          {/* RIGHT COLUMN: Horizontal Swipeable Carousel on Mobile (<640px) / Vertical List on Tablet & Desktop */}
+          <div className="sm:col-span-8 lg:col-span-8 min-w-0">
+            <div
+              ref={homeCarouselRef}
+              className="flex sm:block overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-4 sm:gap-0 sm:space-y-8 -mx-4 px-4 sm:mx-0 sm:px-0 pb-2 sm:pb-0 scrollbar-none scroll-smooth"
+            >
+              {courses.map((course) => (
+                <div
+                  key={`home-card-${course.id}`}
+                  id={`home-course-card-${course.id}`}
+                  data-home-course-id={course.id}
+                  className={`shrink-0 w-[85vw] max-w-[360px] sm:w-full sm:max-w-none snap-center bg-white border rounded-xl transition-all overflow-hidden shadow-xs ${
+                    activeCourseId === course.id ? 'border-[#063B2E] ring-1 ring-[#063B2E]/25 shadow-md' : 'border-[#E8DEC8]'
+                  }`}
+                >
+                  <div className="relative w-full aspect-[9/10] overflow-hidden bg-[#FAF7F2] flex items-center justify-center">
+                    <img
+                      src={course.image}
+                      alt={course.title[language] || course.title.fr}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-auto max-h-full object-contain object-center"
+                    />
+                    <div className="absolute top-2 right-2 sm:top-3 sm:right-3 rtl:right-auto rtl:left-2 sm:rtl:left-3 bg-[#062B22]/95 text-[#E5BD5B] text-[10px] sm:text-xs font-mono font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded border border-[#D6AD4F]/55 shadow-sm">
+                      {course.priceDZD} {t('dzd')}
+                    </div>
+                  </div>
+
+                  <div className="p-4 sm:p-6 space-y-3 sm:space-y-4">
+                    <div>
+                      <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#5C6660] mb-1">
+                        <Clock className="w-3.5 h-3.5 text-[#063B2E] shrink-0" />
+                        <span className="truncate">{course.duration[language] || course.duration.fr}</span>
+                      </div>
+                      <h3 className="text-base sm:text-xl font-bold text-[#062B22] font-display leading-snug">
+                        {course.title[language] || course.title.fr}
+                      </h3>
+                      <div className="text-xs font-semibold text-[#8C6B28] mt-1">
+                        {course.instructor.name}
+                      </div>
+                      <p className="text-xs text-[#5C6660] mt-1.5 sm:mt-2 leading-relaxed">
+                        {course.shortDesc[language] || course.shortDesc.fr}
+                      </p>
+                    </div>
+
+                    <div className="pt-3 sm:pt-4 border-t border-[#E8DEC8]/70 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3">
+                      <button
+                        onClick={() => onNavigate('courses')}
+                        className="text-xs font-semibold text-[#063B2E] hover:text-[#8C6B28] transition-colors text-left rtl:text-right py-1 cursor-pointer"
+                      >
+                        {t('viewDetails')}
+                      </button>
+
+                      <button
+                        onClick={() => onOpenRegistration(course.id)}
+                        className="w-full sm:w-auto px-4 py-2.5 sm:py-2 bg-[#063B2E] hover:bg-[#0A4F3E] text-[#FAF6ED] hover:text-[#E5BD5B] border border-[#D6AD4F]/55 text-xs font-bold uppercase tracking-wider rounded transition-colors whitespace-nowrap shadow-xs text-center cursor-pointer"
+                      >
+                        {t('registerShort')}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile Carousel Indicator Dots */}
+            <div className="sm:hidden flex items-center justify-center gap-1.5 pt-3">
+              {courses.map((course) => {
+                const isActive = activeCourseId === course.id;
+                return (
+                  <button
+                    key={`home-dot-${course.id}`}
+                    type="button"
+                    onClick={() => handleSelectHomeCoursePath(course.id)}
+                    aria-label={course.title[language] || course.title.fr}
+                    className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                      isActive ? 'w-6 bg-[#063B2E]' : 'w-1.5 bg-[#D6AD4F]/45'
+                    }`}
                   />
-                  <div className="absolute top-2 right-2 sm:top-3 sm:right-3 rtl:right-auto rtl:left-2 sm:rtl:left-3 bg-[#062B22]/95 text-[#E5BD5B] text-[10px] sm:text-xs font-mono font-bold px-2 sm:px-3 py-0.5 sm:py-1 rounded border border-[#D6AD4F]/55 shadow-sm">
-                    {course.priceDZD} {t('dzd')}
-                  </div>
-                </div>
-
-                <div className="p-3 sm:p-6 space-y-2.5 sm:space-y-4">
-                  <div>
-                    <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#5C6660] mb-1">
-                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#063B2E] shrink-0" />
-                      <span className="truncate">{course.duration[language] || course.duration.fr}</span>
-                    </div>
-                    <h3 className="text-sm sm:text-xl font-bold text-[#062B22] font-display leading-snug">
-                      {course.title[language] || course.title.fr}
-                    </h3>
-                    <div className="text-[11px] sm:text-xs font-semibold text-[#8C6B28] mt-1">
-                      {course.instructor.name}
-                    </div>
-                    <p className="text-[11px] sm:text-xs text-[#5C6660] mt-1.5 sm:mt-2 leading-relaxed">
-                      {course.shortDesc[language] || course.shortDesc.fr}
-                    </p>
-                  </div>
-
-                  <div className="pt-3 sm:pt-4 border-t border-[#E8DEC8]/70 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-3">
-                    <button
-                      onClick={() => onNavigate('courses')}
-                      className="text-[11px] sm:text-xs font-semibold text-[#063B2E] hover:text-[#8C6B28] transition-colors text-left rtl:text-right py-1 cursor-pointer"
-                    >
-                      {t('viewDetails')}
-                    </button>
-
-                    <button
-                      onClick={() => onOpenRegistration(course.id)}
-                      className="w-full sm:w-auto px-3 sm:px-4 py-2 bg-[#063B2E] hover:bg-[#0A4F3E] text-[#FAF6ED] hover:text-[#E5BD5B] border border-[#D6AD4F]/55 text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded transition-colors whitespace-nowrap shadow-xs text-center cursor-pointer"
-                    >
-                      {t('registerShort')}
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
 
         </div>

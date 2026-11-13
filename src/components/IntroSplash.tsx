@@ -58,7 +58,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
 
   return (
     <div
-      className={`fixed inset-0 z-50 min-h-screen w-full flex items-center justify-center select-none overflow-hidden transition-colors duration-500 ease-out ${
+      className={`fixed inset-0 z-50 h-[100dvh] w-full flex items-center justify-center p-2.5 sm:p-6 lg:p-8 select-none overflow-hidden transition-colors duration-500 ease-out ${
         isFlying ? 'pointer-events-none' : ''
       }`}
       style={{
@@ -171,7 +171,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
 
       {/* 3. Thin Rounded Gold Frame */}
       <div
-        className={`relative z-10 w-[calc(100%-20px)] sm:w-[calc(100%-48px)] lg:w-[calc(100%-64px)] max-w-[1380px] min-h-[calc(100dvh-20px)] sm:min-h-[calc(100dvh-48px)] lg:min-h-[calc(100dvh-64px)] rounded-[22px] sm:rounded-[30px] border flex flex-col items-center justify-center px-4 py-12 sm:px-10 sm:py-16 overflow-hidden transition-all duration-500 ${
+        className={`relative z-10 w-full max-w-[1380px] h-full rounded-[22px] sm:rounded-[30px] border flex flex-col items-center justify-center px-4 py-14 sm:px-10 sm:py-16 overflow-hidden transition-all duration-500 ${
           isFlying ? 'border-transparent shadow-none' : 'border-[#D6AD4F]/75 shadow-[inset_0_0_50px_rgba(0,22,15,0.65)]'
         }`}
       >
@@ -354,14 +354,14 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
         </div>
 
         {/* 5. Symmetrical Centered Branding & Main CTA */}
-        <div className="relative z-10 flex flex-col items-center text-center max-w-5xl mx-auto">
+        <div className="relative z-10 w-full max-w-5xl mx-auto flex flex-col items-center justify-center text-center">
           <h1 className="sr-only">
             Chef Benzaza — Se réinventez chaque jour · Académie Professionnelle Mostaganem
           </h1>
 
           {/* Existing Original Chef Benzaza Logo (Crown + Monogram B + CHEF BENZAZA + SE RÉINVENTEZ CHAQUE JOUR) */}
           <div
-            className={`transform transition-all duration-700 ease-out ${
+            className={`w-full flex items-center justify-center transform transition-all duration-700 ease-out ${
               phase === 'enter'
                 ? 'opacity-0 scale-95 translate-y-4'
                 : 'opacity-100 scale-100 translate-y-0'
@@ -375,7 +375,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
                 ...flyStyle,
                 transition: isFlying ? 'transform 850ms cubic-bezier(0.16, 1, 0.3, 1)' : undefined,
               }}
-              className={`w-[90vw] max-w-[440px] sm:max-w-[620px] md:max-w-[740px] lg:max-w-[820px] h-auto max-h-[46vh] sm:max-h-[54vh] object-contain drop-shadow-[0_12px_32px_rgba(214,173,79,0.32)] ${
+              className={`block w-full max-w-[380px] sm:max-w-[580px] md:max-w-[740px] lg:max-w-[820px] h-auto max-h-[42dvh] sm:max-h-[54dvh] object-contain mx-auto drop-shadow-[0_12px_32px_rgba(214,173,79,0.32)] ${
                 isFlying ? 'z-50' : ''
               }`}
             />
@@ -383,17 +383,17 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
 
           {/* Subtitle & Location Supporting Copy */}
           <div
-            className={`mt-5 sm:mt-8 space-y-2.5 sm:space-y-3.5 animate-benzaza-fade transition-all duration-400 ${
+            className={`w-full mt-5 sm:mt-8 space-y-2.5 sm:space-y-3.5 flex flex-col items-center text-center animate-benzaza-fade transition-all duration-400 ${
               isFlying ? 'opacity-0 translate-y-3 pointer-events-none' : 'opacity-100 translate-y-0'
             }`}
             style={{ animationDelay: '150ms' }}
           >
-            <div className="flex items-center justify-center gap-2.5 sm:gap-5 px-2 max-w-full">
+            <div className="flex items-center justify-center gap-2 sm:gap-5 w-full max-w-full px-1">
               <span
                 className="w-5 sm:w-20 md:w-28 h-[1.5px] bg-gradient-to-r from-transparent to-[#D6AD4F] shrink-0"
                 aria-hidden="true"
               />
-              <span className="text-[13px] sm:text-base md:text-lg lg:text-xl font-bold uppercase tracking-[0.14em] sm:tracking-[0.26em] text-[#F5D477] sm:whitespace-nowrap">
+              <span className="text-center text-xs sm:text-base md:text-lg lg:text-xl font-bold uppercase tracking-[0.12em] sm:tracking-[0.26em] text-[#F5D477] sm:whitespace-nowrap">
                 {language === 'ar' ? 'الأكاديمية المهنية' : 'ACADÉMIE PROFESSIONNELLE'}
               </span>
               <span
@@ -402,7 +402,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
               />
             </div>
 
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-[#F8F4E9] font-medium tracking-wide px-4">
+            <p className="w-full text-center text-[13px] sm:text-base md:text-lg lg:text-xl text-[#F8F4E9] font-medium tracking-wide px-2">
               {language === 'ar'
                 ? 'مستغانم، الجزائر · التميز من خلال التكوين'
                 : "Mostaganem, Algérie · L'excellence par la formation"}
@@ -411,7 +411,7 @@ export const IntroSplash: React.FC<IntroSplashProps> = ({ onComplete, onStartFli
 
           {/* Centered Gold Gradient Main Button with Shimmer */}
           <div
-            className={`mt-6 sm:mt-10 animate-benzaza-fade transition-all duration-400 ${
+            className={`w-full flex justify-center mt-6 sm:mt-10 animate-benzaza-fade transition-all duration-400 ${
               isFlying ? 'opacity-0 translate-y-4 scale-95 pointer-events-none' : 'opacity-100 translate-y-0 scale-100'
             }`}
             style={{ animationDelay: '280ms' }}

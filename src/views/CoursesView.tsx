@@ -11,6 +11,8 @@ import {
   CheckCircle2,
   Sparkles,
   Award,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 
 interface CoursesViewProps {
@@ -26,6 +28,8 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
   const [activeCourseId, setActiveCourseId] = useState<string>('');
 
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const mobileCarouselRef = useRef<HTMLDivElement>(null);
+  const mobileTabsRef = useRef<HTMLDivElement>(null);
 
   const categories = [
     { id: 'all', label: t('all') },
@@ -48,57 +52,113 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
     return matchesCategory && matchesSearch;
   });
 
+  const activeCourseIndex = Math.max(
+    0,
+    filteredCourses.findIndex((c) => c.id === activeCourseId)
+  );
+
   // Set default active course ID when filtered list changes
   useEffect(() => {
-    if (filteredCourses.length > 0 && !activeCourseId) {
+    if (
+      filteredCourses.length > 0 &&
+      (!activeCourseId || !filteredCourses.some((c) => c.id === activeCourseId))
+    ) {
       setActiveCourseId(filteredCourses[0].id);
     }
   }, [filteredCourses, activeCourseId]);
 
-  // Scrollspy via IntersectionObserver
+  // Scrollspy via IntersectionObserver (horizontal carousel on mobile, vertical viewport on sm+)
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-15% 0px -55% 0px',
-      threshold: 0.1,
-    };
+    let observer: IntersectionObserver | null = null;
+    const mediaQuery = window.matchMedia('(max-width: 639px)');
 
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const id = entry.target.getAttribute('data-course-id');
-          if (id) {
-            setActiveCourseId(id);
+    const setupObserver = () => {
+      if (observer) observer.disconnect();
+      const isMobile = mediaQuery.matches;
+
+      const observerOptions: IntersectionObserverInit = isMobile
+        ? {
+            root: mobileCarouselRef.current,
+            rootMargin: '0px -15% 0px -15%',
+            threshold: 0.55,
           }
-        }
-      });
+        : {
+            root: null,
+            rootMargin: '-15% 0px -55% 0px',
+            threshold: 0.1,
+          };
+
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('data-course-id');
+            if (id) {
+              setActiveCourseId(id);
+            }
+          }
+        });
+      }, observerOptions);
+
+      const cards = document.querySelectorAll('[data-course-id]');
+      cards.forEach((card) => observer?.observe(card));
     };
 
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-    const cards = document.querySelectorAll('[data-course-id]');
-    cards.forEach((card) => observer.observe(card));
+    setupObserver();
+    mediaQuery.addEventListener('change', setupObserver);
 
-    return () => observer.disconnect();
+    return () => {
+      if (observer) observer.disconnect();
+      mediaQuery.removeEventListener('change', setupObserver);
+    };
   }, [filteredCourses]);
 
-  // Ensure active sidebar item scrolls smoothly inside sidebar view
+  // Ensure active sidebar item and mobile tab scroll smoothly into view
   useEffect(() => {
-    if (!activeCourseId || !sidebarRef.current) return;
-    const activeBtn = sidebarRef.current.querySelector(`#path-item-${activeCourseId}`);
-    if (activeBtn) {
-      activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    if (!activeCourseId) return;
+    if (sidebarRef.current && window.innerWidth >= 640) {
+      const activeBtn = sidebarRef.current.querySelector(`#path-item-${activeCourseId}`);
+      if (activeBtn) {
+        activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+    if (mobileTabsRef.current && window.innerWidth < 640) {
+      const tabsEl = mobileTabsRef.current;
+      const activeTab = tabsEl.querySelector(`#course-mobile-tab-${activeCourseId}`) as HTMLElement | null;
+      if (activeTab) {
+        const tabRect = activeTab.getBoundingClientRect();
+        const tabsRect = tabsEl.getBoundingClientRect();
+        const delta = tabRect.left - tabsRect.left - (tabsRect.width - tabRect.width) / 2;
+        tabsEl.scrollBy({ left: delta, behavior: 'smooth' });
+      }
     }
   }, [activeCourseId]);
 
   const handleSelectCoursePath = (id: string) => {
     setActiveCourseId(id);
     const targetEl = document.getElementById(`course-card-${id}`);
-    if (targetEl) {
+    if (!targetEl) return;
+
+    if (window.innerWidth < 640 && mobileCarouselRef.current) {
+      const carousel = mobileCarouselRef.current;
+      const targetRect = targetEl.getBoundingClientRect();
+      const carouselRect = carousel.getBoundingClientRect();
+      const delta = targetRect.left - carouselRect.left - (carouselRect.width - targetRect.width) / 2;
+      carousel.scrollBy({ left: delta, behavior: 'smooth' });
+    } else {
       const yOffset = -90;
       const y = targetEl.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
+  const handleStepMobileCourse = (direction: -1 | 1) => {
+    if (filteredCourses.length === 0) return;
+    const nextIndex = Math.min(filteredCourses.length - 1, Math.max(0, activeCourseIndex + direction));
+    const nextCourse = filteredCourses[nextIndex];
+    if (nextCourse) {
+      handleSelectCoursePath(nextCourse.id);
     }
   };
 
@@ -150,155 +210,239 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ onOpenRegistration }) 
           <p className="text-xs text-[#5C6660] mt-1">Essayez de modifier vos filtres ou termes de recherche.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-12 gap-2 sm:gap-6 lg:gap-8 items-start">
-          
-          {/* LEFT SIDEBAR: Simple Rectangular Formation & Formateur Path List (Visible on ALL Screen Sizes) */}
-          <div className="col-span-4 sm:col-span-4 lg:col-span-4 sticky top-16 sm:top-24 self-start">
-            <div className="bg-white border border-[#E8DEC8] rounded-xl flex flex-col shadow-xs overflow-hidden">
-              
-              {/* Sidebar Header */}
-              <div className="p-2.5 sm:p-4 bg-[#063B2E] border-b border-[#D6AD4F]/40">
-                <h3 className="text-[11px] sm:text-sm font-bold text-[#E5BD5B] font-display uppercase tracking-wider">
+        <div className="space-y-4 sm:space-y-0">
+          {/* MOBILE HEADER & HORIZONTAL FORMATION SELECTOR (< 640px) */}
+          <div className="sm:hidden space-y-3">
+            <div className="bg-[#063B2E] border border-[#D6AD4F]/50 rounded-xl px-3.5 py-2.5 flex items-center justify-between gap-2 shadow-sm">
+              <div className="flex items-center gap-2 min-w-0">
+                <h3 className="text-xs font-bold text-[#E5BD5B] font-display uppercase tracking-wider truncate">
                   Nos Formations
                 </h3>
+                <span className="text-[11px] font-mono font-bold text-[#FAF6ED]/85 bg-[#042119] border border-[#D6AD4F]/40 px-2 py-0.5 rounded">
+                  {activeCourseIndex + 1} / {filteredCourses.length}
+                </span>
               </div>
 
-              {/* Scrollable Path List */}
+              <div className="flex items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => handleStepMobileCourse(-1)}
+                  disabled={activeCourseIndex <= 0}
+                  aria-label="Formation précédente"
+                  className="w-8 h-8 rounded-lg bg-[#042119] border border-[#D6AD4F]/50 text-[#E5BD5B] flex items-center justify-center disabled:opacity-35 transition-opacity cursor-pointer"
+                >
+                  <ChevronLeft className={`w-4 h-4 ${isRtl ? 'rotate-180' : ''}`} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleStepMobileCourse(1)}
+                  disabled={activeCourseIndex >= filteredCourses.length - 1}
+                  aria-label="Formation suivante"
+                  className="w-8 h-8 rounded-lg bg-[#042119] border border-[#D6AD4F]/50 text-[#E5BD5B] flex items-center justify-center disabled:opacity-35 transition-opacity cursor-pointer"
+                >
+                  <ChevronRight className={`w-4 h-4 ${isRtl ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
+            </div>
+
+            <div
+              ref={mobileTabsRef}
+              className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1"
+            >
+              {filteredCourses.map((course) => {
+                const isActive = activeCourseId === course.id;
+                return (
+                  <button
+                    key={`course-mobile-tab-${course.id}`}
+                    id={`course-mobile-tab-${course.id}`}
+                    type="button"
+                    onClick={() => handleSelectCoursePath(course.id)}
+                    className={`shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-[#063B2E] text-[#E5BD5B] border-[#D6AD4F] shadow-xs'
+                        : 'bg-white text-[#062B22] border-[#E8DEC8] hover:border-[#063B2E]/40'
+                    }`}
+                  >
+                    {course.title[language] || course.title.fr}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 lg:gap-8 items-start">
+            
+            {/* LEFT SIDEBAR: Simple Rectangular Formation & Formateur Path List (Tablet & Desktop) */}
+            <div className="hidden sm:block sm:col-span-4 lg:col-span-4 sticky top-16 sm:top-24 self-start">
+              <div className="bg-white border border-[#E8DEC8] rounded-xl flex flex-col shadow-xs overflow-hidden">
+                
+                {/* Sidebar Header */}
+                <div className="p-2.5 sm:p-4 bg-[#063B2E] border-b border-[#D6AD4F]/40">
+                  <h3 className="text-[11px] sm:text-sm font-bold text-[#E5BD5B] font-display uppercase tracking-wider">
+                    Nos Formations
+                  </h3>
+                </div>
+
+                {/* Scrollable Path List */}
+                <div
+                  ref={sidebarRef}
+                  className="max-h-[calc(100vh-120px)] sm:max-h-[calc(100vh-180px)] overflow-y-auto divide-y divide-[#E8DEC8]"
+                >
+                  {filteredCourses.map((course) => {
+                    const isActive = activeCourseId === course.id;
+                    return (
+                      <button
+                        key={`path-item-${course.id}`}
+                        id={`path-item-${course.id}`}
+                        onClick={() => handleSelectCoursePath(course.id)}
+                        className={`w-full text-left rtl:text-right p-2 sm:p-4 transition-colors flex flex-col cursor-pointer ${
+                          isActive
+                            ? 'bg-[#063B2E] border-l-2 sm:border-l-4 rtl:border-l-0 rtl:border-r-2 sm:rtl:border-r-4 border-l-[#D6AD4F] rtl:border-r-[#D6AD4F] text-[#FAF6ED]'
+                            : 'bg-white hover:bg-[#FAF7F2] text-[#062B22]'
+                        }`}
+                      >
+                        {/* BIG BOLD FORMATION TITLE */}
+                        <span className={`text-[11px] sm:text-base font-bold font-display leading-tight line-clamp-2 break-words ${
+                          isActive ? 'text-[#E5BD5B]' : 'text-[#062B22]'
+                        }`}>
+                          {course.title[language] || course.title.fr}
+                        </span>
+
+                        {/* FORMATEUR NAME DOWNSIDE THE FORMATION NAME */}
+                        <span className={`text-[10px] sm:text-xs font-semibold mt-1 block truncate w-full ${
+                          isActive ? 'text-[#FAF6ED]/90' : 'text-[#063B2E]'
+                        }`}>
+                          {course.instructor.name}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN: Horizontal Swipeable Carousel on Mobile (<640px) / Vertical List on Tablet & Desktop */}
+            <div className="sm:col-span-8 lg:col-span-8 min-w-0">
               <div
-                ref={sidebarRef}
-                className="max-h-[calc(100vh-120px)] sm:max-h-[calc(100vh-180px)] overflow-y-auto divide-y divide-[#E8DEC8]"
+                ref={mobileCarouselRef}
+                className="flex sm:block overflow-x-auto sm:overflow-visible snap-x snap-mandatory gap-4 sm:gap-0 sm:space-y-10 -mx-3 px-3 sm:mx-0 sm:px-0 pb-2 sm:pb-0 scrollbar-none scroll-smooth"
               >
+                {filteredCourses.map((course) => (
+                  <div
+                    key={course.id}
+                    id={`course-card-${course.id}`}
+                    data-course-id={course.id}
+                    className={`shrink-0 w-[86vw] max-w-[360px] sm:w-full sm:max-w-[280px] md:max-w-[320px] lg:max-w-[350px] snap-center bg-white rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md ${
+                      activeCourseId === course.id ? 'border-[#063B2E] ring-2 ring-[#063B2E]/20' : 'border-[#E8DEC8]'
+                    }`}
+                  >
+                    {/* Card Banner Photo */}
+                    <div className="relative w-full overflow-hidden bg-white">
+                      <img
+                        src={course.image}
+                        alt={course.title[language] || course.title.fr}
+                        referrerPolicy="no-referrer"
+                        className="w-full h-auto object-contain object-center block"
+                      />
+                      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#021510]/90 via-[#042119]/45 to-transparent pointer-events-none" />
+                      
+                      {/* Price Tag Badge */}
+                      <div className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 rtl:right-auto rtl:left-2.5 sm:rtl:left-4 bg-[#062B22]/95 backdrop-blur-md text-[#E5BD5B] text-[10px] sm:text-xs font-mono font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg border border-[#D6AD4F]/50 shadow-md">
+                        {course.priceDZD} {t('dzd')}
+                      </div>
+
+                      {/* Formateur Badge over Banner */}
+                      <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-4 sm:left-4 sm:right-4 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
+                        <div className="min-w-0">
+                          <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-[#E5BD5B] block">
+                            Formation dirigée par
+                          </span>
+                          <h4 className="text-xs sm:text-base font-bold text-[#FAF6ED] font-display flex items-center gap-1 sm:gap-1.5 truncate">
+                            <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E5BD5B] shrink-0" />
+                            <span className="truncate">{course.instructor.name}</span>
+                          </h4>
+                        </div>
+
+                        <div className="self-start sm:self-auto bg-[#021510]/60 backdrop-blur-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs text-[#FAF6ED] font-medium flex items-center gap-1 sm:gap-1.5 border border-[#D6AD4F]/40 max-w-full">
+                          <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#E5BD5B] shrink-0" />
+                          <span className="truncate">{course.duration[language] || course.duration.fr}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Card Body */}
+                    <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
+                      
+                      {/* Title & Short Description */}
+                      <div>
+                        <h2 className="text-base sm:text-2xl font-bold text-[#062B22] font-display leading-tight">
+                          {course.title[language] || course.title.fr}
+                        </h2>
+                        <p className="text-xs sm:text-sm text-[#5C6660] mt-1.5 sm:mt-2 leading-relaxed">
+                          {course.fullDesc[language] || course.fullDesc.fr}
+                        </p>
+                      </div>
+
+                      {/* Objectives Highlights */}
+                      <div className="bg-[#FAF7F2] p-3 sm:p-4 rounded-xl border border-[#E8DEC8] space-y-2">
+                        <h4 className="text-[11px] sm:text-xs font-bold text-[#062B22] uppercase tracking-wider font-display flex items-center gap-1.5">
+                          <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#063B2E] shrink-0" />
+                          <span>Compétences clés acquises</span>
+                        </h4>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 pt-1">
+                          {(course.objectives[language] || course.objectives.fr).map((obj, i) => (
+                            <div key={i} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#5C6660]">
+                              <span className="text-[#D6AD4F] font-bold">•</span>
+                              <span>{obj}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Action CTAs */}
+                      <div className="pt-3 sm:pt-4 border-t border-[#F1ECE1] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4">
+                        <button
+                          onClick={() => setSelectedCourse(course)}
+                          className="w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-2.5 bg-white hover:bg-[#FAF7F2] text-[#063B2E] border border-[#063B2E]/35 text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center justify-center gap-2 shadow-xs cursor-pointer"
+                        >
+                          <span>{t('viewDetails')}</span>
+                          <ArrowRight className={`w-3.5 h-3.5 ${isRtl ? 'rotate-180' : ''}`} />
+                        </button>
+
+                        <button
+                          onClick={() => onOpenRegistration(course.id)}
+                          className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50 text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md shadow-[#063B2E]/15 text-center cursor-pointer"
+                        >
+                          {t('registerNow')} — {course.priceDZD} {t('dzd')}
+                        </button>
+                      </div>
+
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Mobile Carousel Indicator Dots */}
+              <div className="sm:hidden flex items-center justify-center gap-1.5 pt-3">
                 {filteredCourses.map((course) => {
                   const isActive = activeCourseId === course.id;
                   return (
                     <button
-                      key={`path-item-${course.id}`}
-                      id={`path-item-${course.id}`}
+                      key={`course-dot-${course.id}`}
+                      type="button"
                       onClick={() => handleSelectCoursePath(course.id)}
-                      className={`w-full text-left rtl:text-right p-2 sm:p-4 transition-colors flex flex-col ${
-                        isActive
-                          ? 'bg-[#063B2E] border-l-2 sm:border-l-4 rtl:border-l-0 rtl:border-r-2 sm:rtl:border-r-4 border-l-[#D6AD4F] rtl:border-r-[#D6AD4F] text-[#FAF6ED]'
-                          : 'bg-white hover:bg-[#FAF7F2] text-[#062B22]'
+                      aria-label={course.title[language] || course.title.fr}
+                      className={`h-1.5 rounded-full transition-all cursor-pointer ${
+                        isActive ? 'w-6 bg-[#063B2E]' : 'w-1.5 bg-[#D6AD4F]/45'
                       }`}
-                    >
-                      {/* BIG BOLD FORMATION TITLE */}
-                      <span className={`text-[11px] sm:text-base font-bold font-display leading-tight line-clamp-2 break-words ${
-                        isActive ? 'text-[#E5BD5B]' : 'text-[#062B22]'
-                      }`}>
-                        {course.title[language] || course.title.fr}
-                      </span>
-
-                      {/* FORMATEUR NAME DOWNSIDE THE FORMATION NAME */}
-                      <span className={`text-[10px] sm:text-xs font-semibold mt-1 block truncate w-full ${
-                        isActive ? 'text-[#FAF6ED]/90' : 'text-[#063B2E]'
-                      }`}>
-                        {course.instructor.name}
-                      </span>
-                    </button>
+                    />
                   );
                 })}
               </div>
-
             </div>
+
           </div>
-
-          {/* RIGHT COLUMN: Full Detailed Formation Cards (Visible on ALL Screen Sizes) */}
-          <div className="col-span-8 sm:col-span-8 lg:col-span-8 space-y-4 sm:space-y-10 min-w-0">
-            {filteredCourses.map((course) => (
-              <div
-                key={course.id}
-                id={`course-card-${course.id}`}
-                data-course-id={course.id}
-                className={`w-full max-w-[200px] sm:max-w-[280px] md:max-w-[320px] lg:max-w-[350px] bg-white rounded-xl sm:rounded-2xl border transition-all duration-300 overflow-hidden shadow-sm hover:shadow-md ${
-                  activeCourseId === course.id ? 'border-[#063B2E] ring-2 ring-[#063B2E]/20' : 'border-[#E8DEC8]'
-                }`}
-              >
-                {/* Card Banner Photo */}
-                <div className="relative w-full overflow-hidden bg-white">
-                  <img
-                    src={course.image}
-                    alt={course.title[language] || course.title.fr}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-auto object-contain object-center block"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#021510]/90 via-[#042119]/45 to-transparent pointer-events-none" />
-                  
-                  {/* Price Tag Badge */}
-                  <div className="absolute top-2.5 right-2.5 sm:top-4 sm:right-4 rtl:right-auto rtl:left-2.5 sm:rtl:left-4 bg-[#062B22]/95 backdrop-blur-md text-[#E5BD5B] text-[10px] sm:text-xs font-mono font-bold px-2 sm:px-3 py-1 sm:py-1.5 rounded-md sm:rounded-lg border border-[#D6AD4F]/50 shadow-md">
-                    {course.priceDZD} {t('dzd')}
-                  </div>
-
-                  {/* Formateur Badge over Banner */}
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-4 sm:left-4 sm:right-4 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 sm:gap-2">
-                    <div className="min-w-0">
-                      <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-[#E5BD5B] block">
-                        Formation dirigée par
-                      </span>
-                      <h4 className="text-xs sm:text-base font-bold text-[#FAF6ED] font-display flex items-center gap-1 sm:gap-1.5 truncate">
-                        <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#E5BD5B] shrink-0" />
-                        <span className="truncate">{course.instructor.name}</span>
-                      </h4>
-                    </div>
-
-                    <div className="self-start sm:self-auto bg-[#021510]/60 backdrop-blur-xs px-2 sm:px-3 py-0.5 sm:py-1 rounded text-[10px] sm:text-xs text-[#FAF6ED] font-medium flex items-center gap-1 sm:gap-1.5 border border-[#D6AD4F]/40 max-w-full">
-                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#E5BD5B] shrink-0" />
-                      <span className="truncate">{course.duration[language] || course.duration.fr}</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-3.5 sm:p-6 lg:p-8 space-y-4 sm:space-y-6">
-                  
-                  {/* Title & Short Description */}
-                  <div>
-                    <h2 className="text-base sm:text-2xl font-bold text-[#062B22] font-display leading-tight">
-                      {course.title[language] || course.title.fr}
-                    </h2>
-                    <p className="text-[11px] sm:text-sm text-[#5C6660] mt-1.5 sm:mt-2 leading-relaxed">
-                      {course.fullDesc[language] || course.fullDesc.fr}
-                    </p>
-                  </div>
-
-                  {/* Objectives Highlights */}
-                  <div className="bg-[#FAF7F2] p-3 sm:p-4 rounded-xl border border-[#E8DEC8] space-y-2">
-                    <h4 className="text-[11px] sm:text-xs font-bold text-[#062B22] uppercase tracking-wider font-display flex items-center gap-1.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#063B2E] shrink-0" />
-                      <span>Compétences clés acquises</span>
-                    </h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 pt-1">
-                      {(course.objectives[language] || course.objectives.fr).map((obj, i) => (
-                        <div key={i} className="flex items-start gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-[#5C6660]">
-                          <span className="text-[#D6AD4F] font-bold">•</span>
-                          <span>{obj}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Action CTAs */}
-                  <div className="pt-3 sm:pt-4 border-t border-[#F1ECE1] flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 sm:gap-4">
-                    <button
-                      onClick={() => setSelectedCourse(course)}
-                      className="w-full sm:w-auto px-3 sm:px-4 py-2 sm:py-2.5 bg-white hover:bg-[#FAF7F2] text-[#063B2E] border border-[#063B2E]/35 text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-lg transition-colors flex items-center justify-center gap-2 shadow-xs"
-                    >
-                      <span>{t('viewDetails')}</span>
-                      <ArrowRight className={`w-3.5 h-3.5 ${isRtl ? 'rotate-180' : ''}`} />
-                    </button>
-
-                    <button
-                      onClick={() => onOpenRegistration(course.id)}
-                      className="w-full sm:w-auto px-4 sm:px-6 py-2 sm:py-2.5 bg-[#063B2E] hover:bg-[#042119] text-[#FAF6ED] border border-[#D6AD4F]/50 text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-lg transition-colors shadow-md shadow-[#063B2E]/15 text-center"
-                    >
-                      {t('registerNow')} — {course.priceDZD} {t('dzd')}
-                    </button>
-                  </div>
-
-                </div>
-              </div>
-            ))}
-          </div>
-
         </div>
       )}
 
